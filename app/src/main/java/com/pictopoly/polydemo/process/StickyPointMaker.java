@@ -26,7 +26,7 @@ public class StickyPointMaker extends EdgePointMaker {
 		Random r = new Random();
 		Collection<Point> builtPoints = new ArrayList<>();
 		
-		int width = bitmapToBeProcessed.getWidth(), height = bitmapToBeProcessed.getHeight();
+		int width = bitmapToBeProcessed.getWidth() - 1, height = bitmapToBeProcessed.getHeight() - 1;
 		
 		for(int i = 0; i < pointCount; i++) {
 			builtPoints.add(new Point(
@@ -44,12 +44,12 @@ public class StickyPointMaker extends EdgePointMaker {
 		for(Point p : builtPoints) {
 			movePointByNetForces(p, points);
 			
-			if(p.getX() > width)
-				p.setX(width);
+			if(p.getX() >= width)
+				p.setX(width - 1);
 			if(p.getX() < 0)
 				p.setX(0);
-			if(p.getY() > height)
-				p.setY(height);
+			if(p.getY() >= height)
+				p.setY(height - 1);
 			if(p.getY() < 0)
 				p.setY(0);
 		}
@@ -59,9 +59,9 @@ public class StickyPointMaker extends EdgePointMaker {
 		// Finally, for completeness, add the corners
 		
 		points.add(new Point(0,0,0));
-		points.add(new Point(width,0,0));
-		points.add(new Point(0,height,0));
-		points.add(new Point(width,height,0));
+		points.add(new Point(width - 1,0,0));
+		points.add(new Point(0,height - 1,0));
+		points.add(new Point(width - 1,height - 1,0));
 		
 		return points;
 	}

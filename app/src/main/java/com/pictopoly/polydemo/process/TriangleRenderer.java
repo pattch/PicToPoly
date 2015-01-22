@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.util.Log;
 
 import com.pictopoly.polydemo.tri.Point;
 import com.pictopoly.polydemo.tri.Triangle;
@@ -28,6 +29,13 @@ public class TriangleRenderer {
      *      The triangle to be rendered
      */
     private static void renderTriangle(Canvas canvas, Bitmap map, Triangle triangle) {
+        if(map == null || triangle == null || triangle.getA() == null || triangle.getB() == null || triangle.getC() == null)
+            return;
+
+        Log.d("TraingleRenderer",
+                "Map null?" + (null == map) + " Map mutable? " + (map.isMutable()) +
+                "Triangle null? " + (null == triangle));
+
         // Set Path based on triangle
         Path path = new Path();
         path.setFillType(Path.FillType.EVEN_ODD);

@@ -29,6 +29,11 @@ public class ImageProcessFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_image, parent, false);
 
         mImageView = (ImageView)v.findViewById(R.id.imageView);
+        if(processor.getProcessedImage() != null)
+            mImageView.setImageBitmap(processor.getProcessedImage());
+        else if(processor.getRawImage() != null)
+            mImageView.setImageBitmap(processor.getRawImage());
+
         mImageView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {

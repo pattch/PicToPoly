@@ -1,6 +1,7 @@
 package com.pictopoly.polydemo.process;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import java.util.List;
 
@@ -19,15 +20,18 @@ public class ImageHandler {
 	}
 	
 	public ImageHandler(Bitmap bitmapToBeProcessed) {
+        this.triangulation = new DelaunayTriangulation();
         this.pointMaker = new StickyPointMaker(bitmapToBeProcessed);
-        this.rawImage = bitmapToBeProcessed;
+        this.rawImage = bitmapToBeProcessed.copy(Bitmap.Config.ARGB_8888, true);
     }
 	
 	public void setImage(Bitmap bitmapToBeProcessed) {
-		this.rawImage = bitmapToBeProcessed;
+		this.rawImage = bitmapToBeProcessed.copy(Bitmap.Config.ARGB_8888, true);
+        this.pointMaker = new StickyPointMaker(bitmapToBeProcessed);
 	}
 	
 	public Bitmap processImage() {
+        Log.d(getClass().getSimpleName(), "pointMaker null? " + (pointMaker == null) + " rawImage null? " + (rawImage == null));
 		this.triangulation = new DelaunayTriangulation(pointMaker.makePoints(rawImage));
 		this.processedImage = renderTriangles(this.rawImage);
 		return this.processedImage;

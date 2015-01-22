@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">PolyDemo</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="nav_open_image">Open Image</string>
     <string name="action_settings">Settings</string>
 
 </resources>

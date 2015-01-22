@@ -1,5 +1,7 @@
 package com.pictopoly.polydemo;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -11,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
 
+import com.pictopoly.polydemo.process.ImageHandler;
+
 
 public class PolyActivity extends ActionBarActivity {
 
@@ -18,6 +22,10 @@ public class PolyActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_poly);
+
+        // Load Default Image
+        loadDefaultImage();
+
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
                     .add(R.id.image_container, new ImageProcessFragment())
@@ -47,5 +55,12 @@ public class PolyActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void loadDefaultImage() {
+        Bitmap image = BitmapFactory.decodeResource(this.getResources(), R.drawable.bird);
+        ImageHandler handler = ImageLayerHandler.getInstance().getProcessor();
+        handler.setImage(image);
+        handler.processImage();
     }
 }
