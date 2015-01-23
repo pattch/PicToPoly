@@ -5,13 +5,13 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal|top"
+        android:layout_gravity="top"
         android:id="@+id/image_container"/>
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal|bottom"
+        android:layout_height="96dp"
+        android:layout_gravity="bottom"
         android:id="@+id/nav_container"/>
 
 </FrameLayout>

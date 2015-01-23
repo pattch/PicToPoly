@@ -1,10 +1,10 @@
 package com.pictopoly.polydemo;
 
+import android.app.Activity;
+import android.app.FragmentManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,7 +16,7 @@ import android.os.Build;
 import com.pictopoly.polydemo.process.ImageHandler;
 
 
-public class PolyActivity extends ActionBarActivity {
+public class PolyActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +24,7 @@ public class PolyActivity extends ActionBarActivity {
         setContentView(R.layout.activity_poly);
 
         // Load Default Image
-        loadDefaultImage();
+//        loadDefaultImage();
 
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()

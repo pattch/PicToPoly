@@ -16,7 +16,7 @@ public class NavigationFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceBundle) {
-        View v = inflater.inflate(R.layout.fragment_nav, parent);
+        View v = inflater.inflate(R.layout.fragment_nav, parent, false);
 
         mOpenImageButton = (Button)v.findViewById(R.id.nav_open_image);
         mOpenImageButton.setOnClickListener(new View.OnClickListener() {

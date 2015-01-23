@@ -13,7 +13,7 @@ import java.util.Random;
 import com.pictopoly.polydemo.tri.Point;
 
 public class StickyPointMaker extends EdgePointMaker {
-	protected int pointCount = 20000;
+	protected int pointCount = 1000;
 	protected double stickiness = 5;
 
 	public StickyPointMaker(Bitmap bitmapToBeProcessed) {
