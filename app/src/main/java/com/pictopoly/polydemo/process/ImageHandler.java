@@ -52,7 +52,10 @@ public class ImageHandler {
 	}
 
 	public void addPoint(Point point) {
-		triangulation.insertPoint(point);
+        if(rawImage != null
+                && point.getX() >= 0 && point.getY() >= 0
+                && point.getX() < rawImage.getWidth() && point.getY() < rawImage.getHeight())
+		    triangulation.insertPoint(point);
 	}
 
 	public Bitmap refreshTriangles() {

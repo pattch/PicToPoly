@@ -24,7 +24,7 @@ public class PolyActivity extends Activity {
         setContentView(R.layout.activity_poly);
 
         // Load Default Image
-//        loadDefaultImage();
+        loadDefaultImage();
 
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()

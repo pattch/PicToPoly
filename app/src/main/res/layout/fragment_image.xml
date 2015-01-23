@@ -5,6 +5,7 @@
     android:background="@color/material_blue_grey_900">
 
     <ImageView
+        android:contentDescription="@string/processed_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/imageView"
