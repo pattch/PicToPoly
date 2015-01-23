@@ -12,4 +12,20 @@
         android:layout_gravity="center_horizontal|top"
         android:text="@string/nav_open_image"/>
 
+    <Button
+        android:id="@+id/nav_switch_image"
+        android:layout_width="144dp"
+        android:layout_height="48dp"
+        android:layout_margin="12dp"
+        android:layout_gravity="center_horizontal|top"
+        android:text="@string/nav_switch_image"/>
+
+    <Button
+        android:id="@+id/nav_process_image"
+        android:layout_width="144dp"
+        android:layout_height="48dp"
+        android:layout_margin="12dp"
+        android:layout_gravity="center_horizontal|top"
+        android:text="@string/nav_process_image"/>
+
 </FrameLayout>

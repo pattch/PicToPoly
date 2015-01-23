@@ -2,6 +2,7 @@ package com.pictopoly.polydemo.filter;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
@@ -29,5 +30,25 @@ public class GreyScaleFilter implements ImageFilter {
         c.drawBitmap(bitmap,0,0,p);
 
         return greyMap;
+    }
+
+    @Override
+    public int[] filter(int[] colorIntArray, int width, int height) {
+        int length = colorIntArray.length;
+        int[] greyIntArray = new int[length];
+        System.arraycopy(colorIntArray,0, greyIntArray, 0, length);
+
+        for(int i = 0; i < length; i++)
+            greyIntArray[i] = getGreyScaleValue(greyIntArray[i]);
+
+        return greyIntArray;
+    }
+
+    public static int getGreyScaleValue(int color) {
+        int r = Color.red(color),
+                g = Color.green(color),
+                b = Color.blue(color);
+
+        return (r + g + b) / 3;
     }
 }

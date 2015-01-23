@@ -14,6 +14,7 @@ public class ImageHandler {
 	protected PointMaker pointMaker;
 	protected Triangulation triangulation;
 	protected Bitmap rawImage, processedImage;
+    protected int[] rawPixels, processedPixels;
 	
 	public ImageHandler() {
 		this.triangulation = new DelaunayTriangulation();
@@ -21,12 +22,28 @@ public class ImageHandler {
 	
 	public ImageHandler(Bitmap bitmapToBeProcessed) {
         this.triangulation = new DelaunayTriangulation();
-        this.pointMaker = new StickyPointMaker(bitmapToBeProcessed);
-        this.rawImage = bitmapToBeProcessed.copy(Bitmap.Config.ARGB_8888, true);
+        setImage(bitmapToBeProcessed);
     }
 	
 	public void setImage(Bitmap bitmapToBeProcessed) {
-		this.rawImage = bitmapToBeProcessed.copy(Bitmap.Config.ARGB_8888, true);
+        this.rawImage = bitmapToBeProcessed.copy(Bitmap.Config.ARGB_8888, true);
+
+        this.rawPixels = new int[this.rawImage.getWidth() * this.rawImage.getHeight()];
+        this.rawImage.getPixels(this.rawPixels,
+                0,
+                this.rawImage.getWidth(),
+                0,
+                0,
+                this.rawImage.getWidth(),
+                this.rawImage.getHeight());
+
+        this.processedPixels = new int[this.rawPixels.length];
+        System.arraycopy(this.rawPixels,
+                0,
+                this.processedPixels,
+                0,
+                this.rawPixels.length);
+
         this.pointMaker = new StickyPointMaker(bitmapToBeProcessed);
 	}
 	

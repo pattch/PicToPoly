@@ -78,5 +78,11 @@ public class PolyActivity extends Activity {
         }
     }
 
+    public ImageProcessFragment getImageProcessFragment() {
+        return imageFragment;
+    }
 
+    public NavigationFragment getNavigationFragment() {
+        return navFragment;
+    }
 }

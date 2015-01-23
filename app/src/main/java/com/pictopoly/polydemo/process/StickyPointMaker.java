@@ -13,7 +13,7 @@ import java.util.Random;
 import com.pictopoly.polydemo.tri.Point;
 
 public class StickyPointMaker extends EdgePointMaker {
-	protected int pointCount = 1000;
+	protected int pointCount = 10000;
 	protected double stickiness = 5;
 
 	public StickyPointMaker(Bitmap bitmapToBeProcessed) {
@@ -22,24 +22,19 @@ public class StickyPointMaker extends EdgePointMaker {
 	
 	@Override
 	public Collection<Point> makePoints(Bitmap bitmapToBeProcessed) {
+        setImageQuality(3);
+        super.makePoints(bitmapToBeProcessed);
 		// Generate random points.
 		Random r = new Random();
 		Collection<Point> builtPoints = new ArrayList<>();
 		
-		int width = bitmapToBeProcessed.getWidth() - 1, height = bitmapToBeProcessed.getHeight() - 1;
-		
 		for(int i = 0; i < pointCount; i++) {
-			builtPoints.add(new Point(
-						r.nextDouble() * width,
-						r.nextDouble() * height,
-						0
-					));
-		}
-		
-		// Make the random points move closer to the  edges of the image.
-		
-		setImageQuality(3);
-		super.makePoints(bitmapToBeProcessed);
+            builtPoints.add(new Point(
+                    r.nextDouble() * width,
+                    r.nextDouble() * height,
+                    0
+            ));
+        }
 		
 		for(Point p : builtPoints) {
 			movePointByNetForces(p, points);
@@ -65,7 +60,11 @@ public class StickyPointMaker extends EdgePointMaker {
 		
 		return points;
 	}
-	
+
+    /*
+     * Could be and Should be improved by using a graph for the points, and approximating the sum
+     * of forces by only using a fixed number of nearby points. would change complexity from O(n^2) to O(n)
+     */
 	private void movePointByNetForces(Point ptMoved, Collection<Point> points) {
 		double sumX = 0, sumY = 0;
 		for(Point p : points) {

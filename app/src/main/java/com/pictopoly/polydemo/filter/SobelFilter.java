@@ -59,22 +59,64 @@ public class SobelFilter implements ImageFilter {
     	return (clr) + (clr << 8) + (clr << 16);
     }
 
-    public static double[][] buildWindow(int x, int y, Bitmap srcImg) {
-		double[][] retVal = new double[5][5];
-		for (int ypos = -2; ypos <= 2; ypos++) {
-		    for (int xpos = -2; xpos <= 2; xpos++) {
-			int currX = xpos + x;
-			int currY = ypos + y;
-			if ((currX >= 0 && currX < width)
-				&& (currY >= 0 && currY < height)) {
-			    int rgbRawValue = srcImg.getPixel(currX, currY);
-			    int grayScaleValue = getGreyScale(rgbRawValue);
-			    retVal[xpos + 2][ypos + 2] = grayScaleValue;
-			} else
-			    retVal[xpos + 2][ypos + 2] = 255;
-		    }
-		}
-		return retVal;
+    public static double[][] buildWindow(int[] pixels, int x, int y, int width, int height) {
+        double[][] retVal = new double[3][3];
+        for(int yPos = -1; yPos <= 1; yPos++) {
+            for(int xPos = -1; xPos <= 1; xPos++) {
+                int currX = xPos + x; int currY = yPos + y;
+                if(currX >= 0 && currX < width && currY >= 0 && currY < height) {
+                    int rgbRawValue = getIntFromArrayAsTwoDimensional(pixels, currX, currY, width, height),
+                        greyScaleValue = GreyScaleFilter.getGreyScaleValue(rgbRawValue);
+                    retVal[xPos + 1][yPos + 1] = greyScaleValue;
+                }
+            }
+        }
+        return retVal;
+    }
+
+    public static double[][] buildWindow(int x, int y, Bitmap srcImg){
+        double[][] retVal = new double[3][3];
+        for ( int ypos = -1; ypos <= 1; ypos++ ){
+            for (int xpos = -1; xpos <= 1; xpos++ ){
+                int currX = xpos + x; int currY = ypos + y;
+                if ( (currX >= 0 && currX < width) && (currY >= 0 && currY < height) ){
+                    int rgbRawValue = srcImg.getPixel(currX, currY);
+                    int grayScaleValue = getGreyScale(rgbRawValue);
+                    retVal[xpos + 1][ypos + 1] = grayScaleValue;
+                }
+                else
+                    retVal[xpos + 1][ypos + 1] = 255;
+            }
+        }
+        return retVal;
+    }
+
+    public static int getIntFromArrayAsTwoDimensional(int[] src, int x, int y, int width, int height) {
+        int offset = y * width;
+        int accessInt = x + offset;
+        return src[accessInt];
+    }
+
+    public static void setIntInArrayAsTwoDimensional(int[] src, int x, int y, int width, int height, int value) {
+        int offset = y * width;
+        int accessInt = x + offset;
+        src[accessInt] = value;
+    }
+
+    public static int[] edgeDetection(int[] pixels, int width, int height) {
+        double[][] window;
+        int[] retVal = new int[pixels.length];
+        int localWidth = width,
+            localHeight = height;
+        for(int y  = 0; y < localHeight; y++) {
+            for(int x = 0; x < localWidth; x++) {
+                window = buildWindow(pixels,x,y,width,height);
+                double sobelValue = sobel(window);
+                int sobelRGBValue = setGreyScaleValue((int)sobelValue);
+                setIntInArrayAsTwoDimensional(retVal,x,y,width,height,sobelRGBValue);
+            }
+        }
+        return retVal;
     }
 
     public static Bitmap edgeDetection(Bitmap srcImg) {
@@ -84,11 +126,11 @@ public class SobelFilter implements ImageFilter {
                 for (int x = 0; x < width; x++) {
                 window = buildWindow(x, y, srcImg);
 
-                double newValue = srcImg.getPixel(x, y);
+//                double newValue = srcImg.getPixel(x, y);
                 double sobelValue = sobel(window);
                 int sobelRGBValue = setGreyScaleValue((int) sobelValue);
-                int grayScaleMag = getGreyScale((int) newValue);
-                int greyscaleValue = setGreyScaleValue(grayScaleMag);
+//                int grayScaleMag = getGreyScale((int) newValue);
+//                int greyscaleValue = setGreyScaleValue(grayScaleMag);
                 retVal.setPixel(x, y, sobelRGBValue);
 		    }
 		}
@@ -100,5 +142,10 @@ public class SobelFilter implements ImageFilter {
         height = i.getHeight();
         width = i.getWidth();
         return edgeDetection(i);
+    }
+
+    @Override
+    public int[] filter(int[] pixels, int width, int height) {
+        return edgeDetection(pixels,width,height);
     }
 }

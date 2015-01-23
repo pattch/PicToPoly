@@ -75,39 +75,4 @@ public class ImageProcessFragment extends Fragment {
             mImageView.invalidate();
         }
     }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(resultCode == Activity.RESULT_OK && requestCode == PolyActivity.SELECT_PICTURE) {
-            Uri imageUri = data.getData();
-            String imagePath = getPath(imageUri);
-            Bitmap map = BitmapFactory.decodeFile(imagePath);
-            Log.d("PolyActivity","" + ImageLayerHandler.getInstance().getProcessor().getProcessedImage().getByteCount());
-            ImageLayerHandler.getInstance().getProcessor().setImage(map);
-            Log.d("PolyActivity","" + ImageLayerHandler.getInstance().getProcessor().getProcessedImage().getByteCount());
-            ImageLayerHandler.getInstance().getProcessor().processImage();
-            refreshImageView();
-        }
-    }
-
-    private String getPath(Uri uri) {
-        if(uri == null) {
-            Toast.makeText(getActivity(), R.string.image_uri_null, Toast.LENGTH_SHORT).show();
-            return null;
-        }
-
-        // try to retrieve the image from the media store first
-        // this will only work for images selected from gallery
-        String[] projection = { MediaStore.Images.Media.DATA };
-        Cursor cursor = getActivity().managedQuery(uri, projection, null, null, null);
-        if( cursor != null ) {
-            int column_index = cursor
-                    .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-            cursor.moveToFirst();
-            return cursor.getString(column_index);
-        }
-
-        // fallback code
-        return uri.getPath();
-    }
 }
