@@ -13,22 +13,24 @@ import android.widget.Button;
  */
 public class NavigationFragment extends Fragment {
     protected Button mOpenImageButton;
-    protected static final int SELECT_PICTURE = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceBundle) {
-        View v = inflater.inflate(R.layout.fragment_nav, parent, false);
+        View view = inflater.inflate(R.layout.fragment_nav, parent, false);
 
-        mOpenImageButton = (Button)v.findViewById(R.id.nav_open_image);
+        mOpenImageButton = (Button)view.findViewById(R.id.nav_open_image);
         mOpenImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_PICTURE);
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PolyActivity.SELECT_PICTURE);
+            }
         });
 
-        return v;
+        return view;
     }
+
+
 }

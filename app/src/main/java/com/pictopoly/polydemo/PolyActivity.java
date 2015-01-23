@@ -3,10 +3,14 @@ package com.pictopoly.polydemo;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.app.Fragment;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,12 +18,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.pictopoly.polydemo.process.ImageHandler;
 
 
 public class PolyActivity extends Activity {
-    private static final int SELECT_PICTURE = 0;
+    public static final int SELECT_PICTURE = 0;
+    protected static ImageProcessFragment imageFragment;
+    protected static NavigationFragment navFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +36,12 @@ public class PolyActivity extends Activity {
         // First Time Running
         if (savedInstanceState == null) {
             loadDefaultImage();
+            imageFragment = new ImageProcessFragment();
+            navFragment = new NavigationFragment();
+
             getFragmentManager().beginTransaction()
-                    .add(R.id.image_container, new ImageProcessFragment())
-                    .add(R.id.nav_container, new NavigationFragment())
+                    .add(R.id.image_container, imageFragment)
+                    .add(R.id.nav_container, navFragment)
                     .commit();
         }
     }
@@ -60,9 +70,13 @@ public class PolyActivity extends Activity {
     }
 
     private void loadDefaultImage() {
-        Bitmap image = BitmapFactory.decodeResource(this.getResources(), R.drawable.bird);
-        ImageHandler handler = ImageLayerHandler.getInstance().getProcessor();
-        handler.setImage(image);
-        handler.processImage();
+        if(ImageLayerHandler.getInstance().getProcessor().getRawImage() == null) {
+            Bitmap image = BitmapFactory.decodeResource(this.getResources(), R.drawable.bird);
+            ImageHandler handler = ImageLayerHandler.getInstance().getProcessor();
+            handler.setImage(image);
+            handler.processImage();
+        }
     }
+
+
 }
