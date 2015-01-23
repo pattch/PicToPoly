@@ -13,6 +13,7 @@ import android.widget.Button;
  */
 public class NavigationFragment extends Fragment {
     protected Button mOpenImageButton;
+    protected static final int SELECT_PICTURE = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceBundle) {
@@ -22,8 +23,10 @@ public class NavigationFragment extends Fragment {
         mOpenImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Open an Image from the gallery here
-            }
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_PICTURE);
         });
 
         return v;

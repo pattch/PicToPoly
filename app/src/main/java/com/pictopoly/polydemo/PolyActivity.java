@@ -2,6 +2,7 @@ package com.pictopoly.polydemo;
 
 import android.app.Activity;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.app.Fragment;
@@ -12,21 +13,22 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
+import android.widget.Button;
 
 import com.pictopoly.polydemo.process.ImageHandler;
 
 
 public class PolyActivity extends Activity {
+    private static final int SELECT_PICTURE = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_poly);
 
-        // Load Default Image
-        loadDefaultImage();
-
+        // First Time Running
         if (savedInstanceState == null) {
+            loadDefaultImage();
             getFragmentManager().beginTransaction()
                     .add(R.id.image_container, new ImageProcessFragment())
                     .add(R.id.nav_container, new NavigationFragment())

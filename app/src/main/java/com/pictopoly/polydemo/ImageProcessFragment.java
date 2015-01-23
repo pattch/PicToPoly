@@ -46,6 +46,7 @@ public class ImageProcessFragment extends Fragment {
                         mImageView.setImageBitmap(processor.refreshTriangles());
                     else if(processor.getRawImage() != null)
                         mImageView.setImageBitmap(processor.processImage());
+//                    invalidate();
                 }
 
                 return true;
