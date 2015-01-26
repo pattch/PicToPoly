@@ -1,17 +1,26 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent">
 
     <FrameLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_gravity="top"
-        android:id="@+id/image_container"/>
-
-    <FrameLayout
+        android:id="@+id/nav_container"
         android:layout_width="match_parent"
         android:layout_height="72dp"
-        android:layout_gravity="bottom"
-        android:id="@+id/nav_container"/>
+        android:background="#ffff5a43"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
-</FrameLayout>
+    <FrameLayout
+        android:id="@+id/surface_container"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:background="#ff8787ff"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/nav_container">
+
+    </FrameLayout>
+
+</RelativeLayout>

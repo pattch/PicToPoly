@@ -1,31 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/material_deep_teal_500">
+    android:layout_marginTop="12dp"
+    android:layout_marginBottom="12dp">
 
-    <Button
-        android:id="@+id/nav_open_image"
-        android:layout_width="144dp"
-        android:layout_height="48dp"
-        android:layout_margin="12dp"
-        android:layout_gravity="center_horizontal|top"
-        android:text="@string/nav_open_image"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/nav_switch_image"
-        android:layout_width="144dp"
-        android:layout_height="48dp"
-        android:layout_margin="12dp"
-        android:layout_gravity="center_horizontal|top"
-        android:text="@string/nav_switch_image"/>
+        <TextView
+            android:id="@+id/nav_process_image"
+            android:text="@string/md_brush"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:textSize="48dp" />
 
-    <Button
-        android:id="@+id/nav_process_image"
-        android:layout_width="144dp"
-        android:layout_height="48dp"
-        android:layout_margin="12dp"
-        android:layout_gravity="center_horizontal|top"
-        android:text="@string/nav_process_image"/>
+        <TextView
+            android:id="@+id/nav_open_image"
+            android:text="@string/md_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:textSize="48dp" />
 
-</FrameLayout>
+    </LinearLayout>
+
+</LinearLayout>

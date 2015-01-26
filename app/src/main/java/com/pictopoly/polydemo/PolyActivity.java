@@ -40,7 +40,7 @@ public class PolyActivity extends Activity {
             navFragment = new NavigationFragment();
 
             getFragmentManager().beginTransaction()
-                    .add(R.id.image_container, imageFragment)
+                    .add(R.id.surface_container, imageFragment)
                     .add(R.id.nav_container, navFragment)
                     .commit();
         }

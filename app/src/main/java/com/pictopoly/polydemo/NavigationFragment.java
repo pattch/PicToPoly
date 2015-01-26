@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -14,19 +15,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 /**
  * Created by Samuel on 1/21/2015.
  */
 public class NavigationFragment extends Fragment {
-    protected Button mOpenImageButton;
+    protected TextView mOpenImageButton, mProcessImageButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceBundle) {
         View view = inflater.inflate(R.layout.fragment_nav, parent, false);
 
-        mOpenImageButton = (Button)view.findViewById(R.id.nav_open_image);
+        Typeface materialTypeface = Typeface.createFromAsset(view.getContext().getAssets(), "fonts/material_design_icons.ttf");
+
+        mOpenImageButton = (TextView)view.findViewById(R.id.nav_open_image);
+        mOpenImageButton.setTypeface(materialTypeface);
+//        mOpenImageButton.setText(R.string.md_photo);
         mOpenImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,6 +45,18 @@ public class NavigationFragment extends Fragment {
             }
         });
 
+        mProcessImageButton = (TextView)view.findViewById(R.id.nav_process_image);
+        mProcessImageButton.setTypeface(materialTypeface);
+//        mProcessImageButton.setText(R.string.md_brush);
+        mProcessImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO: make it process the image here.
+            }
+        });
+
+
+
         return view;
     }
 
@@ -45,12 +65,14 @@ public class NavigationFragment extends Fragment {
         if(resultCode == Activity.RESULT_OK && requestCode == PolyActivity.SELECT_PICTURE) {
             Uri imageUri = data.getData();
             String imagePath = getPath(imageUri);
-            Bitmap map = BitmapFactory.decodeFile(imagePath);
-            Log.d("PolyActivity", "" + ImageLayerHandler.getInstance().getProcessor().getProcessedImage().getByteCount());
-            ImageLayerHandler.getInstance().getProcessor().setImage(map);
-            Log.d("PolyActivity","" + ImageLayerHandler.getInstance().getProcessor().getProcessedImage().getByteCount());
-            ImageLayerHandler.getInstance().getProcessor().processImage();
-            ((PolyActivity)getActivity()).getImageProcessFragment().refreshImageView();
+            if(imagePath != null) {
+                Bitmap map = BitmapFactory.decodeFile(imagePath);
+                if(map != null) {
+                    ImageLayerHandler.getInstance().getProcessor().setImage(map);
+                    ImageLayerHandler.getInstance().getProcessor().processImage();
+                    ((PolyActivity) getActivity()).getImageProcessFragment().refreshImageView();
+                }
+            }
         }
     }
 
