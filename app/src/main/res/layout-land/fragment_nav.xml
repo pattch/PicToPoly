@@ -8,7 +8,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp">
 
         <TextView
             android:id="@+id/nav_process_image"
@@ -29,5 +31,32 @@
             android:textSize="48dp" />
 
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp">
+
+        <TextView
+            android:id="@+id/nav_camera"
+            android:text="@string/md_camera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:textSize="48dp"/>
+
+        <TextView
+            android:id="@+id/nav_sliders"
+            android:text="@string/md_tune"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:textSize="48dp"/>
+
+        </LinearLayout>
 
 </LinearLayout>

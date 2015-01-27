@@ -24,8 +24,9 @@ import com.pictopoly.polydemo.process.ImageHandler;
 
 
 public class PolyActivity extends Activity {
-    public static final int SELECT_PICTURE = 0;
-    protected static ImageProcessFragment imageFragment;
+    public static final int INTENT_SELECT_PICTURE = 0;
+    public static final int INTENT_CAMERA = 1;
+    protected static SurfaceProcessFragment surfaceFragment;
     protected static NavigationFragment navFragment;
 
     @Override
@@ -35,12 +36,12 @@ public class PolyActivity extends Activity {
 
         // First Time Running
         if (savedInstanceState == null) {
-            loadDefaultImage();
-            imageFragment = new ImageProcessFragment();
+            surfaceFragment = new SurfaceProcessFragment();
             navFragment = new NavigationFragment();
+            loadDefaultImage();
 
             getFragmentManager().beginTransaction()
-                    .add(R.id.surface_container, imageFragment)
+                    .add(R.id.surface_container, surfaceFragment)
                     .add(R.id.nav_container, navFragment)
                     .commit();
         }
@@ -74,15 +75,24 @@ public class PolyActivity extends Activity {
             Bitmap image = BitmapFactory.decodeResource(this.getResources(), R.drawable.bird);
             ImageHandler handler = ImageLayerHandler.getInstance().getProcessor();
             handler.setImage(image);
-            handler.processImage();
+            setImage(image);
         }
     }
 
-    public ImageProcessFragment getImageProcessFragment() {
-        return imageFragment;
+    /*
+     * Pre-condition: map is not null
+     * Post-condition: The current Layer's Image is set to map
+     */
+    public void setImage(Bitmap map) {
+        ImageLayerHandler.getInstance().getProcessor().setImage(map);
+        surfaceFragment.refreshImage();
     }
 
-    public NavigationFragment getNavigationFragment() {
-        return navFragment;
-    }
+//    public ImageProcessFragment getImageProcessFragment() {
+//        return imageFragment;
+//    }
+
+//    public NavigationFragment getNavigationFragment() {
+//        return navFragment;
+//    }
 }
