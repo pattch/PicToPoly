@@ -1,9 +1,11 @@
 package com.pictopoly.polydemo.nav;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.View;
 
 import com.pictopoly.polydemo.PolyActivity;
@@ -16,12 +18,14 @@ import java.io.InputStream;
  * Created by Marklar on 1/26/2015.
  */
 public class OpenImageIntentNavigationElement extends IntentNavigationElement {
-    public OpenImageIntentNavigationElement(int id, final int requestCode) {
-        super(id,requestCode);
+    private String TAG = this.getClass().getSimpleName();
+
+    public OpenImageIntentNavigationElement(int id) {
+        super(id,PolyActivity.INTENT_SELECT_PICTURE);
     }
 
-    public OpenImageIntentNavigationElement(View view, int id, final int requestCode) {
-        super(view,id,requestCode);
+    public OpenImageIntentNavigationElement(View view, int id) {
+        super(view,id,PolyActivity.INTENT_SELECT_PICTURE);
     }
 
     public Intent getIntent() {
@@ -32,19 +36,27 @@ public class OpenImageIntentNavigationElement extends IntentNavigationElement {
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data, PolyActivity activity) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d(TAG, "Returning from Activity");
         if(resultCode == Activity.RESULT_OK)
             try {
+                Activity activity = (Activity)view.getContext();
                 InputStream stream = activity.getContentResolver().openInputStream(
                         data.getData());
                 Bitmap bitmap = BitmapFactory.decodeStream(stream);
                 stream.close();
 
-                activity.setImage(bitmap);
+                if(activity instanceof PolyActivity)
+                    ((PolyActivity)activity).setImage(bitmap);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }
+    }
+
+    @Override
+    public void onClick(View view, Fragment container) {
+        container.startActivityForResult(getIntent(),REQUEST_CODE);
     }
 }

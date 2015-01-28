@@ -32,12 +32,21 @@
         android:gravity="center_horizontal"
         android:textSize="48dp"/>
 
+    <!--<TextView-->
+    <!--android:id="@+id/nav_sliders"-->
+    <!--android:text="@string/md_tune"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="1"-->
+    <!--android:gravity="center_horizontal"-->
+    <!--android:textSize="48dp"/>-->
+
     <TextView
-        android:id="@+id/nav_sliders"
-        android:text="@string/md_tune"
+        android:id="@+id/nav_save_image"
+        android:text="@string/md_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center_horizontal"
-        android:textSize="48dp"/>
+        android:textSize="48dp" />
 </LinearLayout>

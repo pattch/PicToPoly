@@ -1,5 +1,6 @@
 package com.pictopoly.polydemo.nav;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.view.View;
 
@@ -26,7 +27,16 @@ public abstract class IntentNavigationElement extends NavigationElement {
      */
     @Override
     public void onClick(View view) {
-        view.getContext().startActivity(getIntent());
+        this.view.getContext().startActivity(getIntent());
+    }
+
+    /**
+     * Should start activity for result using REQUEST_CODE here
+     * @param view
+     * @param container
+     */
+    public void onClick(View view, Fragment container) {
+        container.startActivityForResult(getIntent(), REQUEST_CODE);
     }
 
     /**
@@ -38,7 +48,7 @@ public abstract class IntentNavigationElement extends NavigationElement {
     /**
      * What should be done
      */
-    public abstract void onActivityResult(int requestCode, int resultCode, Intent data, PolyActivity activity);
+    public abstract void onActivityResult(int requestCode, int resultCode, Intent data);
 
     public int getRequestCode() {
         return REQUEST_CODE;

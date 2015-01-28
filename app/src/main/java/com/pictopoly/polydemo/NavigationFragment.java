@@ -18,6 +18,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.pictopoly.polydemo.nav.CameraIntentNavigationElement;
+import com.pictopoly.polydemo.nav.IntentNavigationElement;
+import com.pictopoly.polydemo.nav.NavigationElement;
+import com.pictopoly.polydemo.nav.OpenImageIntentNavigationElement;
+import com.pictopoly.polydemo.nav.ProcessImageNavigationElement;
+import com.pictopoly.polydemo.nav.SaveImageNavigationElement;
 import com.pictopoly.polydemo.process.ImageHandler;
 
 import org.w3c.dom.Text;
@@ -25,30 +31,48 @@ import org.w3c.dom.Text;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by Samuel on 1/21/2015.
  */
 public class NavigationFragment extends Fragment {
     private final String TAG = this.getClass().getSimpleName();
-    protected TextView[] mButtons;
-    protected int[] mButtonIds = new int[] {R.id.nav_open_image,
-            R.id.nav_camera,
-            R.id.nav_process_image,
-            R.id.nav_sliders};
-    protected int mButtonCount = mButtonIds.length;
+//    protected int[] mButtonIds = new int[] {R.id.nav_open_image,
+//            R.id.nav_camera,
+//            R.id.nav_process_image,
+//            R.id.nav_sliders};
+//    protected int mButtonCount = mButtonIds.length;
+
+    protected List<NavigationElement> navElements = new LinkedList<NavigationElement>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceBundle) {
         View view = inflater.inflate(R.layout.fragment_nav, parent, false);
-        mButtons = new TextView[mButtonCount];
         Typeface materialTypeface = Typeface.createFromAsset(view.getContext().getAssets(), "fonts/material_design_icons.ttf");
 
-        // TODO: Implement as NavigationElement(s) so adding new functionality is easier
-        for(int i = 0; i < mButtonCount; i++) {
-            mButtons[i] = (TextView)view.findViewById(mButtonIds[i]);
-            mButtons[i].setTypeface(materialTypeface);
-            setListener(mButtons[i], mButtonIds[i]);
+        navElements.add(new OpenImageIntentNavigationElement(R.id.nav_open_image));
+        navElements.add(new CameraIntentNavigationElement(R.id.nav_camera));
+        navElements.add(new ProcessImageNavigationElement(R.id.nav_process_image));
+        navElements.add(new SaveImageNavigationElement(R.id.nav_save_image));
+
+        for(final NavigationElement navEl : navElements) {
+            View v = view.findViewById(navEl.getId());
+            navEl.setView(v);
+
+            if(v instanceof TextView)
+                ((TextView) v).setTypeface(materialTypeface);
+
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(navEl instanceof IntentNavigationElement)
+                        ((IntentNavigationElement)navEl).onClick(v, NavigationFragment.this); // Seriously magic 'this' action here
+                    else
+                        navEl.onClick(v);
+                }
+            });
         }
 
         return view;
@@ -92,28 +116,20 @@ public class NavigationFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.d(TAG, "Returned From Activity");
+        if(resultCode == Activity.RESULT_OK) {
+            int rCode = requestCode;
 
-        switch(requestCode) {
-        case PolyActivity.INTENT_SELECT_PICTURE:
-            if(resultCode == Activity.RESULT_OK)
-                try {
-                    InputStream stream = getActivity().getContentResolver().openInputStream(
-                            data.getData());
-                    Bitmap bitmap = BitmapFactory.decodeStream(stream);
-                    stream.close();
-
-                    ((PolyActivity) getActivity()).setImage(bitmap);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
+            for (NavigationElement navEl : navElements) {
+                if (navEl instanceof IntentNavigationElement) {
+                    IntentNavigationElement intentNav = (IntentNavigationElement) navEl;
+                    if (intentNav.getRequestCode() == rCode) {
+                        Log.d(TAG,navEl.getClass().getSimpleName());
+                        intentNav.onActivityResult(requestCode,resultCode,data);
+                    }
                 }
-        break;
-        case PolyActivity.INTENT_CAMERA:
-        // TODO: Handle The Image Return Here
-        break;
-        }
-
+            }
+        } else
+        Log.d(TAG, "Result: " + resultCode);
         super.onActivityResult(requestCode, resultCode, data);
     }
 

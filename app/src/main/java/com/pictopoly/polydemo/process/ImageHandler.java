@@ -13,6 +13,7 @@ import com.pictopoly.polydemo.tri.Triangulation;
 
 public class ImageHandler {
     private final String TAG = this.getClass().getSimpleName();
+    public static String PICTURE_PATH = "/Pictures/PicToPoly/";
 	protected PointMaker pointMaker;
 	protected Triangulation triangulation;
 	protected Bitmap rawImage, processedImage;
