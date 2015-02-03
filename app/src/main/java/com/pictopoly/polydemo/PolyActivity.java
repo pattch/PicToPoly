@@ -84,9 +84,14 @@ public class PolyActivity extends Activity {
      * Post-condition: The current Layer's Image is set to map
      */
     public void setImage(Bitmap map) {
-        ImageLayerHandler.getInstance().getProcessor().setImage(map);
-        surfaceFragment.refreshImage();
+//        ImageLayerHandler.getInstance().getProcessor().setImage(map);
+//        surfaceFragment.refreshImage();
+        surfaceFragment.setImage(map);
     }
+
+//    public void setImageToHandlerImage() {
+//        surfaceFragment.refreshImage();
+//    }
 
 //    public ImageProcessFragment getImageProcessFragment() {
 //        return imageFragment;

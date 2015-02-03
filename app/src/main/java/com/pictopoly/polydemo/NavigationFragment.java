@@ -78,40 +78,39 @@ public class NavigationFragment extends Fragment {
         return view;
     }
 
-    private void setListener(View view, int id) {
-        switch(id) {
-        case R.id.nav_open_image:
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent();
-                    intent.setType("image/*");
-                    intent.setAction(Intent.ACTION_GET_CONTENT);
-                    startActivityForResult(Intent.createChooser(intent, "Select Picture"), PolyActivity.INTENT_SELECT_PICTURE);
-                }
-            });
-        break;
-
-        case R.id.nav_process_image:
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    ImageHandler handler = ImageLayerHandler.getInstance().getProcessor();
-                    if (!handler.hasProcessed())
-                        ((PolyActivity) getActivity()).setImage(handler.processImage());
-                }
-            });
-        break;
-
-        case R.id.nav_camera:
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // TODO: Take A Picture With The Camera Here
-                }
-            });
-        }
-    }
+//    private void setListener(View view, int id) {
+//        switch(id) {
+//        case R.id.nav_open_image:
+//            view.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent intent = new Intent();
+//                    intent.setType("image/*");
+//                    intent.setAction(Intent.ACTION_GET_CONTENT);
+//                    startActivityForResult(Intent.createChooser(intent, "Select Picture"), PolyActivity.INTENT_SELECT_PICTURE);
+//                }
+//            });
+//        break;
+//
+//        case R.id.nav_process_image:
+//            view.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    ImageHandler handler = ImageLayerHandler.getInstance().getProcessor();
+//                    ((PolyActivity) getActivity()).setImage(handler.processImage());
+//                }
+//            });
+//        break;
+//
+//        case R.id.nav_camera:
+//            view.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    // TODO: Take A Picture With The Camera Here
+//                }
+//            });
+//        }
+//    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

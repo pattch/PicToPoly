@@ -1,6 +1,7 @@
 package com.pictopoly.polydemo.process;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.util.Log;
 
@@ -18,7 +19,6 @@ public class ImageHandler {
 	protected Triangulation triangulation;
 	protected Bitmap rawImage, processedImage;
     protected int width, height;
-    protected boolean hasProcessed = false;
 	
 	public ImageHandler() {
 		this.triangulation = new DelaunayTriangulation();
@@ -31,10 +31,9 @@ public class ImageHandler {
 	
 	public Bitmap setImage(Bitmap bitmapToBeProcessed) {
         this.rawImage = bitmapToBeProcessed.copy(Bitmap.Config.ARGB_8888, true);
+        this.processedImage = rawImage.copy(Bitmap.Config.ARGB_8888, true);
 
-        this.pointMaker = new StickyPointMaker(bitmapToBeProcessed);
-
-        hasProcessed = false;
+        this.pointMaker = new RandomPointMaker(bitmapToBeProcessed);
         this.width = rawImage.getWidth();
         this.height = rawImage.getHeight();
         return this.rawImage;
@@ -44,7 +43,7 @@ public class ImageHandler {
         Log.d(getClass().getSimpleName(), "pointMaker null? " + (pointMaker == null) + " rawImage null? " + (rawImage == null));
 		this.triangulation = new DelaunayTriangulation(pointMaker.makePoints(rawImage));
 		this.processedImage = renderTriangles(this.rawImage);
-        hasProcessed = true;
+        Log.d(TAG, "Finished Rendering");
 		return this.processedImage;
 	}
 	
@@ -57,9 +56,10 @@ public class ImageHandler {
 	}
 	
 	public Bitmap renderTriangles(Bitmap bitmapToBeRendered) {
+        Bitmap copy = bitmapToBeRendered.copy(Bitmap.Config.ARGB_8888, true);
 		List<Triangle> triangles = this.triangulation.getTriangulation();
-		TriangleRenderer.render(bitmapToBeRendered, triangles);
-        return bitmapToBeRendered;
+		TriangleRenderer.render(copy, triangles);
+        return copy;
 	}
 
 	public void addPoint(Point point) {
@@ -74,17 +74,13 @@ public class ImageHandler {
 		return this.processedImage;
 	}
 
-    public boolean hasProcessed() {
-        return this.hasProcessed;
-    }
-
     public Bitmap rescale(int newWidth, int newHeight) {
         if(this.width != newWidth || this.height != newHeight)
             return setImage(getResizedBitmap(this.rawImage, newWidth, newHeight));
         return rawImage;
     }
 
-    public Bitmap getResizedBitmap(Bitmap bm, int newWidth, int newHeight) {
+    public static Bitmap getResizedBitmap(Bitmap bm, int newWidth, int newHeight) {
         int width = bm.getWidth();
         int height = bm.getHeight();
         float scaleWidth = ((float) newWidth) / width;

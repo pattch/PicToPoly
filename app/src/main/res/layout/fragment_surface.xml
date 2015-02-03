@@ -7,4 +7,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/triangleSurfaceView" />
+
+    <RelativeLayout
+        style="@style/GenericProgressBackground"
+        android:id="@+id/loadingPanel" >
+        <ProgressBar
+            style="@style/GenericProcessIndicator" />
+    </RelativeLayout>
+
 </LinearLayout>

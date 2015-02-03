@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.View;
 
+import com.pictopoly.polydemo.ImageLayerHandler;
 import com.pictopoly.polydemo.PolyActivity;
 
 import java.io.FileNotFoundException;
@@ -46,8 +47,10 @@ public class OpenImageIntentNavigationElement extends IntentNavigationElement {
                 Bitmap bitmap = BitmapFactory.decodeStream(stream);
                 stream.close();
 
-                if(activity instanceof PolyActivity)
-                    ((PolyActivity)activity).setImage(bitmap);
+                if(activity instanceof PolyActivity) {
+                    ImageLayerHandler.getInstance().getProcessor().setImage(bitmap);
+                    ((PolyActivity) activity).setImage(ImageLayerHandler.getInstance().getProcessor().getRawImage());
+                }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {

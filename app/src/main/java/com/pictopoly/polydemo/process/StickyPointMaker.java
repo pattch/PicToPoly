@@ -4,6 +4,7 @@ package com.pictopoly.polydemo.process;
 //import java.awt.image.BufferedImage;
 import android.graphics.Bitmap;
 import android.media.Image;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,8 +13,8 @@ import java.util.Random;
 
 import com.pictopoly.polydemo.tri.Point;
 
-public class StickyPointMaker extends EdgePointMaker {
-	protected int pointCount = 10000;
+public class StickyPointMaker extends RadiusPointMaker {
+    private final String TAG = this.getClass().getSimpleName();
 	protected double stickiness = 5;
 
 	public StickyPointMaker(Bitmap bitmapToBeProcessed) {
@@ -22,41 +23,38 @@ public class StickyPointMaker extends EdgePointMaker {
 	
 	@Override
 	public Collection<Point> makePoints(Bitmap bitmapToBeProcessed) {
-        setImageQuality(3);
+//        setImageQuality(10);
         super.makePoints(bitmapToBeProcessed);
 		// Generate random points.
 		Random r = new Random();
 		Collection<Point> builtPoints = new ArrayList<>();
+        int width = bitmapToBeProcessed.getWidth(),
+                height = bitmapToBeProcessed.getHeight();
 		
 		for(int i = 0; i < pointCount; i++) {
             builtPoints.add(new Point(
                     r.nextDouble() * width,
-                    r.nextDouble() * height,
-                    0
-            ));
+                    r.nextDouble() * height));
         }
 		
-		for(Point p : builtPoints) {
-			movePointByNetForces(p, points);
-			
-			if(p.getX() >= width)
-				p.setX(width - 1);
-			if(p.getX() < 0)
-				p.setX(0);
-			if(p.getY() >= height)
-				p.setY(height - 1);
-			if(p.getY() < 0)
-				p.setY(0);
-		}
+//		for(Point p : builtPoints) {
+////          Should only be used once complexity is reduced
+////			movePointByNetForces(p, points);
+//
+//			if(p.getX() >= width)
+//				p.setX(width - 1);
+//			if(p.getX() < 0)
+//				p.setX(0);
+//			if(p.getY() >= height)
+//				p.setY(height - 1);
+//			if(p.getY() < 0)
+//				p.setY(0);
+//		}
+
+        ensureAllPointsWithinBounds(builtPoints,width,height);
 		
 		points.addAll(builtPoints);
-		
-		// Finally, for completeness, add the corners
-		
-		points.add(new Point(0,0,0));
-		points.add(new Point(width - 1,0,0));
-		points.add(new Point(0,height - 1,0));
-		points.add(new Point(width - 1,height - 1,0));
+        Log.d(TAG, "Points: " + this.points.size());
 		
 		return points;
 	}

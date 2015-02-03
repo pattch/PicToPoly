@@ -33,12 +33,7 @@ public class SaveImageNavigationElement extends NavigationElement {
         FileOutputStream out = null;
         try {
             ImageHandler handler = ImageLayerHandler.getInstance().getProcessor();
-            Bitmap bitmap;
-            if(handler.hasProcessed())
-                bitmap = handler.getProcessedImage();
-            else
-                bitmap = handler.getRawImage();
-
+            Bitmap bitmap = handler.getProcessedImage();
             out = new FileOutputStream(path + bitmap.getGenerationId() + ".jpg");
             bitmap.compress(Bitmap.CompressFormat.JPEG,100,out);
         } catch (FileNotFoundException e) {

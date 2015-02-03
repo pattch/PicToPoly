@@ -12,6 +12,7 @@ import android.view.MotionEvent;
 import android.view.SurfaceView;
 
 import com.pictopoly.polydemo.process.ImageHandler;
+import com.pictopoly.polydemo.tri.Point;
 
 /**
  * Created by Marklar on 1/26/2015.
@@ -37,7 +38,7 @@ public class TriangleSurfaceView extends SurfaceView {
             if(!paint.isFilterBitmap())
                 paint.setFilterBitmap(true);
 
-            mTriangleMap = handler.rescale(getWidth(),getHeight());
+            mTriangleMap = ImageHandler.getResizedBitmap(handler.getProcessedImage(),getWidth(),getHeight());
             surfaceBounds.set(0,0,getWidth(),getHeight());
 
             canvas.drawBitmap(mTriangleMap, null, surfaceBounds, paint);
@@ -53,8 +54,9 @@ public class TriangleSurfaceView extends SurfaceView {
     }
 
     public boolean handleTouch(MotionEvent event) {
-
-
+        handler.addPoint(new Point(event.getX(),event.getY()));
+        handler.refreshTriangles();
+        invalidate();
         return true;
     }
 

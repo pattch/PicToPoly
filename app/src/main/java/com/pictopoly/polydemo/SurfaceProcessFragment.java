@@ -35,29 +35,35 @@ public class SurfaceProcessFragment extends Fragment {
         });
         refreshImage();
 
+//        mTriangleSurfaceView.setVisibility(View.INVISIBLE);
+        // handle loading screen
+        view.findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
+
         return view;
     }
 
     public void setImage(Bitmap bitmap) {
-        if(mTriangleSurfaceView != null)
+        if(mTriangleSurfaceView != null) {
             mTriangleSurfaceView.setImage(bitmap);
+            mTriangleSurfaceView.invalidate();
+        }
     }
 
-    public void refreshImageRaw() {
-        if(mTriangleSurfaceView != null)
-            mTriangleSurfaceView.setImage(handler.getRawImage());
-    }
-
-    public void refreshImageProcessed() {
-        if(mTriangleSurfaceView != null)
-            mTriangleSurfaceView.setImage(handler.getProcessedImage());
-    }
+//    public void refreshImageRaw() {
+//        if(mTriangleSurfaceView != null)
+//            mTriangleSurfaceView.setImage(handler.getRawImage());
+//    }
+//
+//    public void refreshImageProcessed() {
+//        if(mTriangleSurfaceView != null)
+//            mTriangleSurfaceView.setImage(handler.getProcessedImage());
+//    }
 
     public void refreshImage() {
-        if(handler.hasProcessed())
-            refreshImageProcessed();
-        else
-            refreshImageRaw();
+        if(mTriangleSurfaceView != null) {
+            mTriangleSurfaceView.setImage(handler.getProcessedImage());
+            mTriangleSurfaceView.invalidate();
+        }
     }
 
 }

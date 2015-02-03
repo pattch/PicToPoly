@@ -11,7 +11,7 @@ import java.util.Collection;
  * Created by Samuel on 1/23/2015.
  */
 public abstract class PixelPointMaker implements PointMaker {
-    public static final int defaultNumberOfPoints = 10000;
+    public static int pointCount = 10000;
     protected Collection<Point> points;
     protected int[] pixels;
     protected int width, height;
@@ -29,7 +29,7 @@ public abstract class PixelPointMaker implements PointMaker {
                 bitmapToBeProcessed.getWidth(),
                 bitmapToBeProcessed.getHeight());
 
-        points = new ArrayList<>(defaultNumberOfPoints);
+        points = new ArrayList<>(pointCount);
     }
 
     public static int getPixel(int[] pixels, int x, int y, int width, int height) {
