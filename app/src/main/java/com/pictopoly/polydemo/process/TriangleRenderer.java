@@ -15,7 +15,7 @@ import java.util.Iterator;
 
 public class TriangleRenderer {
     private static String TAG = "TriangleRenderer";
-    protected static Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    protected static Paint paint = new Paint();
 
     /*
      * Don't let anywhere call the helper method to draw a single Triangle, that way we
@@ -65,8 +65,7 @@ public class TriangleRenderer {
                 blueSample / pts.length);
 
         paint.setColor(colorSample);
-
-        // Draw to canvas
+        paint.setStyle(Paint.Style.FILL_AND_STROKE);
         canvas.drawPath(path, paint);
     }
 
@@ -100,8 +99,8 @@ public class TriangleRenderer {
     }
 
     private static void initPaint() {
+        paint.setFlags(Paint.ANTI_ALIAS_FLAG);
         paint.setStrokeWidth(2);
-        paint.setStyle(Paint.Style.FILL_AND_STROKE);
         paint.setAntiAlias(true);
     }
 }

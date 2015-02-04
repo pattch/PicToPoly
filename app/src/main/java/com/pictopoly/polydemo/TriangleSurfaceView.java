@@ -32,17 +32,33 @@ public class TriangleSurfaceView extends SurfaceView {
 
     @Override
     public void onDraw(Canvas canvas) {
-        canvas.drawColor(Color.BLACK);
+        canvas.drawColor(Color.DKGRAY);
 
         if(mTriangleMap != null) {
             if(!paint.isFilterBitmap())
                 paint.setFilterBitmap(true);
 
-            mTriangleMap = ImageHandler.getResizedBitmap(handler.getProcessedImage(),getWidth(),getHeight());
-            surfaceBounds.set(0,0,getWidth(),getHeight());
+            mTriangleMap = handler.getProcessedImage();
+            int width = mTriangleMap.getWidth(),
+                    height = mTriangleMap.getHeight();
+
+            double scale = getRescaleFactor(getWidth(),getHeight(),width,height);
+            width *= scale;
+            height *= scale;
+
+            mTriangleMap = ImageHandler.getResizedBitmap(handler.getProcessedImage(),(int)width,(int)height);
+            double xPad = getWidth() - width,
+                    yPad = getHeight() - height;
+            surfaceBounds.set((int)(xPad / 2),(int)(yPad / 2),(int)(xPad / 2) + width,(int)(yPad / 2) + height);
 
             canvas.drawBitmap(mTriangleMap, null, surfaceBounds, paint);
         }
+    }
+
+    private double getRescaleFactor(double containerWidth, double containerHeight, int imageWidth, int imageHeight) {
+        double wScale = containerWidth / imageWidth,
+                hScale = containerHeight / imageHeight;
+        return Math.min(wScale,hScale);
     }
 
     public void setImage(Bitmap triangleMap) {
@@ -54,17 +70,11 @@ public class TriangleSurfaceView extends SurfaceView {
     }
 
     public boolean handleTouch(MotionEvent event) {
-        handler.addPoint(new Point(event.getX(),event.getY()));
+        int offsetX = surfaceBounds.centerX() - (surfaceBounds.width() / 2),
+                offsetY = surfaceBounds.centerY() - (surfaceBounds.height() / 2);
+        handler.addPoint(new Point(event.getX() - offsetX,event.getY() - offsetY));
         handler.refreshTriangles();
-        invalidate();
+        this.invalidate();
         return true;
     }
-
-    public void autoPopulate() {
-        // TODO: Process the Image here
-    }
-
-//    public void renderTriangles(Canvas canvas) {
-//
-//    }
 }
