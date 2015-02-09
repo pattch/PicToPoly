@@ -28,6 +28,11 @@ public class PolyActivity extends Activity {
     public static final int INTENT_CAMERA = 1;
     protected static SurfaceProcessFragment surfaceFragment;
     protected static NavigationFragment navFragment;
+    protected View rootView;
+
+    protected int[] optionElements = new int[] {
+            R.id.nav_image_options,
+            R.id.nav_point_options, };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,13 +43,21 @@ public class PolyActivity extends Activity {
         if (savedInstanceState == null) {
             surfaceFragment = new SurfaceProcessFragment();
             navFragment = new NavigationFragment();
-            loadDefaultImage();
+//            loadDefaultImage();
 
             getFragmentManager().beginTransaction()
                     .add(R.id.surface_container, surfaceFragment)
                     .add(R.id.nav_container, navFragment)
                     .commit();
         }
+
+        rootView = findViewById(R.id.root_container);
+        rootView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clearAllOptions();
+            }
+        });
     }
 
 
@@ -70,14 +83,14 @@ public class PolyActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void loadDefaultImage() {
-        if(ImageLayerHandler.getInstance().getProcessor().getRawImage() == null) {
-            Bitmap image = BitmapFactory.decodeResource(this.getResources(), R.drawable.bird);
-            ImageHandler handler = ImageLayerHandler.getInstance().getProcessor();
-            handler.setImage(image);
-            setImage(image);
-        }
-    }
+//    private void loadDefaultImage() {
+//        if(ImageLayerHandler.getInstance().getProcessor().getRawImage() == null) {
+//            Bitmap image = BitmapFactory.decodeResource(this.getResources(), R.drawable.bird);
+//            ImageHandler handler = ImageLayerHandler.getInstance().getProcessor();
+//            handler.setImage(image);
+//            setImage(image);
+//        }
+//    }
 
     /*
      * Pre-condition: map is not null
@@ -86,7 +99,26 @@ public class PolyActivity extends Activity {
     public void setImage(Bitmap map) {
 //        ImageLayerHandler.getInstance().getProcessor().setImage(map);
 //        surfaceFragment.refreshImage();
-        surfaceFragment.setImage(map);
+        if(surfaceFragment != null)
+            surfaceFragment.setImage(map);
+    }
+
+    public void clearAllOptions() {
+        for(int Id : optionElements) {
+            View v = findViewById(Id);
+            if(v != null)
+                v.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    public void refreshTriangleSurface() {
+        if(surfaceFragment != null)
+            surfaceFragment.invalidate();
+    }
+
+    public void setChangingSinglePoint(boolean addSinglePoint) {
+        if(surfaceFragment != null)
+            surfaceFragment.setChangingSinglePoint(addSinglePoint);
     }
 
 //    public void setImageToHandlerImage() {

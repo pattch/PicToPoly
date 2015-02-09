@@ -16,6 +16,7 @@ import java.util.Iterator;
 public class TriangleRenderer {
     private static String TAG = "TriangleRenderer";
     protected static Paint paint = new Paint();
+    protected static boolean fillPaint = true;
 
     /*
      * Don't let anywhere call the helper method to draw a single Triangle, that way we
@@ -34,10 +35,6 @@ public class TriangleRenderer {
         if(map == null || triangle == null || triangle.getA() == null || triangle.getB() == null || triangle.getC() == null)
             return;
 
-//        Log.d("TriangleRenderer",
-//                "Map null?" + (null == map) + " Map mutable? " + (map.isMutable()) +
-//                "Triangle null? " + (null == triangle));
-
         // Set Path based on triangle
         Path path = new Path();
         path.setFillType(Path.FillType.EVEN_ODD);
@@ -50,22 +47,31 @@ public class TriangleRenderer {
         // Read Colors from map
         Point triangleCenterPoint = new Point((triangle.getA().getX() + triangle.getB().getX() + triangle.getC().getX())/3,
                 (triangle.getA().getY() + triangle.getB().getY() + triangle.getC().getY())/3);
-        Point[] pts = new Point[] {triangle.getA(), triangle.getB(), triangle.getC(), triangleCenterPoint};
+//        Point[] pts = new Point[] {triangle.getA(), triangle.getB(), triangle.getC(), triangleCenterPoint};
+//
+//        int colorSample, redSample=0, blueSample=0, greenSample=0;
+//        for(Point p : pts) {
+//            colorSample = map.getPixel((int)(p.getX()), (int)(p.getY()));
+//            redSample += Color.red(colorSample);
+//            blueSample += Color.blue(colorSample);
+//            greenSample += Color.green(colorSample);
+//        }
+//
+//        colorSample = Color.rgb(redSample / pts.length,
+//                greenSample / pts.length,
+//                blueSample / pts.length);
 
-        int colorSample, redSample=0, blueSample=0, greenSample=0;
-        for(Point p : pts) {
-            colorSample = map.getPixel((int)(p.getX()), (int)(p.getY()));
-            redSample += Color.red(colorSample);
-            blueSample += Color.blue(colorSample);
-            greenSample += Color.green(colorSample);
+        int colorSample = map.getPixel((int)triangleCenterPoint.getX(), (int)triangleCenterPoint.getY());
+
+        if(fillPaint) {
+            paint.setColor(colorSample);
+            paint.setAlpha(255);
+            paint.setStyle(Paint.Style.FILL_AND_STROKE);
+        } else {
+            paint.setColor(Color.WHITE);
+            paint.setAlpha(200);
+            paint.setStyle(Paint.Style.STROKE);
         }
-
-        colorSample = Color.rgb(redSample / pts.length,
-                greenSample / pts.length,
-                blueSample / pts.length);
-
-        paint.setColor(colorSample);
-        paint.setStyle(Paint.Style.FILL_AND_STROKE);
         canvas.drawPath(path, paint);
     }
 
@@ -77,8 +83,15 @@ public class TriangleRenderer {
     }
 
     public static void render(Bitmap map, Collection<Triangle> triangles) {
+        fillPaint = true;
         Canvas c = new Canvas(map);
         render(c,map,triangles);
+    }
+
+    public static void renderLines(Bitmap map, Collection<Triangle> triangles) {
+        fillPaint = false;
+        Canvas c = new Canvas(map);
+        render(c, map, triangles);
     }
 
     public static void render(Canvas canvas, Bitmap map, Iterator<Triangle> updatedTriangles) {
@@ -94,7 +107,14 @@ public class TriangleRenderer {
     }
 
     public static void render(Bitmap processedMap, Bitmap rawMap, Iterator<Triangle> updatedTriangles) {
+        fillPaint = true;
         Canvas c = new Canvas(processedMap);
+        render(c,rawMap,updatedTriangles);
+    }
+
+    public static void renderLines(Bitmap lineMap, Bitmap rawMap, Iterator<Triangle> updatedTriangles) {
+        fillPaint = false;
+        Canvas c = new Canvas(lineMap);
         render(c,rawMap,updatedTriangles);
     }
 

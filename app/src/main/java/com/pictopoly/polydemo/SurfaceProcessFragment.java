@@ -1,5 +1,6 @@
 package com.pictopoly.polydemo;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -30,14 +31,18 @@ public class SurfaceProcessFragment extends Fragment {
         mTriangleSurfaceView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                return mTriangleSurfaceView.handleTouch(event);
+                Activity a = SurfaceProcessFragment.this.getActivity();
+                if(a instanceof PolyActivity)
+                    ((PolyActivity)a).clearAllOptions();
+
+                boolean res = false;
+                if((event.getAction() == MotionEvent.ACTION_DOWN && mTriangleSurfaceView.isChangingSinglePoint()) || !mTriangleSurfaceView.isChangingSinglePoint())
+                    res = mTriangleSurfaceView.handleTouch(event);
+                return res;
             }
         });
         refreshImage();
-
-//        mTriangleSurfaceView.setVisibility(View.INVISIBLE);
-        // handle loading screen
-        view.findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
+        view.findViewById(R.id.loadingPanel).setVisibility(View.INVISIBLE);
 
         return view;
     }
@@ -49,16 +54,6 @@ public class SurfaceProcessFragment extends Fragment {
         }
     }
 
-//    public void refreshImageRaw() {
-//        if(mTriangleSurfaceView != null)
-//            mTriangleSurfaceView.setImage(handler.getRawImage());
-//    }
-//
-//    public void refreshImageProcessed() {
-//        if(mTriangleSurfaceView != null)
-//            mTriangleSurfaceView.setImage(handler.getProcessedImage());
-//    }
-
     public void refreshImage() {
         if(mTriangleSurfaceView != null) {
             mTriangleSurfaceView.setImage(handler.getProcessedImage());
@@ -66,4 +61,13 @@ public class SurfaceProcessFragment extends Fragment {
         }
     }
 
+    public void invalidate() {
+        if(mTriangleSurfaceView != null)
+            mTriangleSurfaceView.invalidate();
+    }
+
+    public void setChangingSinglePoint(boolean changingSinglePoint) {
+        if(mTriangleSurfaceView != null)
+            mTriangleSurfaceView.setChangingSinglePoint(changingSinglePoint);
+    }
 }

@@ -11,7 +11,7 @@ import java.util.Collection;
  * Created by Samuel on 1/23/2015.
  */
 public abstract class PixelPointMaker implements PointMaker {
-    public static int pointCount = 10000;
+    public static int pointCount = 1000;
     protected Collection<Point> points;
     protected int[] pixels;
     protected int width, height;

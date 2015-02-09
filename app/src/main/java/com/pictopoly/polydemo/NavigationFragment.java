@@ -3,34 +3,16 @@ package com.pictopoly.polydemo;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.pictopoly.polydemo.nav.CameraIntentNavigationElement;
-import com.pictopoly.polydemo.nav.IntentNavigationElement;
-import com.pictopoly.polydemo.nav.NavigationElement;
-import com.pictopoly.polydemo.nav.OpenImageIntentNavigationElement;
-import com.pictopoly.polydemo.nav.ProcessImageNavigationElement;
-import com.pictopoly.polydemo.nav.SaveImageNavigationElement;
-import com.pictopoly.polydemo.process.ImageHandler;
+import com.pictopoly.polydemo.nav.*;
 
-import org.w3c.dom.Text;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -39,12 +21,8 @@ import java.util.List;
  */
 public class NavigationFragment extends Fragment {
     private final String TAG = this.getClass().getSimpleName();
-//    protected int[] mButtonIds = new int[] {R.id.nav_open_image,
-//            R.id.nav_camera,
-//            R.id.nav_process_image,
-//            R.id.nav_sliders};
-//    protected int mButtonCount = mButtonIds.length;
 
+    protected View navAddImageOptions, navPointOptions;
     protected List<NavigationElement> navElements = new LinkedList<NavigationElement>();
 
     @Override
@@ -52,10 +30,43 @@ public class NavigationFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_nav, parent, false);
         Typeface materialTypeface = Typeface.createFromAsset(view.getContext().getAssets(), "fonts/material_design_icons.ttf");
 
+        // Make Options Invisible
+        navAddImageOptions = view.findViewById(R.id.nav_image_options);
+        if(navAddImageOptions != null)
+            navAddImageOptions.setVisibility(View.INVISIBLE);
+        navPointOptions = view.findViewById(R.id.nav_point_options);
+        if(navPointOptions != null)
+            navPointOptions.setVisibility(View.INVISIBLE);
+
+        // 5 Main Buttons
+        navElements.add(new AddImageNavigationElement(R.id.nav_add_image));
+        navElements.add(new PointOptionsNavigationElement(R.id.nav_add_points));
+        navElements.add(new SliderNavigationElement(R.id.nav_edit_image));                  // Needs its own Option Nav El Class
+        navElements.add(new ChangeTriangleViewNavigationElement(R.id.nav_change_view));
+        navElements.add(new SaveImageNavigationElement(R.id.nav_save_image));
+
+        // Add Image Options
         navElements.add(new OpenImageIntentNavigationElement(R.id.nav_open_image));
         navElements.add(new CameraIntentNavigationElement(R.id.nav_camera));
+
+        // Add Point Options
         navElements.add(new ProcessImageNavigationElement(R.id.nav_process_image));
-        navElements.add(new SaveImageNavigationElement(R.id.nav_save_image));
+        navElements.add(new NavigationElement(R.id.nav_add_single_point) {
+            @Override
+            public void onClick(View view) {
+                Activity a = NavigationFragment.this.getActivity();
+                if(a instanceof PolyActivity)
+                    ((PolyActivity)a).setChangingSinglePoint(true);
+            }
+        });
+        navElements.add(new NavigationElement(R.id.nav_add_line_point) {
+            @Override
+            public void onClick(View view) {
+                Activity a = NavigationFragment.this.getActivity();
+                if(a instanceof PolyActivity)
+                    ((PolyActivity)a).setChangingSinglePoint(false);
+            }
+        });
 
         for(final NavigationElement navEl : navElements) {
             View v = view.findViewById(navEl.getId());
@@ -64,9 +75,16 @@ public class NavigationFragment extends Fragment {
             if(v instanceof TextView)
                 ((TextView) v).setTypeface(materialTypeface);
 
+            if(null == v)
+                Log.d(TAG,navEl.getClass().getSimpleName() + " " + navEl.getId());
+            else
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Activity a = NavigationFragment.this.getActivity();
+                    if(a instanceof PolyActivity)
+                        ((PolyActivity)a).clearAllOptions();
+
                     if(navEl instanceof IntentNavigationElement)
                         ((IntentNavigationElement)navEl).onClick(v, NavigationFragment.this); // Seriously magic 'this' action here
                     else
@@ -77,40 +95,6 @@ public class NavigationFragment extends Fragment {
 
         return view;
     }
-
-//    private void setListener(View view, int id) {
-//        switch(id) {
-//        case R.id.nav_open_image:
-//            view.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Intent intent = new Intent();
-//                    intent.setType("image/*");
-//                    intent.setAction(Intent.ACTION_GET_CONTENT);
-//                    startActivityForResult(Intent.createChooser(intent, "Select Picture"), PolyActivity.INTENT_SELECT_PICTURE);
-//                }
-//            });
-//        break;
-//
-//        case R.id.nav_process_image:
-//            view.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    ImageHandler handler = ImageLayerHandler.getInstance().getProcessor();
-//                    ((PolyActivity) getActivity()).setImage(handler.processImage());
-//                }
-//            });
-//        break;
-//
-//        case R.id.nav_camera:
-//            view.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    // TODO: Take A Picture With The Camera Here
-//                }
-//            });
-//        }
-//    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -132,26 +116,26 @@ public class NavigationFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    private String getPath(Uri uri) {
-        if(uri == null) {
-            Toast.makeText(getActivity(), R.string.image_uri_null, Toast.LENGTH_SHORT).show();
-            Log.d(TAG, "Uri null");
-            return null;
-        }
-
-        Log.d(TAG, "Trying to make Cursor");
-        // try to retrieve the image from the media store first
-        // this will only work for images selected from gallery
-        String[] projection = { MediaStore.Images.Media.DATA };
-        Cursor cursor = getActivity().getContentResolver().query(uri, projection, null, null, null);
-        if( cursor != null ) {
-            int column_index = cursor
-                    .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-            cursor.moveToFirst();
-            return cursor.getString(column_index);
-        }
-
-        // fallback code
-        return uri.getPath();
-    }
+//    private String getPath(Uri uri) {
+//        if(uri == null) {
+//            Toast.makeText(getActivity(), R.string.image_uri_null, Toast.LENGTH_SHORT).show();
+//            Log.d(TAG, "Uri null");
+//            return null;
+//        }
+//
+//        Log.d(TAG, "Trying to make Cursor");
+//        // try to retrieve the image from the media store first
+//        // this will only work for images selected from gallery
+//        String[] projection = { MediaStore.Images.Media.DATA };
+//        Cursor cursor = getActivity().getContentResolver().query(uri, projection, null, null, null);
+//        if( cursor != null ) {
+//            int column_index = cursor
+//                    .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+//            cursor.moveToFirst();
+//            return cursor.getString(column_index);
+//        }
+//
+//        // fallback code
+//        return uri.getPath();
+//    }
 }

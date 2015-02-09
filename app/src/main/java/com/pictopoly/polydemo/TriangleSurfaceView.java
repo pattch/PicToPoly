@@ -19,10 +19,23 @@ import com.pictopoly.polydemo.tri.Point;
  */
 public class TriangleSurfaceView extends SurfaceView {
     private final String TAG = this.getClass().getSimpleName();
-    protected Bitmap mTriangleMap;
+    public static final int BG_COLOR = Color.DKGRAY;
+    public static final int DRAW_TRIANGLES_OPAQUE = 1;
+    public static final int DRAW_TRIANGLES_TRANSPARENT = 2;
+    public static final int DRAW_TRIANGLES_LINES = 4;
+    public static final int DRAW_LINES = 8;
+    public static final int DRAW_RAW = 16;
+    protected static int drawingState = 1;
+    protected Bitmap mTriangleMap, mLineMap, mRawMap;
+
     protected final Paint paint = new Paint();
     protected Rect surfaceBounds;
     protected ImageHandler handler = ImageLayerHandler.getInstance().getProcessor();
+
+    protected int mWidth, mHeight;
+    protected double mScale;
+
+    protected boolean changingSinglePoint = false;
 
     public TriangleSurfaceView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -38,21 +51,69 @@ public class TriangleSurfaceView extends SurfaceView {
             if(!paint.isFilterBitmap())
                 paint.setFilterBitmap(true);
 
-            mTriangleMap = handler.getProcessedImage();
-            int width = mTriangleMap.getWidth(),
-                    height = mTriangleMap.getHeight();
+            // Initialize Maps
+            initMaps();
 
-            double scale = getRescaleFactor(getWidth(),getHeight(),width,height);
-            width *= scale;
-            height *= scale;
+            // Get The Scale
+            mWidth = mTriangleMap.getWidth();
+            mHeight = mTriangleMap.getHeight();
+            mScale = getRescaleFactor(getWidth(),getHeight(),mWidth,mHeight);
+            mWidth *= mScale;
+            mHeight *= mScale;
 
-            mTriangleMap = ImageHandler.getResizedBitmap(handler.getProcessedImage(),(int)width,(int)height);
-            double xPad = getWidth() - width,
-                    yPad = getHeight() - height;
-            surfaceBounds.set((int)(xPad / 2),(int)(yPad / 2),(int)(xPad / 2) + width,(int)(yPad / 2) + height);
+            // Update Maps Based on the new Image Scale
+            resizeMaps(mWidth,mHeight);
 
-            canvas.drawBitmap(mTriangleMap, null, surfaceBounds, paint);
+            // Make the Rectangle to use to draw the Map
+            double xPad = getWidth() - mWidth,
+                    yPad = getHeight() - mHeight;
+            surfaceBounds.set((int)(xPad / 2),(int)(yPad / 2),(int)(xPad / 2) + mWidth,(int)(yPad / 2) + mHeight);
+
+            // Draw Triangles Based on the TriangleSurfaceView's State to canvas
+            drawMapByState(canvas);
         }
+    }
+
+    private void drawMapByState(Canvas canvas) {
+        switch(drawingState) {
+            case DRAW_TRIANGLES_TRANSPARENT:
+                paint.setAlpha(255);
+                canvas.drawBitmap(mRawMap, null, surfaceBounds, paint);
+                paint.setAlpha(200);
+                canvas.drawBitmap(mTriangleMap, null, surfaceBounds, paint);
+                break;
+            case DRAW_TRIANGLES_LINES:
+                paint.setAlpha(255);
+                canvas.drawBitmap(mTriangleMap, null, surfaceBounds, paint);
+                paint.setAlpha(200);
+                canvas.drawBitmap(mLineMap, null, surfaceBounds, paint);
+                break;
+            case DRAW_LINES:
+                paint.setAlpha(255);
+                canvas.drawBitmap(mLineMap, null, surfaceBounds, paint);
+                break;
+            case DRAW_RAW:
+                paint.setAlpha(255);
+                canvas.drawBitmap(mRawMap, null, surfaceBounds, paint);
+                break;
+            case DRAW_TRIANGLES_OPAQUE:
+            default:
+                paint.setAlpha(255);
+                canvas.drawBitmap(mTriangleMap, null, surfaceBounds, paint);
+                break;
+        }
+    }
+
+    private void initMaps() {
+        mTriangleMap = handler.getProcessedImage();
+        mLineMap = handler.getLineImage();
+        mRawMap = handler.getRawImage();
+    }
+
+    private void resizeMaps(int width, int height) {
+        mTriangleMap = ImageHandler.getResizedBitmap(mTriangleMap,width,height);
+        mLineMap = ImageHandler.getResizedBitmap(mLineMap,width,height);
+        mRawMap = ImageHandler.getResizedBitmap(mRawMap,width,height);
     }
 
     private double getRescaleFactor(double containerWidth, double containerHeight, int imageWidth, int imageHeight) {
@@ -70,11 +131,35 @@ public class TriangleSurfaceView extends SurfaceView {
     }
 
     public boolean handleTouch(MotionEvent event) {
-        int offsetX = surfaceBounds.centerX() - (surfaceBounds.width() / 2),
-                offsetY = surfaceBounds.centerY() - (surfaceBounds.height() / 2);
-        handler.addPoint(new Point(event.getX() - offsetX,event.getY() - offsetY));
+        Log.d(TAG,"adding pt (" + event.getX() + "," + event.getY() + ") - adding single? " + changingSinglePoint);
+        int offsetX = surfaceBounds.left,
+                offsetY = surfaceBounds.top;
+        double ptX = (int)(event.getX()/mScale),
+            ptY = (int)(event.getY()/mScale);
+        ptX -= offsetX;
+        ptY -= offsetY;
+        handler.addPoint(new Point(ptX, ptY));
         handler.refreshTriangles();
         this.invalidate();
         return true;
+    }
+
+    public static void setRenderType(int state) {
+        if(drawingState >= 0 && state <= DRAW_RAW)
+            drawingState = state;
+        else
+            drawingState = DRAW_TRIANGLES_OPAQUE;
+    }
+
+    public static void changeRenderType() {
+        setRenderType(drawingState * 2);
+    }
+
+    public boolean isChangingSinglePoint() {
+        return changingSinglePoint;
+    }
+
+    public void setChangingSinglePoint(boolean changingSinglePoint) {
+        this.changingSinglePoint = changingSinglePoint;
     }
 }

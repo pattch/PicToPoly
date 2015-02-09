@@ -2,8 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="12dp"
-    android:layout_marginBottom="12dp">
+    android:background="#aa673AB7">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,23 +11,27 @@
         android:layout_marginTop="12dp"
         android:layout_marginBottom="12dp">
 
-        <TextView
-            android:id="@+id/nav_process_image"
-            android:text="@string/md_brush"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:textSize="48dp" />
-
-        <TextView
+        <Button
             android:id="@+id/nav_open_image"
-            android:text="@string/md_photo"
+            android:text="@string/md_folder"
+            style="?android:buttonBarButtonStyle"
+            android:textColor="#ffffffff"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:textSize="48dp" />
+            android:gravity="center_horizontal|center_vertical"
+            android:textSize="24dp" />
+
+        <Button
+            style="?android:buttonBarButtonStyle"
+            android:id="@+id/nav_camera"
+            android:text="@string/md_camera_alt"
+            android:textColor="#ffffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal|center_vertical"
+            android:textSize="24dp"/>
 
     </LinearLayout>
 
@@ -39,33 +42,102 @@
         android:layout_marginTop="12dp"
         android:layout_marginBottom="12dp">
 
-        <TextView
-            android:id="@+id/nav_camera"
-            android:text="@string/md_camera"
+        <Button
+            style="?android:buttonBarButtonStyle"
+            android:id="@+id/nav_process_image"
+            android:text="@string/md_spellcheck"
+            android:textColor="#ffffffff"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:textSize="48dp"/>
+            android:gravity="center_horizontal|center_vertical"
+            android:textSize="24dp" />
 
-        <!--<TextView-->
-            <!--android:id="@+id/nav_sliders"-->
-            <!--android:text="@string/md_tune"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"-->
-            <!--android:gravity="center_horizontal"-->
-            <!--android:textSize="48dp"/>-->
-
-        <TextView
+        <Button
+            style="?android:buttonBarButtonStyle"
             android:id="@+id/nav_save_image"
             android:text="@string/md_save"
+            android:textColor="#ffffffff"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:textSize="48dp" />
+            android:gravity="center_horizontal|center_vertical"
+            android:textSize="24dp" />
 
-        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp">
+
+        <Button
+            style="?android:buttonBarButtonStyle"
+            android:id="@+id/nav_edit_image"
+            android:text="@string/md_edit"
+            android:textColor="#ffffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal|center_vertical"
+            android:textSize="24dp" />
+
+        <Button
+            style="?android:buttonBarButtonStyle"
+            android:id="@+id/nav_change_view"
+            android:text="@string/md_remove_red_eye"
+            android:textColor="#ffffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal|center_vertical"
+            android:textSize="24dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp">
+
+        <Button
+            style="?android:buttonBarButtonStyle"
+            android:id="@+id/nav_add_single_point"
+            android:text="@string/md_adjust"
+            android:textColor="#ffffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal|center_vertical"
+            android:textSize="24dp" />
+
+        <Button
+            style="?android:buttonBarButtonStyle"
+            android:id="@+id/nav_add_line_point"
+            android:text="@string/md_gesture"
+            android:textColor="#ffffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal|center_vertical"
+            android:textSize="24dp" />
+
+    </LinearLayout>
+
+    <!-- Button Specific to Portrait - no content -->
+
+    <!-- No Extra Add Image Button on Landscape -->
+    <TextView
+        android:id="@+id/nav_add_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
+
+    <!-- End Portrait Elements -->
 
 </LinearLayout>

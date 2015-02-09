@@ -39,15 +39,15 @@ public class OpenImageIntentNavigationElement extends IntentNavigationElement {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.d(TAG, "Returning from Activity");
-        if(resultCode == Activity.RESULT_OK)
+        if(resultCode == Activity.RESULT_OK) {
             try {
-                Activity activity = (Activity)view.getContext();
+                Activity activity = (Activity) view.getContext();
                 InputStream stream = activity.getContentResolver().openInputStream(
                         data.getData());
                 Bitmap bitmap = BitmapFactory.decodeStream(stream);
                 stream.close();
 
-                if(activity instanceof PolyActivity) {
+                if (activity instanceof PolyActivity) {
                     ImageLayerHandler.getInstance().getProcessor().setImage(bitmap);
                     ((PolyActivity) activity).setImage(ImageLayerHandler.getInstance().getProcessor().getRawImage());
                 }
@@ -56,6 +56,7 @@ public class OpenImageIntentNavigationElement extends IntentNavigationElement {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
     }
 
     @Override
