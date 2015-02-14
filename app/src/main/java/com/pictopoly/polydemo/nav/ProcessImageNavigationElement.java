@@ -1,5 +1,6 @@
 package com.pictopoly.polydemo.nav;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.util.Log;
@@ -24,8 +25,13 @@ public class ProcessImageNavigationElement extends NavigationElement {
     @Override
     public void onClick(View view) {
         ImageHandler handler = ImageLayerHandler.getInstance().getProcessor();
-        if (view.getContext() instanceof PolyActivity) {
-            ((PolyActivity) view.getContext()).setImage( handler.processImage());
+        Activity a = (Activity)view.getContext();
+        if (a instanceof PolyActivity) {
+            Log.d(getClass().getSimpleName(), "Processing from Nav");
+            PolyActivity pa = (PolyActivity)a;
+            pa.showLoadingPanel();
+            Thread processThread = new Thread(handler);
+            processThread.start();
         } else
             Log.d(getClass().getSimpleName(), "Activity for ProcessNavEl not PolyActivity");
     }

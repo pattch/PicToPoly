@@ -68,6 +68,24 @@ public class NavigationFragment extends Fragment {
             }
         });
 
+        // Add Insert/Remove Buttons
+        navElements.add(new NavigationElement(R.id.nav_insert_points) {
+            @Override
+            public void onClick(View view) {
+                Activity a = NavigationFragment.this.getActivity();
+                if(a instanceof PolyActivity)
+                    ((PolyActivity)a).setAddingPoints(true);
+            }
+        });
+        navElements.add(new NavigationElement(R.id.nav_remove_points) {
+            @Override
+            public void onClick(View view) {
+                Activity a = NavigationFragment.this.getActivity();
+                if(a instanceof PolyActivity)
+                    ((PolyActivity)a).setAddingPoints(false);
+            }
+        });
+
         for(final NavigationElement navEl : navElements) {
             View v = view.findViewById(navEl.getId());
             navEl.setView(v);

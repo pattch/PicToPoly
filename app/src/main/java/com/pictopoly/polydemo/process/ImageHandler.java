@@ -3,6 +3,8 @@ package com.pictopoly.polydemo.process;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.os.*;
+import android.os.Process;
 import android.util.Log;
 
 import java.util.List;
@@ -12,7 +14,7 @@ import com.pictopoly.polydemo.tri.Point;
 import com.pictopoly.polydemo.tri.Triangle;
 import com.pictopoly.polydemo.tri.Triangulation;
 
-public class ImageHandler {
+public class ImageHandler extends NotifyingRunnable {
     private final String TAG = this.getClass().getSimpleName();
     public static String PICTURE_PATH = "/Pictures/PicToPoly/";
 	protected PointMaker pointMaker;
@@ -38,12 +40,21 @@ public class ImageHandler {
         this.height = rawImage.getHeight();
         return this.rawImage;
 	}
+
+    @Override
+    public void doRun() {
+        android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
+        processImage();
+    }
 	
 	public Bitmap processImage() {
-		this.triangulation = new DelaunayTriangulation(pointMaker.makePoints(rawImage));
-		this.processedImage = renderTriangles(this.rawImage);
-        this.lineImage = renderLines(this.rawImage);
-		return this.processedImage;
+        if(rawImage != null) {
+            triangulation = new DelaunayTriangulation(pointMaker.makePoints(rawImage));
+            this.processedImage = renderTriangles(this.rawImage);
+            this.lineImage = renderLines(this.rawImage);
+            Log.d(TAG, "Finished Processing");
+            return this.processedImage;
+        } else return null;
 	}
 	
 	public Bitmap getProcessedImage() {
@@ -66,7 +77,8 @@ public class ImageHandler {
 	}
 
     public Bitmap renderLines(Bitmap bitmapToBeRendered) {
-        Bitmap copy = bitmapToBeRendered.copy(Bitmap.Config.ARGB_8888, true);
+        Bitmap copy = bitmapToBeRendered.copy(Bitmap.Config.ARGB_8888, true); // I don't think we even care about the background image here.
+//        Bitmap blank = Bitmap.createBitmap(bitmapToBeRendered.getWidth(),bitmapToBeRendered.getHeight(), Bitmap.Config.ARGB_8888);
         List<Triangle> triangles = this.triangulation.getTriangulation();
         TriangleRenderer.renderLines(copy, triangles);
         return copy;
@@ -79,13 +91,24 @@ public class ImageHandler {
 		    triangulation.insertPoint(point);
 	}
 
-    // TODO: Make this actually iterate over the updated triangles instead of all the triangles
+    public void removePoint(Point point) {
+        if(rawImage != null
+                && point.getX() >= 0 && point.getY() >= 0
+                && point.getX() < rawImage.getWidth() && point.getY() < rawImage.getHeight()) {
+            Point p = triangulation.findClosePoint(point);
+            if(p != null)
+                triangulation.deletePoint(p);
+        }
+    }
+
 	public Bitmap refreshTriangles() {
-//		TriangleRenderer.render(this.processedImage,this.rawImage,this.triangulation.getLastUpdatedTriangles());
-//        TriangleRenderer.renderLines(this.lineImage,this.rawImage,this.triangulation.getLastUpdatedTriangles());
-        this.processedImage = renderTriangles(this.rawImage);
-        this.lineImage = renderLines(this.rawImage);
-		return this.processedImage;
+        if(rawImage != null) {
+            TriangleRenderer.render(this.processedImage, this.rawImage, this.triangulation.getLastUpdatedTriangles());
+            TriangleRenderer.renderLines(this.lineImage, this.rawImage, this.triangulation.getLastUpdatedTriangles());
+//        this.processedImage = renderTriangles(this.rawImage);
+//        this.lineImage = renderLines(this.rawImage);
+            return this.processedImage;
+        } else return null;
 	}
 
     public Bitmap rescale(int newWidth, int newHeight) {

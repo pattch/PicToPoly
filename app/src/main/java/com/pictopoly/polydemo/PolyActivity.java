@@ -21,9 +21,10 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.pictopoly.polydemo.process.ImageHandler;
+import com.pictopoly.polydemo.process.ThreadCompleteListener;
 
 
-public class PolyActivity extends Activity {
+public class PolyActivity extends Activity implements ThreadCompleteListener {
     public static final int INTENT_SELECT_PICTURE = 0;
     public static final int INTENT_CAMERA = 1;
     protected static SurfaceProcessFragment surfaceFragment;
@@ -50,6 +51,9 @@ public class PolyActivity extends Activity {
                     .add(R.id.nav_container, navFragment)
                     .commit();
         }
+
+        ImageHandler handler = ImageLayerHandler.getInstance().getProcessor();
+        handler.addListener(this);
 
         rootView = findViewById(R.id.root_container);
         rootView.setOnClickListener(new View.OnClickListener() {
@@ -83,14 +87,16 @@ public class PolyActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-//    private void loadDefaultImage() {
-//        if(ImageLayerHandler.getInstance().getProcessor().getRawImage() == null) {
-//            Bitmap image = BitmapFactory.decodeResource(this.getResources(), R.drawable.bird);
-//            ImageHandler handler = ImageLayerHandler.getInstance().getProcessor();
-//            handler.setImage(image);
-//            setImage(image);
-//        }
-//    }
+    @Override
+    public void notifyThreadComplete(final Runnable runnable) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                PolyActivity.this.setImage(ImageLayerHandler.getInstance().getProcessor().getProcessedImage());
+                PolyActivity.this.hideLoadingPanel();
+            }
+        });
+    }
 
     /*
      * Pre-condition: map is not null
@@ -119,6 +125,21 @@ public class PolyActivity extends Activity {
     public void setChangingSinglePoint(boolean addSinglePoint) {
         if(surfaceFragment != null)
             surfaceFragment.setChangingSinglePoint(addSinglePoint);
+    }
+
+    public void setAddingPoints(boolean addingPoints) {
+        if(surfaceFragment != null)
+            surfaceFragment.setAddingPoints(addingPoints);
+    }
+
+    public void showLoadingPanel() {
+        if(surfaceFragment != null)
+            surfaceFragment.showLoadingPanel();
+    }
+
+    public void hideLoadingPanel() {
+        if(surfaceFragment != null)
+            surfaceFragment.hideLoadingPanel();
     }
 
 //    public void setImageToHandlerImage() {

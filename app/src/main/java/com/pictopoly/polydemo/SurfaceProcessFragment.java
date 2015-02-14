@@ -17,6 +17,7 @@ import com.pictopoly.polydemo.process.ImageHandler;
 public class SurfaceProcessFragment extends Fragment {
     protected TriangleSurfaceView mTriangleSurfaceView;
     protected ImageHandler handler = ImageLayerHandler.getInstance().getProcessor();
+    protected View loadingPanel;
 
     @Override
     public void onCreate(Bundle savedInstanceBundle) {
@@ -42,7 +43,9 @@ public class SurfaceProcessFragment extends Fragment {
             }
         });
         refreshImage();
-        view.findViewById(R.id.loadingPanel).setVisibility(View.INVISIBLE);
+
+        loadingPanel = view.findViewById(R.id.loadingPanel);
+        loadingPanel.setVisibility(View.INVISIBLE);
 
         return view;
     }
@@ -69,5 +72,20 @@ public class SurfaceProcessFragment extends Fragment {
     public void setChangingSinglePoint(boolean changingSinglePoint) {
         if(mTriangleSurfaceView != null)
             mTriangleSurfaceView.setChangingSinglePoint(changingSinglePoint);
+    }
+
+    public void setAddingPoints(boolean addingPoints) {
+        if(mTriangleSurfaceView != null)
+            mTriangleSurfaceView.setAddingPoints(addingPoints);
+    }
+
+    public void showLoadingPanel() {
+        if(loadingPanel != null)
+            loadingPanel.setVisibility(View.VISIBLE);
+    }
+
+    public void hideLoadingPanel() {
+        if(loadingPanel != null)
+            loadingPanel.setVisibility(View.INVISIBLE);
     }
 }

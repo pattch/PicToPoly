@@ -4,6 +4,38 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
+    <!-- Insert/Remove -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true">
+
+        <Button
+            style="?android:buttonBarButtonStyle"
+            android:id="@+id/nav_insert_points"
+            android:text="@string/md_add_circle_outline"
+            android:textColor="#ffffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical|center_horizontal"
+            android:textSize="24dp" />
+
+        <Button
+            style="?android:buttonBarButtonStyle"
+            android:id="@+id/nav_remove_points"
+            android:text="@string/md_remove_circle_outline"
+            android:textColor="#ffffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical|center_horizontal"
+            android:textSize="24dp" />
+
+    </LinearLayout>
+
     <!-- Point Options -->
     <LinearLayout
         android:id="@+id/nav_point_options"
@@ -98,39 +130,89 @@
         android:gravity="center_vertical"
         android:background="#aa673AB7">
 
-        <Button
-            style="?android:buttonBarButtonStyle"
-            android:id="@+id/nav_add_image"
-            android:text="@string/md_photo"
-            android:textColor="#ffffffff"
+        <!-- Image Options -->
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center_horizontal|center_vertical"
-            android:textSize="24dp" />
+            android:padding="0dp"
+            android:orientation="vertical">
 
-        <Button
-            style="?android:buttonBarButtonStyle"
-            android:id="@+id/nav_add_points"
-            android:text="@string/md_blur_circular"
-            android:textColor="#ffffffff"
+            <Button
+                style="?android:buttonBarButtonStyle"
+                android:id="@+id/nav_add_image"
+                android:text="@string/md_photo"
+                android:textColor="#ffffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:textSize="24dp" />
+
+            <TextView
+                android:text="@string/image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|bottom"
+                android:textColor="#aaffffff"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
+
+        <!-- Point Options -->
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center_horizontal|center_vertical"
-            android:textSize="24dp" />
+            android:padding="0dp"
+            android:orientation="vertical">
 
+            <Button
+                style="?android:buttonBarButtonStyle"
+                android:id="@+id/nav_add_points"
+                android:text="@string/md_blur_circular"
+                android:textColor="#ffffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:textSize="24dp" />
 
-        <Button
-            style="?android:buttonBarButtonStyle"
-            android:text="@string/md_edit"
-            android:id="@+id/nav_edit_image"
-            android:textColor="#ffffffff"
+            <TextView
+                android:text="@string/points"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|bottom"
+                android:textColor="#aaffffff"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
+
+        <!-- Edit Image -->
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center_horizontal|center_vertical"
-            android:textSize="24dp" />
+            android:padding="0dp"
+            android:orientation="vertical">
+
+            <Button
+                style="?android:buttonBarButtonStyle"
+                android:text="@string/md_edit"
+                android:id="@+id/nav_edit_image"
+                android:textColor="#ffffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:textSize="24dp" />
+
+            <TextView
+                android:text="@string/filters"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|bottom"
+                android:textColor="#aaffffff"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
 
         <!--<Button-->
             <!--style="?android:buttonBarButtonStyle"-->
@@ -143,27 +225,59 @@
             <!--android:gravity="center_horizontal|center_vertical"-->
             <!--android:textSize="24dp" />-->
 
-        <Button
-            style="?android:buttonBarButtonStyle"
-            android:id="@+id/nav_change_view"
-            android:text="@string/md_remove_red_eye"
-            android:textColor="#ffffffff"
+        <!-- Change View -->
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center_horizontal|center_vertical"
-            android:textSize="24dp" />
+            android:orientation="vertical">
 
-        <Button
-            style="?android:buttonBarButtonStyle"
-            android:id="@+id/nav_save_image"
-            android:text="@string/md_save"
-            android:textColor="#ffffffff"
+            <Button
+                style="?android:buttonBarButtonStyle"
+                android:id="@+id/nav_change_view"
+                android:text="@string/md_remove_red_eye"
+                android:textColor="#ffffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:textSize="24dp" />
+
+            <TextView
+                android:text="@string/view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|bottom"
+                android:textColor="#aaffffff"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center_horizontal|center_vertical"
-            android:textSize="24dp" />
+            android:padding="0dp"
+            android:orientation="vertical">
+
+            <Button
+                style="?android:buttonBarButtonStyle"
+                android:id="@+id/nav_save_image"
+                android:text="@string/md_save"
+                android:textColor="#ffffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:textSize="24dp" />
+
+            <TextView
+                android:text="@string/save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|bottom"
+                android:textColor="#aaffffff"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

@@ -69,6 +69,8 @@ public class CameraIntentNavigationElement extends IntentNavigationElement {
         try {
             bitmap = MediaStore.Images.Media.getBitmap(cr,imageFileLocation);
             ImageLayerHandler.getInstance().getProcessor().setImage(bitmap);
+            if(activity instanceof PolyActivity)
+                ((PolyActivity) activity).setImage(ImageLayerHandler.getInstance().getProcessor().getRawImage());
         } catch (FileNotFoundException e) {
             Toast.makeText(activity,"Image not found", Toast.LENGTH_SHORT).show();
             return;

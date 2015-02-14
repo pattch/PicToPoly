@@ -12,7 +12,7 @@
 
     <FrameLayout
         android:layout_height="match_parent"
-        android:layout_width="144dp"
+        android:layout_width="match_parent"
         android:layout_gravity="end"
         android:id="@+id/nav_container" />
 

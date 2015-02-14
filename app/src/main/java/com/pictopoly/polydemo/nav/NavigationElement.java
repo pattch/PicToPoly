@@ -1,7 +1,7 @@
 package com.pictopoly.polydemo.nav;
 
-import android.app.Fragment;
-import android.view.View;
+        import android.app.Fragment;
+        import android.view.View;
 
 /**
  * Created by Marklar on 1/26/2015.

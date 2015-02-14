@@ -36,6 +36,7 @@ public class TriangleSurfaceView extends SurfaceView {
     protected double mScale;
 
     protected boolean changingSinglePoint = false;
+    protected boolean addingPoints = true;
 
     public TriangleSurfaceView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -90,6 +91,7 @@ public class TriangleSurfaceView extends SurfaceView {
                 break;
             case DRAW_LINES:
                 paint.setAlpha(255);
+                canvas.drawBitmap(mRawMap, null, surfaceBounds, paint);
                 canvas.drawBitmap(mLineMap, null, surfaceBounds, paint);
                 break;
             case DRAW_RAW:
@@ -138,8 +140,13 @@ public class TriangleSurfaceView extends SurfaceView {
             ptY = (int)(event.getY()/mScale);
         ptX -= offsetX;
         ptY -= offsetY;
-        handler.addPoint(new Point(ptX, ptY));
+
+        if(addingPoints)
+            handler.addPoint(new Point(ptX, ptY));
+        else
+            handler.removePoint(new Point(ptX, ptY));
         handler.refreshTriangles();
+
         this.invalidate();
         return true;
     }
@@ -161,5 +168,9 @@ public class TriangleSurfaceView extends SurfaceView {
 
     public void setChangingSinglePoint(boolean changingSinglePoint) {
         this.changingSinglePoint = changingSinglePoint;
+    }
+
+    public void setAddingPoints(boolean addingPoints) {
+        this.addingPoints = addingPoints;
     }
 }

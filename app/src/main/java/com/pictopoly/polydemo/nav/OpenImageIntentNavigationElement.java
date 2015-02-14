@@ -39,24 +39,23 @@ public class OpenImageIntentNavigationElement extends IntentNavigationElement {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.d(TAG, "Returning from Activity");
-        if(resultCode == Activity.RESULT_OK) {
-            try {
-                Activity activity = (Activity) view.getContext();
-                InputStream stream = activity.getContentResolver().openInputStream(
-                        data.getData());
-                Bitmap bitmap = BitmapFactory.decodeStream(stream);
-                stream.close();
+        Activity activity = (Activity) view.getContext();
 
-                if (activity instanceof PolyActivity) {
-                    ImageLayerHandler.getInstance().getProcessor().setImage(bitmap);
-                    ((PolyActivity) activity).setImage(ImageLayerHandler.getInstance().getProcessor().getRawImage());
-                }
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        try {
+            InputStream stream = activity.getContentResolver().openInputStream(
+                    data.getData());
+            Bitmap bitmap = BitmapFactory.decodeStream(stream);
+            stream.close();
+
+            ImageLayerHandler.getInstance().getProcessor().setImage(bitmap);
+            if (activity instanceof PolyActivity)
+                ((PolyActivity) activity).setImage(ImageLayerHandler.getInstance().getProcessor().getRawImage());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
     }
 
     @Override
