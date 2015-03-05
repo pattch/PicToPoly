@@ -49,19 +49,6 @@ public class TriangleRenderer {
         // Read Colors from map
         Point triangleCenterPoint = new Point((triangle.getA().getX() + triangle.getB().getX() + triangle.getC().getX())/3,
                 (triangle.getA().getY() + triangle.getB().getY() + triangle.getC().getY())/3);
-//        Point[] pts = new Point[] {triangle.getA(), triangle.getB(), triangle.getC(), triangleCenterPoint};
-//
-//        int colorSample, redSample=0, blueSample=0, greenSample=0;
-//        for(Point p : pts) {
-//            colorSample = map.getPixel((int)(p.getX()), (int)(p.getY()));
-//            redSample += Color.red(colorSample);
-//            blueSample += Color.blue(colorSample);
-//            greenSample += Color.green(colorSample);
-//        }
-//
-//        colorSample = Color.rgb(redSample / pts.length,
-//                greenSample / pts.length,
-//                blueSample / pts.length);
 
         int colorSample = map.getPixel((int)triangleCenterPoint.getX(), (int)triangleCenterPoint.getY());
 

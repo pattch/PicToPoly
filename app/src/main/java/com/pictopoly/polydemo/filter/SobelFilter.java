@@ -119,8 +119,8 @@ public class SobelFilter implements ImageFilter {
         return retVal;
     }
 
-    public static Bitmap edgeDetection(Bitmap srcImg) {
-        Bitmap retVal = new GreyScaleFilter().filter(srcImg);
+    public static void edgeDetection(Bitmap srcImg) {
+        new GreyScaleFilter().filter(srcImg);
 		double[][] window = new double[3][3];
 		for (int y = 0; y < height; y++) {
                 for (int x = 0; x < width; x++) {
@@ -131,17 +131,16 @@ public class SobelFilter implements ImageFilter {
                 int sobelRGBValue = setGreyScaleValue((int) sobelValue);
 //                int grayScaleMag = getGreyScale((int) newValue);
 //                int greyscaleValue = setGreyScaleValue(grayScaleMag);
-                retVal.setPixel(x, y, sobelRGBValue);
+                srcImg.setPixel(x, y, sobelRGBValue);
 		    }
 		}
-		return retVal;
     }
 
     @Override
-    public Bitmap filter(Bitmap i) {
+    public void filter(Bitmap i) {
         height = i.getHeight();
         width = i.getWidth();
-        return edgeDetection(i);
+        edgeDetection(i);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.pictopoly.polydemo.nav;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.view.View;
@@ -27,7 +28,8 @@ public abstract class IntentNavigationElement extends NavigationElement {
      */
     @Override
     public void onClick(View view) {
-        this.view.getContext().startActivity(getIntent());
+        Activity a = (Activity)this.view.getContext();
+        a.startActivityForResult(getIntent(), REQUEST_CODE);
     }
 
     /**

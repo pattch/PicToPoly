@@ -12,7 +12,7 @@ import java.util.Random;
  * Created by Marklar on 2/3/2015.
  */
 public class RandomPointMaker extends RadiusPointMaker {
-    private static int numberOfRandomPoints = pointCount;
+    private int numberOfRandomPoints = pointCount;
     public RandomPointMaker(Bitmap bitmapToBeProcessed) {super(bitmapToBeProcessed);}
 
     @Override
@@ -33,11 +33,11 @@ public class RandomPointMaker extends RadiusPointMaker {
         return this.points;
     }
 
-    public static void setNumberOfRandomPoints(int r) {
+    public void setNumberOfRandomPoints(int r) {
         numberOfRandomPoints = r;
     }
 
-    public static int getNumberOfRandomPoints() {
+    public int getNumberOfRandomPoints() {
         return numberOfRandomPoints;
     }
 }

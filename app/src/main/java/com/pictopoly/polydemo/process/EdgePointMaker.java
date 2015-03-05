@@ -26,7 +26,7 @@ import com.pictopoly.polydemo.tri.Point;
 import com.pictopoly.polydemo.filter.*;
 
 public class EdgePointMaker extends PixelPointMaker implements PointMaker {
-    protected int numberOfEdgePoints = pointCount / RadiusPointMaker.getRatio();
+    protected int numberOfEdgePoints = pointCount / 5; // Default
     private final String TAG = this.getClass().getSimpleName();
 
 	/**
@@ -36,24 +36,22 @@ public class EdgePointMaker extends PixelPointMaker implements PointMaker {
 	 */
 	public static final int MAX_COLOR = Color.WHITE;
 	
-	/**k
+	/**
      *            	This represents the lower bound of colors considered to be an edge
      *            	point. Setting this to a darker grey will allow more
      *            	points to be considered edge points.
 	 */
-	public static final int MIN_COLOR = Color.argb(255,20,20,20);
+	public static final int MIN_COLOR = Color.argb(255,5,5,5);
 	
 	/*
      *            Instead of passing through the entire image pixel by pixel I
      *            skip pixels, this variable is how many pixels to skip.
      */
-	protected int imageQuality = 10;
+	protected int imageQuality = 4;
 	protected Bitmap rawBitmap;
 	
 	@Override
 	public Collection<Point> makePoints(Bitmap bitmapToBeProcessed) {
-//        getBitmapPixels(bitmapToBeProcessed);
-//		return makePoints(pixels,width,height);
         if(this.points != null && this.points.size() > 0)
             this.points.clear();
         else if(this.points == null)
@@ -63,19 +61,10 @@ public class EdgePointMaker extends PixelPointMaker implements PointMaker {
                 newHeight = bitmapToBeProcessed.getHeight() / imageQuality;
 
         Bitmap filteredMap = ImageHandler.getResizedBitmap(bitmapToBeProcessed, newWidth, newHeight);
-        filteredMap = new GreyScaleFilter().filter(filteredMap);
-        filteredMap = new SobelFilter().filter(filteredMap);
+        new GreyScaleFilter().filter(filteredMap);
+        new SobelFilter().filter(filteredMap);
 
         Collection<Point> newPoints = new ArrayList<>();
-//        for(int i =0; i < newWidth; i ++) {
-//            for(int j = 0; j < newHeight; j ++) {
-//                int mapColor = filteredMap.getPixel(i,j);
-//                if(mapColor <= MAX_COLOR && mapColor >= MIN_COLOR) {
-////                    Log.d(TAG, "adding Point: (" + (i * imageQuality) + ", " + (j * imageQuality) + ")");
-//                    this.points.add(new Point(i * imageQuality, j * imageQuality));
-//                }
-//            }
-//        }
 
         Random r = new Random();
         // Go through either all of the points in the new Image, or until we have enough uniformly distributed Edge Points
@@ -94,55 +83,19 @@ public class EdgePointMaker extends PixelPointMaker implements PointMaker {
 
         return this.points;
     }
-
-    // This currently doesn't work.
-    public Collection<Point> makePoints(int[] pixels, int width, int height) {
-        if(this.points.size() > 0)
-            this.points.clear();
-        int[] greyPixels = new GreyScaleFilter().filter(pixels, width, height);
-        greyPixels = new SobelFilter().filter(greyPixels,width,height);
-
-		/*
-		 *        This is the integer representation of a RGB value, every pixel
-		 *        color is stored here, and compared to minColor and maxColor.
-		 *        Since the image is Black and White the only colors will be
-     	 *        black -> white. If it is found to be a color between minColor
-     	 *        and maxColor it is considered a edge point.
-		 */
-        int intColor;
-
-        Collection<Point> builtPoints = new ArrayList<>();
-
-        for (int yCoord = 0; yCoord < height; yCoord += imageQuality) {
-            for (int xCoord = 0; xCoord < width; xCoord += imageQuality) {
-                intColor = getPixel(greyPixels,xCoord, yCoord,width, height);
-
-                if (intColor <= MAX_COLOR
-                        && intColor >= MIN_COLOR)
-
-                    builtPoints.add(new Point(xCoord, yCoord));
-            }
-        }
-
-        Log.d(TAG, "Points: " + builtPoints.size());
-
-        this.points.addAll(builtPoints);
-        return this.points;
-    }
-
 	
 	public EdgePointMaker(Bitmap bitmapToBeProcessed) {
-		getBitmapPixels(bitmapToBeProcessed);
+        this.rawBitmap = bitmapToBeProcessed;
 	}
 	
 	public void setBitmap(Bitmap bitmapToBeProcessed) {
-		getBitmapPixels(bitmapToBeProcessed);
+		this.rawBitmap = bitmapToBeProcessed;
 	}
 	
 	public Collection<Point> makePoints() {
-		if(this.pixels == null)
-			return null;
-		this.points = makePoints(pixels, width, height);
+        if(this.rawBitmap == null)
+            return null;
+		this.points = makePoints(this.rawBitmap);
 		return this.points;
 	}
 	
@@ -157,4 +110,8 @@ public class EdgePointMaker extends PixelPointMaker implements PointMaker {
 	public int getImageQuality() {
 		return this.imageQuality;
 	}
+
+    public void setNumberOfEdgePoints(int numberOfEdgePoints) {
+        this.numberOfEdgePoints = numberOfEdgePoints;
+    }
 }

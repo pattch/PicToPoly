@@ -3,6 +3,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- Close Image, Undo -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true">
+
+        <Button
+            style="?android:buttonBarButtonStyle"
+            android:id="@+id/nav_close_image"
+            android:text="@string/md_close"
+            android:textColor="#ffffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical|center_horizontal"
+            android:textSize="36dp" />
+
+    </LinearLayout>
+
     <!-- Insert/Remove Points -->
     <LinearLayout
         android:layout_width="wrap_content"
@@ -21,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_vertical|center_horizontal"
-            android:textSize="24dp" />
+            android:textSize="36dp" />
 
         <Button
             style="?android:buttonBarButtonStyle"
@@ -32,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_vertical|center_horizontal"
-            android:textSize="24dp" />
+            android:textSize="36dp" />
 
     </LinearLayout>
 

@@ -5,6 +5,6 @@ package com.pictopoly.polydemo.filter;
 import android.graphics.Bitmap;
 
 public interface ImageFilter {
-    public Bitmap filter(Bitmap bitmap);
+    public void filter(Bitmap bitmap);
 	public int[] filter(int[] pixels, int width, int height);
 }

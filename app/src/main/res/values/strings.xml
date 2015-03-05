@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">PolyDemo</string>
+    <string name="app_name">Pic To Poly</string>
+
+    // Splash Screen Strings
+    <string name="splash_pic">Pic</string>
+    <string name="splash_to"> to </string>
+    <string name="splash_poly">Poly</string>
 
     // Navigation Strings
     <string name="nav_open_image">OPEN</string>
     <string name="nav_process_image">PROC</string>
+    <string name="tri_delaunay">Delaunay</string>
+    <string name="tri_delaunay_edge_points">Edge Points</string>
+    <string name="tri_delaunay_near_edge_points">Near-Edge Points</string>
+    <string name="tri_delaunay_near_edge_distance">Near-Edge Radius</string>
+    <string name="tri_delaunay_random_points">Random Points</string>
 
     <string name="processed_image">Processed Image</string>
     <string name="image_uri_null">Bad Image Path.</string>
@@ -16,6 +26,7 @@
     <string name="filters">Filters</string>
     <string name="view">View</string>
     <string name="save">Save</string>
+    <string name="auto_settings">Poly Settings</string>
 
 
     // Material Design Icons

@@ -59,7 +59,7 @@ public class SurfaceProcessFragment extends Fragment {
 
     public void refreshImage() {
         if(mTriangleSurfaceView != null) {
-            mTriangleSurfaceView.setImage(handler.getProcessedImage());
+            mTriangleSurfaceView.setImageHandler(handler);
             mTriangleSurfaceView.invalidate();
         }
     }
@@ -87,5 +87,10 @@ public class SurfaceProcessFragment extends Fragment {
     public void hideLoadingPanel() {
         if(loadingPanel != null)
             loadingPanel.setVisibility(View.INVISIBLE);
+    }
+
+    public void changeRenderType() {
+        if(mTriangleSurfaceView != null)
+            mTriangleSurfaceView.changeRenderType();
     }
 }

@@ -31,11 +31,12 @@ public class ImageHandler extends NotifyingRunnable {
     }
 	
 	public Bitmap setImage(Bitmap bitmapToBeProcessed) {
-        this.triangulation = new DelaunayTriangulation();
+        this.flush();
         this.rawImage = bitmapToBeProcessed.copy(Bitmap.Config.ARGB_8888, true);
         this.processedImage = rawImage.copy(Bitmap.Config.ARGB_8888, true);
         this.lineImage = rawImage.copy(Bitmap.Config.ARGB_8888, true);
         this.pointMaker = new RandomPointMaker(bitmapToBeProcessed);
+//        this.pointMaker = new GridPointMaker(bitmapToBeProcessed);
         this.width = rawImage.getWidth();
         this.height = rawImage.getHeight();
         return this.rawImage;
@@ -91,6 +92,7 @@ public class ImageHandler extends NotifyingRunnable {
 		    triangulation.insertPoint(point);
 	}
 
+    // Needs Work!
     public void removePoint(Point point) {
         if(rawImage != null
                 && point.getX() >= 0 && point.getY() >= 0
@@ -133,7 +135,27 @@ public class ImageHandler extends NotifyingRunnable {
 
     public void flush() {
         this.triangulation = new DelaunayTriangulation();
-        this.processedImage = this.rawImage.copy(Bitmap.Config.ARGB_8888, true);
-        this.lineImage = this.rawImage.copy(Bitmap.Config.ARGB_8888, true);
+        if(this.rawImage != null) {
+            this.rawImage.recycle();
+            this.rawImage = null;
+        }
+        if(this.processedImage != null) {
+            this.processedImage.recycle();
+            this.processedImage = null;
+        }
+        if(this.lineImage != null) {
+            this.lineImage.recycle();
+            this.lineImage = null;
+        }
     }
+
+    public void setPointMaker(PointMaker pointMaker) {
+        this.pointMaker = pointMaker;
+    }
+
+    public PointMaker getPointMaker() {
+        return this.pointMaker;
+    }
+
+
 }

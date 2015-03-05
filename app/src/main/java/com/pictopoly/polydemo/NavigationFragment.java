@@ -3,12 +3,15 @@ package com.pictopoly.polydemo;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.transition.Slide;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.pictopoly.polydemo.nav.*;
@@ -22,8 +25,9 @@ import java.util.List;
 public class NavigationFragment extends Fragment {
     private final String TAG = this.getClass().getSimpleName();
 
-    protected View navAddImageOptions, navPointOptions;
+    protected View navAddImageOptions, navPointOptions, navAutoSettings;
     protected List<NavigationElement> navElements = new LinkedList<NavigationElement>();
+    protected List<SliderElement> sliders = new LinkedList<SliderElement>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceBundle) {
@@ -37,11 +41,18 @@ public class NavigationFragment extends Fragment {
         navPointOptions = view.findViewById(R.id.nav_point_options);
         if(navPointOptions != null)
             navPointOptions.setVisibility(View.INVISIBLE);
+        navAutoSettings = view.findViewById(R.id.nav_auto_settings);
+        if(navAutoSettings != null)
+            navAutoSettings.setVisibility(View.INVISIBLE);
+//        Activity a = (Activity)view.getContext();
+//        if(a instanceof PolyActivity)
+//            ((PolyActivity)a).clearAllOptions();
+
 
         // 5 Main Buttons
         navElements.add(new AddImageNavigationElement(R.id.nav_add_image));
         navElements.add(new PointOptionsNavigationElement(R.id.nav_add_points));
-        navElements.add(new SliderNavigationElement(R.id.nav_edit_image));                  // Needs its own Option Nav El Class
+        navElements.add(new AutoSettingsNavigationElement(R.id.nav_edit_image));                  // Needs its own Option Nav El Class
         navElements.add(new ChangeTriangleViewNavigationElement(R.id.nav_change_view));
         navElements.add(new SaveImageNavigationElement(R.id.nav_save_image));
 
@@ -69,22 +80,36 @@ public class NavigationFragment extends Fragment {
         });
 
         // Add Insert/Remove Buttons
-        navElements.add(new NavigationElement(R.id.nav_insert_points) {
-            @Override
-            public void onClick(View view) {
-                Activity a = NavigationFragment.this.getActivity();
-                if(a instanceof PolyActivity)
-                    ((PolyActivity)a).setAddingPoints(true);
-            }
-        });
-        navElements.add(new NavigationElement(R.id.nav_remove_points) {
-            @Override
-            public void onClick(View view) {
-                Activity a = NavigationFragment.this.getActivity();
-                if(a instanceof PolyActivity)
-                    ((PolyActivity)a).setAddingPoints(false);
-            }
-        });
+//        navElements.add(new NavigationElement(R.id.nav_insert_points) {
+//            @Override
+//            public void onClick(View view) {
+//                Activity a = NavigationFragment.this.getActivity();
+//                if(a instanceof PolyActivity)
+//                    ((PolyActivity)a).setAddingPoints(true);
+//            }
+//        });
+//        navElements.add(new NavigationElement(R.id.nav_remove_points) {
+//            @Override
+//            public void onClick(View view) {
+//                Activity a = NavigationFragment.this.getActivity();
+//                if(a instanceof PolyActivity)
+//                    ((PolyActivity)a).setAddingPoints(false);
+//            }
+//        });
+
+        // Add Color Picker
+        // navElements.add(new ChangeNavColorsNavigationElement(R.id.nav_change_color));
+
+        // Add Auto Settings Opener
+        navElements.add(new AutoSettingsNavigationElement(R.id.nav_change_auto_settings));
+        navElements.add(new AutoSettingsNavigationElement(R.id.nav_auto_settings));
+
+        // Add Close, Undo Buttons
+        navElements.add(new CloseImageIntentNavigationElement(R.id.nav_close_image));
+
+        // Auto Process Settings
+        navElements.add(new ProcessImageNavigationElement(R.id.nav_triangle_button));
+        navElements.add(new ProcessImageNavigationElement(R.id.nav_process_options));
 
         for(final NavigationElement navEl : navElements) {
             View v = view.findViewById(navEl.getId());
@@ -111,6 +136,36 @@ public class NavigationFragment extends Fragment {
             });
         }
 
+        // Add Auto Settings Sliders
+        sliders.add(new EdgePointsSliderElement(R.id.tri_delaunay_edge_points_slider));
+        sliders.add(new NearEdgePointsSliderElement(R.id.tri_delaunay_near_edge_points_slider));
+        sliders.add(new NearEdgeDistanceSliderElement(R.id.tri_delaunay_near_edge_distance_slider));
+        sliders.add(new RandomPointsSliderElement(R.id.tri_delaunay_random_points_slider));
+
+        for(final SliderElement slideEl : sliders) {
+            SeekBar s = (SeekBar)view.findViewById(slideEl.getId());
+            slideEl.setSeekBar(s);
+
+            if(s != null) {
+                s.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                        slideEl.onProgressChanged(seekBar,progress,fromUser);
+                    }
+
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+                        slideEl.onStartTrackingTouch(seekBar);
+                    }
+
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+                        slideEl.onStopTrackingTouch(seekBar);
+                    }
+                });
+            }
+        }
+
         return view;
     }
 
@@ -134,26 +189,21 @@ public class NavigationFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-//    private String getPath(Uri uri) {
-//        if(uri == null) {
-//            Toast.makeText(getActivity(), R.string.image_uri_null, Toast.LENGTH_SHORT).show();
-//            Log.d(TAG, "Uri null");
-//            return null;
-//        }
-//
-//        Log.d(TAG, "Trying to make Cursor");
-//        // try to retrieve the image from the media store first
-//        // this will only work for images selected from gallery
-//        String[] projection = { MediaStore.Images.Media.DATA };
-//        Cursor cursor = getActivity().getContentResolver().query(uri, projection, null, null, null);
-//        if( cursor != null ) {
-//            int column_index = cursor
-//                    .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-//            cursor.moveToFirst();
-//            return cursor.getString(column_index);
-//        }
-//
-//        // fallback code
-//        return uri.getPath();
-//    }
+    // Sets the Background color of the Options and Top Bars to The Specified Colors
+    public void setNavColors(int color, Activity context) {
+        for(int id : PolyActivity.optionElements) {
+            View v = context.findViewById(id);
+            if(v != null)
+                v.setBackgroundColor(color);
+        }
+
+        View v = context.findViewById(R.id.nav_top_bar);
+        if(v != null) v.setBackgroundColor(color);
+        v = context.findViewById(R.id.nav_main_bar);
+        if(v != null) v.setBackgroundColor(color);
+        v = context.findViewById(R.id.nav_auto_settings_top_bar);
+        if(v != null) v.setBackgroundColor(color);
+        v = context.findViewById(R.id.nav_auto_settings);
+        if(v != null) v.setBackgroundColor(Color.parseColor("#ffffff"));
+    }
 }

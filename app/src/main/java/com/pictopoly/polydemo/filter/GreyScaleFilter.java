@@ -13,23 +13,21 @@ import android.graphics.Paint;
 public class GreyScaleFilter implements ImageFilter {
 
     @Override
-    public Bitmap filter(Bitmap bitmap) {
-        int width = bitmap.getWidth(), height = bitmap.getHeight();
-        Bitmap greyMap;
-        greyMap = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+    public void filter(Bitmap bitmap) {
+//        int width = bitmap.getWidth(), height = bitmap.getHeight();
+//        Bitmap greyMap;
+//        greyMap = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
 
         // First create a Canvas from the newly created Bitmap object, then configure a paint object
         // That will be used to draw the original Bitmap with no (zero) saturation, ala greyscale.
 
-        Canvas c = new Canvas(greyMap);
+        Canvas c = new Canvas(bitmap);
         Paint p = new Paint();
         ColorMatrix cm = new ColorMatrix();
         cm.setSaturation(0);
         ColorMatrixColorFilter cf = new ColorMatrixColorFilter(cm);
         p.setColorFilter(cf);
         c.drawBitmap(bitmap,0,0,p);
-
-        return greyMap;
     }
 
     @Override

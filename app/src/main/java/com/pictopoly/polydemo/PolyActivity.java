@@ -27,13 +27,16 @@ import com.pictopoly.polydemo.process.ThreadCompleteListener;
 public class PolyActivity extends Activity implements ThreadCompleteListener {
     public static final int INTENT_SELECT_PICTURE = 0;
     public static final int INTENT_CAMERA = 1;
+    public static final int INTENT_SPLASH = 2;
+    public static final int INTENT_RETURN = 4;
     protected static SurfaceProcessFragment surfaceFragment;
     protected static NavigationFragment navFragment;
     protected View rootView;
 
-    protected int[] optionElements = new int[] {
+    public static final int[] optionElements = new int[] {
             R.id.nav_image_options,
-            R.id.nav_point_options, };
+            R.id.nav_point_options,
+            R.id.nav_auto_settings };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +47,6 @@ public class PolyActivity extends Activity implements ThreadCompleteListener {
         if (savedInstanceState == null) {
             surfaceFragment = new SurfaceProcessFragment();
             navFragment = new NavigationFragment();
-//            loadDefaultImage();
 
             getFragmentManager().beginTransaction()
                     .add(R.id.surface_container, surfaceFragment)
@@ -142,15 +144,13 @@ public class PolyActivity extends Activity implements ThreadCompleteListener {
             surfaceFragment.hideLoadingPanel();
     }
 
-//    public void setImageToHandlerImage() {
-//        surfaceFragment.refreshImage();
-//    }
+    public void changeRenderType() {
+        if(surfaceFragment != null)
+            surfaceFragment.changeRenderType();
+    }
 
-//    public ImageProcessFragment getImageProcessFragment() {
-//        return imageFragment;
-//    }
-
-//    public NavigationFragment getNavigationFragment() {
-//        return navFragment;
-//    }
+    public void setNavColors(int color) {
+        if(navFragment != null)
+            navFragment.setNavColors(color, this);
+    }
 }

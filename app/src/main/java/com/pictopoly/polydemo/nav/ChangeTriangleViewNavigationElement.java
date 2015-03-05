@@ -22,9 +22,11 @@ public class ChangeTriangleViewNavigationElement extends NavigationElement {
     @Override
     public void onClick(View view) {
         Log.d(this.getClass().getSimpleName(), "Changing Triangle View");
-        TriangleSurfaceView.changeRenderType();
         Activity a = (Activity)view.getContext();
-        if(a instanceof PolyActivity)
-            ((PolyActivity)a).refreshTriangleSurface();
+        if(a instanceof PolyActivity) {
+            PolyActivity pa = (PolyActivity)a;
+            pa.changeRenderType();
+            pa.refreshTriangleSurface();
+        }
     }
 }

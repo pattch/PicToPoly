@@ -30,9 +30,9 @@ public class ProcessImageNavigationElement extends NavigationElement {
             Log.d(getClass().getSimpleName(), "Processing from Nav");
             PolyActivity pa = (PolyActivity)a;
             pa.showLoadingPanel();
-            Thread processThread = new Thread(handler);
-            processThread.start();
         } else
             Log.d(getClass().getSimpleName(), "Activity for ProcessNavEl not PolyActivity");
+        Thread processThread = new Thread(handler);
+        processThread.start();
     }
 }
