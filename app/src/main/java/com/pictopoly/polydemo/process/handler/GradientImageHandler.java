@@ -8,10 +8,12 @@ import com.pictopoly.polydemo.filter.GradientMaker;
  * Created by Marklar on 3/14/2015.
  */
 public class GradientImageHandler extends ImageHandler {
-    protected int[] colors;
+    protected GradientMaker gm;
 
     public GradientImageHandler(Bitmap sourceImage) {
         super(sourceImage);
+        gm = new GradientMaker(sourceImage.getWidth(), sourceImage.getHeight(),
+                new int[] {sourceImage.getPixel(0,0), sourceImage.getPixel(sourceImage.getWidth(), sourceImage.getHeight()), }, true);
     }
 
     /**
@@ -24,19 +26,39 @@ public class GradientImageHandler extends ImageHandler {
      * @param isPortrait    Whether the Gradient Image is to be portrait or landscape
      */
     public GradientImageHandler(int[] colors, int width, int height, boolean isPortrait) {
-        super(new GradientMaker(width,height,colors,isPortrait).makeGradient());
+        super(GradientMaker.makeGradient(width, height, colors, isPortrait));
+        this.gm = new GradientMaker(width, height, colors, isPortrait);
     }
 
-    /**
-     * This should generate a triangulation using only random points to the gradient Image already made
-     * @return The triangulated gradient image
-     */
-    @Override
-    public Bitmap processImage() {
-        return null;
+    public GradientImageHandler(int[] colors, int width, int height) {
+        this(colors, width, height, true);
+    }
+
+    public GradientImageHandler(GradientMaker gm) {
+        super(gm.makeGradient());
+        this.gm = gm;
     }
 
     public void setColors(int[] colors) {
-        this.colors = colors;
+        this.gm.setColors(colors);
+        makeGradient();
+    }
+
+    public void setDimensions(int width, int height) {
+        setWidth(width);
+        setHeight(height);
+    }
+
+    public void setWidth(int width) {
+        gm.setWidth(width);
+    }
+
+    public void setHeight(int height) {
+        gm.setHeight(height);
+    }
+
+    private void makeGradient() {
+        this.sourceMap = gm.makeGradient();
+        this.processedMap = this.sourceMap.copy(Bitmap.Config.ARGB_8888, true);
     }
 }

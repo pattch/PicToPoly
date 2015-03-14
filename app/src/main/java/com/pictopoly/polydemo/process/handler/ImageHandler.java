@@ -13,8 +13,6 @@ public abstract class ImageHandler {
         this.processedMap = this.sourceMap.copy(Bitmap.Config.ARGB_8888, true);
     }
 
-    public abstract Bitmap processImage();
-
     public Bitmap getSourceMap() {
         return this.sourceMap;
     }
