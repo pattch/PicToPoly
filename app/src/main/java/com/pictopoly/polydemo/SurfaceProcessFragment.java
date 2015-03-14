@@ -9,14 +9,14 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.pictopoly.polydemo.process.ImageHandler;
+import com.pictopoly.polydemo.process.ImageProcessor;
 
 /**
  * Created by Marklar on 1/26/2015.
  */
 public class SurfaceProcessFragment extends Fragment {
     protected TriangleSurfaceView mTriangleSurfaceView;
-    protected ImageHandler handler = ImageLayerHandler.getInstance().getProcessor();
+    protected ImageProcessor handler = ImageLayerHandler.getInstance().getProcessor();
     protected View loadingPanel;
 
     @Override

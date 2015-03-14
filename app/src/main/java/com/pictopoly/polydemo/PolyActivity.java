@@ -1,26 +1,13 @@
 package com.pictopoly.polydemo;
 
 import android.app.Activity;
-import android.app.FragmentManager;
-import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.app.Fragment;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
-import android.widget.Button;
-import android.widget.Toast;
 
-import com.pictopoly.polydemo.process.ImageHandler;
+import com.pictopoly.polydemo.process.ImageProcessor;
 import com.pictopoly.polydemo.process.ThreadCompleteListener;
 
 
@@ -54,7 +41,7 @@ public class PolyActivity extends Activity implements ThreadCompleteListener {
                     .commit();
         }
 
-        ImageHandler handler = ImageLayerHandler.getInstance().getProcessor();
+        ImageProcessor handler = ImageLayerHandler.getInstance().getProcessor();
         handler.addListener(this);
 
         rootView = findViewById(R.id.root_container);

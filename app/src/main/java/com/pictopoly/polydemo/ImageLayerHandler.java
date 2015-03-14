@@ -1,6 +1,6 @@
 package com.pictopoly.polydemo;
 
-import com.pictopoly.polydemo.process.ImageHandler;
+import com.pictopoly.polydemo.process.ImageProcessor;
 
 /**
  * Created by Samuel on 1/21/2015.
@@ -10,7 +10,7 @@ public class ImageLayerHandler {
     public static final int SPLASH_HANDLER = 0;
     public static final int POLY_HANDLER = 1;
     public static final int NUM_LAYERS = 2;
-    protected ImageHandler[] processors = new ImageHandler[NUM_LAYERS];
+    protected ImageProcessor[] processors = new ImageProcessor[NUM_LAYERS];
     protected int currentProcessor = SPLASH_HANDLER;
 
     public static ImageLayerHandler getInstance() {
@@ -19,19 +19,19 @@ public class ImageLayerHandler {
 
     private ImageLayerHandler() {
         for(int i = 0; i < NUM_LAYERS; i++) {
-            this.processors[i] = new ImageHandler();
+            this.processors[i] = new ImageProcessor();
         }
     }
 
-    public ImageHandler getProcessor() {
+    public ImageProcessor getProcessor() {
         return this.processors[POLY_HANDLER];
     }
 
-    public ImageHandler getSplashProcessor() {
+    public ImageProcessor getSplashProcessor() {
         return this.processors[SPLASH_HANDLER];
     }
 
-    public ImageHandler getCurrentProcessor() {
+    public ImageProcessor getCurrentProcessor() {
         return this.processors[this.currentProcessor];
     }
 

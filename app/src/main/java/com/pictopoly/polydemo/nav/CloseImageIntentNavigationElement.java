@@ -3,10 +3,8 @@ package com.pictopoly.polydemo.nav;
 import android.content.Intent;
 import android.view.View;
 
-import com.pictopoly.polydemo.ImageLayerHandler;
 import com.pictopoly.polydemo.PolyActivity;
 import com.pictopoly.polydemo.SplashActivity;
-import com.pictopoly.polydemo.process.ImageHandler;
 
 /**
  * Created by Marklar on 2/15/2015.

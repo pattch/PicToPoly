@@ -1,14 +1,12 @@
 package com.pictopoly.polydemo.nav;
 
 import android.app.Activity;
-import android.app.Fragment;
-import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 
 import com.pictopoly.polydemo.ImageLayerHandler;
 import com.pictopoly.polydemo.PolyActivity;
-import com.pictopoly.polydemo.process.ImageHandler;
+import com.pictopoly.polydemo.process.ImageProcessor;
 
 /**
  * Created by Marklar on 1/26/2015.
@@ -24,7 +22,7 @@ public class ProcessImageNavigationElement extends NavigationElement {
 
     @Override
     public void onClick(View view) {
-        ImageHandler handler = ImageLayerHandler.getInstance().getProcessor();
+        ImageProcessor handler = ImageLayerHandler.getInstance().getProcessor();
         Activity a = (Activity)view.getContext();
         if (a instanceof PolyActivity) {
             Log.d(getClass().getSimpleName(), "Processing from Nav");

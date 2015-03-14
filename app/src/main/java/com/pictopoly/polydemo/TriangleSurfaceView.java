@@ -5,13 +5,12 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 
-import com.pictopoly.polydemo.process.ImageHandler;
+import com.pictopoly.polydemo.process.ImageProcessor;
 import com.pictopoly.polydemo.tri.Point;
 
 /**
@@ -30,7 +29,7 @@ public class TriangleSurfaceView extends SurfaceView {
 
     protected final Paint paint = new Paint();
     //protected Rect surfaceBounds;
-    protected ImageHandler handler;
+    protected ImageProcessor handler;
 
     protected int mWidth, mHeight;
     protected float mScale, xPivot, yPivot;
@@ -114,7 +113,7 @@ public class TriangleSurfaceView extends SurfaceView {
         }
     }
 
-    public void setImageHandler(ImageHandler handler) {
+    public void setImageHandler(ImageProcessor handler) {
         this.handler = handler;
     }
 
@@ -125,9 +124,9 @@ public class TriangleSurfaceView extends SurfaceView {
     }
 
     public void resizeMaps(int width, int height) {
-        mTriangleMap = ImageHandler.getResizedBitmap(mTriangleMap,width,height);
-        mLineMap = ImageHandler.getResizedBitmap(mLineMap,width,height);
-        mRawMap = ImageHandler.getResizedBitmap(mRawMap,width,height);
+        mTriangleMap = ImageProcessor.getResizedBitmap(mTriangleMap, width, height);
+        mLineMap = ImageProcessor.getResizedBitmap(mLineMap, width, height);
+        mRawMap = ImageProcessor.getResizedBitmap(mRawMap, width, height);
     }
 
     public void flushMaps() {

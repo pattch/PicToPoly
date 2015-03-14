@@ -14,7 +14,7 @@ import com.pictopoly.polydemo.tri.Point;
 import com.pictopoly.polydemo.tri.Triangle;
 import com.pictopoly.polydemo.tri.Triangulation;
 
-public class ImageHandler extends NotifyingRunnable {
+public class ImageProcessor extends NotifyingRunnable {
     private final String TAG = this.getClass().getSimpleName();
     public static String PICTURE_PATH = "/Pictures/PicToPoly/";
 	protected PointMaker pointMaker;
@@ -24,11 +24,11 @@ public class ImageHandler extends NotifyingRunnable {
 
     public static final boolean EXTRA_IMAGES = false;
 	
-	public ImageHandler() {
+	public ImageProcessor() {
 		this.triangulation = new DelaunayTriangulation();
 	}
 	
-	public ImageHandler(Bitmap bitmapToBeProcessed) {
+	public ImageProcessor(Bitmap bitmapToBeProcessed) {
         setImage(bitmapToBeProcessed);
     }
 	

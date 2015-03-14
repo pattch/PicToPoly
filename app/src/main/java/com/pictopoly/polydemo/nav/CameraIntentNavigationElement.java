@@ -14,8 +14,7 @@ import android.widget.Toast;
 
 import com.pictopoly.polydemo.ImageLayerHandler;
 import com.pictopoly.polydemo.PolyActivity;
-import com.pictopoly.polydemo.R;
-import com.pictopoly.polydemo.process.ImageHandler;
+import com.pictopoly.polydemo.process.ImageProcessor;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -42,7 +41,7 @@ public class CameraIntentNavigationElement extends IntentNavigationElement {
         File image;
         try {
             if(view != null) {
-                String path = Environment.getExternalStorageDirectory().getPath() + ImageHandler.PICTURE_PATH;
+                String path = Environment.getExternalStorageDirectory().getPath() + ImageProcessor.PICTURE_PATH;
                 File outputDir = new File(path);
                 outputDir.mkdirs();
                 image = File.createTempFile("picture", ".jpg", outputDir);

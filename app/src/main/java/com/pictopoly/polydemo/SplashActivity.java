@@ -3,14 +3,11 @@ package com.pictopoly.polydemo;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Display;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.pictopoly.polydemo.filter.GradientMaker;
@@ -18,12 +15,9 @@ import com.pictopoly.polydemo.nav.CameraIntentNavigationElement;
 import com.pictopoly.polydemo.nav.IntentNavigationElement;
 import com.pictopoly.polydemo.nav.NavigationElement;
 import com.pictopoly.polydemo.nav.OpenImageIntentNavigationElement;
-import com.pictopoly.polydemo.nav.ProcessImageNavigationElement;
 import com.pictopoly.polydemo.nav.ReturnToImageIntentNavigationElement;
-import com.pictopoly.polydemo.process.GridPointMaker;
-import com.pictopoly.polydemo.process.ImageHandler;
+import com.pictopoly.polydemo.process.ImageProcessor;
 import com.pictopoly.polydemo.process.PointMaker;
-import com.pictopoly.polydemo.process.RandomPointMaker;
 import com.pictopoly.polydemo.process.ThreadCompleteListener;
 import com.pictopoly.polydemo.process.UniformPointMaker;
 
@@ -31,7 +25,7 @@ import com.pictopoly.polydemo.process.UniformPointMaker;
  * Created by Marklar on 2/14/2015.
  */
 public class SplashActivity extends Activity implements ThreadCompleteListener {
-    protected ImageHandler handler;
+    protected ImageProcessor handler;
     private static String TAG = "SplashActivity";
     protected NavigationElement[] navElements = new NavigationElement[] {
             new CameraIntentNavigationElement(R.id.splash_camera),
@@ -48,7 +42,7 @@ public class SplashActivity extends Activity implements ThreadCompleteListener {
         handler = ImageLayerHandler.getInstance().getSplashProcessor();
         mTriangleSurfaceView = (TriangleSurfaceView) findViewById(R.id.splash_triangleSurfaceView);
 
-        ImageHandler ph = ImageLayerHandler.getInstance().getProcessor();
+        ImageProcessor ph = ImageLayerHandler.getInstance().getProcessor();
         if(ph.getProcessedImage() == null) {
             // Make Back Button Invisible, since we haven't opened/captured an Image yet
             View v = findViewById(R.id.splash_back);

@@ -60,7 +60,7 @@ public class EdgePointMaker extends PixelPointMaker implements PointMaker {
         int newWidth = bitmapToBeProcessed.getWidth() / imageQuality,
                 newHeight = bitmapToBeProcessed.getHeight() / imageQuality;
 
-        Bitmap filteredMap = ImageHandler.getResizedBitmap(bitmapToBeProcessed, newWidth, newHeight);
+        Bitmap filteredMap = ImageProcessor.getResizedBitmap(bitmapToBeProcessed, newWidth, newHeight);
         new GreyScaleFilter().filter(filteredMap);
         new SobelFilter().filter(filteredMap);
 

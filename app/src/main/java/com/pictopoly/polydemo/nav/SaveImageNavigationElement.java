@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.pictopoly.polydemo.ImageLayerHandler;
-import com.pictopoly.polydemo.process.ImageHandler;
+import com.pictopoly.polydemo.process.ImageProcessor;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -27,12 +27,12 @@ public class SaveImageNavigationElement extends NavigationElement {
 
     @Override
     public void onClick(View view) {
-        String path = Environment.getExternalStorageDirectory().getPath() + ImageHandler.PICTURE_PATH;
+        String path = Environment.getExternalStorageDirectory().getPath() + ImageProcessor.PICTURE_PATH;
         File outputDir = new File(path);
         outputDir.mkdirs();
         FileOutputStream out = null;
         try {
-            ImageHandler handler = ImageLayerHandler.getInstance().getProcessor();
+            ImageProcessor handler = ImageLayerHandler.getInstance().getProcessor();
             Bitmap bitmap = handler.getProcessedImage();
             out = new FileOutputStream(path + bitmap.getGenerationId() + ".jpg");
             bitmap.compress(Bitmap.CompressFormat.JPEG,100,out);
