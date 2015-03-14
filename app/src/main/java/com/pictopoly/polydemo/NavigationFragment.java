@@ -32,15 +32,27 @@ public class NavigationFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceBundle) {
         View view = inflater.inflate(R.layout.fragment_nav, parent, false);
-        Typeface materialTypeface = Typeface.createFromAsset(view.getContext().getAssets(), "fonts/material_design_icons.ttf");
+        Typeface materialTypeface = Typeface.createFromAsset(view.getContext().getAssets(), "fonts/material_design_icons.ttf"),
+                jsLightTypeface = Typeface.createFromAsset(view.getContext().getAssets(), "fonts/josefin_light.ttf"),
+                lobsterTypeface = Typeface.createFromAsset(view.getContext().getAssets(), "fonts/lobster.ttf");
+
+        // Change Fonts of Splash Text
+        TextView textView = (TextView)view.findViewById(R.id.nav_logo_text_1);
+        textView.setTypeface(jsLightTypeface);
+        textView = (TextView)view.findViewById(R.id.nav_logo_text_2);
+        textView.setTypeface(lobsterTypeface);
+        textView = (TextView)view.findViewById(R.id.nav_logo_text_3);
+        textView.setTypeface(jsLightTypeface);
+        textView = (TextView)view.findViewById(R.id.nav_poly_settings_text);
+        textView.setTypeface(jsLightTypeface);
 
         // Make Options Invisible
-        navAddImageOptions = view.findViewById(R.id.nav_image_options);
-        if(navAddImageOptions != null)
-            navAddImageOptions.setVisibility(View.INVISIBLE);
-        navPointOptions = view.findViewById(R.id.nav_point_options);
-        if(navPointOptions != null)
-            navPointOptions.setVisibility(View.INVISIBLE);
+//        navAddImageOptions = view.findViewById(R.id.nav_image_options);
+//        if(navAddImageOptions != null)
+//            navAddImageOptions.setVisibility(View.INVISIBLE);
+//        navPointOptions = view.findViewById(R.id.nav_point_options);
+//        if(navPointOptions != null)
+//            navPointOptions.setVisibility(View.INVISIBLE);
         navAutoSettings = view.findViewById(R.id.nav_auto_settings);
         if(navAutoSettings != null)
             navAutoSettings.setVisibility(View.INVISIBLE);
@@ -50,9 +62,9 @@ public class NavigationFragment extends Fragment {
 
 
         // 5 Main Buttons
-        navElements.add(new AddImageNavigationElement(R.id.nav_add_image));
-        navElements.add(new PointOptionsNavigationElement(R.id.nav_add_points));
-        navElements.add(new AutoSettingsNavigationElement(R.id.nav_edit_image));                  // Needs its own Option Nav El Class
+        //navElements.add(new AddImageNavigationElement(R.id.nav_add_image));
+        //navElements.add(new PointOptionsNavigationElement(R.id.nav_add_points));
+        //navElements.add(new AutoSettingsNavigationElement(R.id.nav_edit_image));                  // Needs its own Option Nav El Class
         navElements.add(new ChangeTriangleViewNavigationElement(R.id.nav_change_view));
         navElements.add(new SaveImageNavigationElement(R.id.nav_save_image));
 
@@ -109,7 +121,7 @@ public class NavigationFragment extends Fragment {
 
         // Auto Process Settings
         navElements.add(new ProcessImageNavigationElement(R.id.nav_triangle_button));
-        navElements.add(new ProcessImageNavigationElement(R.id.nav_process_options));
+//        navElements.add(new ProcessImageNavigationElement(R.id.nav_process_options));
 
         for(final NavigationElement navEl : navElements) {
             View v = view.findViewById(navEl.getId());
@@ -138,8 +150,8 @@ public class NavigationFragment extends Fragment {
 
         // Add Auto Settings Sliders
         sliders.add(new EdgePointsSliderElement(R.id.tri_delaunay_edge_points_slider));
-        sliders.add(new NearEdgePointsSliderElement(R.id.tri_delaunay_near_edge_points_slider));
-        sliders.add(new NearEdgeDistanceSliderElement(R.id.tri_delaunay_near_edge_distance_slider));
+//        sliders.add(new NearEdgePointsSliderElement(R.id.tri_delaunay_near_edge_points_slider));
+//        sliders.add(new NearEdgeDistanceSliderElement(R.id.tri_delaunay_near_edge_distance_slider));
         sliders.add(new RandomPointsSliderElement(R.id.tri_delaunay_random_points_slider));
 
         for(final SliderElement slideEl : sliders) {

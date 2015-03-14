@@ -69,8 +69,6 @@ public class TriangleSurfaceView extends SurfaceView {
             // Update Maps Based on the new Image Scale
             // resizeMaps(mWidth,mHeight);
 
-
-
             // Make the Rectangle to use to draw the Map
             xPivot = (getWidth() - mWidth) / 2;
             yPivot = (getHeight() - mHeight) / 2;

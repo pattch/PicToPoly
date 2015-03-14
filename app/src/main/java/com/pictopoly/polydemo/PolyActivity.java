@@ -34,8 +34,8 @@ public class PolyActivity extends Activity implements ThreadCompleteListener {
     protected View rootView;
 
     public static final int[] optionElements = new int[] {
-            R.id.nav_image_options,
-            R.id.nav_point_options,
+//            R.id.nav_image_options,
+//            R.id.nav_point_options,
             R.id.nav_auto_settings };
 
     @Override

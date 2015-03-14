@@ -21,6 +21,8 @@ public class ImageHandler extends NotifyingRunnable {
 	protected Triangulation triangulation;
 	protected Bitmap rawImage, processedImage, lineImage;
     protected int width, height;
+
+    public static final boolean EXTRA_IMAGES = false;
 	
 	public ImageHandler() {
 		this.triangulation = new DelaunayTriangulation();
@@ -36,7 +38,7 @@ public class ImageHandler extends NotifyingRunnable {
         this.processedImage = rawImage.copy(Bitmap.Config.ARGB_8888, true);
         this.lineImage = rawImage.copy(Bitmap.Config.ARGB_8888, true);
         this.pointMaker = new RandomPointMaker(bitmapToBeProcessed);
-//        this.pointMaker = new GridPointMaker(bitmapToBeProcessed);
+        this.pointMaker = new GridPointMaker(bitmapToBeProcessed);
         this.width = rawImage.getWidth();
         this.height = rawImage.getHeight();
         return this.rawImage;

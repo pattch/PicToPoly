@@ -4,13 +4,16 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.pictopoly.polydemo.filter.GradientMaker;
 import com.pictopoly.polydemo.nav.CameraIntentNavigationElement;
 import com.pictopoly.polydemo.nav.IntentNavigationElement;
 import com.pictopoly.polydemo.nav.NavigationElement;
@@ -35,8 +38,8 @@ public class SplashActivity extends Activity implements ThreadCompleteListener {
             new OpenImageIntentNavigationElement(R.id.splash_open_image),
             new ReturnToImageIntentNavigationElement(R.id.splash_back),
     };
-//    protected Button mCameraButton, mOpenImageButton;
     protected TriangleSurfaceView mTriangleSurfaceView;
+    protected int[] colors = new int[] {Color.parseColor("#E65100"), Color.parseColor("#311B92"),};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +64,11 @@ public class SplashActivity extends Activity implements ThreadCompleteListener {
         // First Time Running SplashActivity
         if (savedInstanceState == null && handler.getProcessedImage() == null) {
             Log.d(TAG, "Making new pointMaker, loading bitmap etc.");
-            Bitmap gradient = BitmapFactory.decodeResource(getResources(), R.drawable.gradient);
+//            Bitmap gradient = BitmapFactory.decodeResource(getResources(), R.drawable.gradient);
+//            Display display = getWindowManager().getDefaultDisplay();
+//            android.graphics.Point size = new android.graphics.Point();
+//            display.getSize(size);
+            Bitmap gradient = GradientMaker.makeGradient(1000, 1000, this.colors, true);
             handler.setImage(gradient);
             PointMaker pm = new UniformPointMaker();
             handler.setPointMaker(pm);
@@ -77,7 +84,6 @@ public class SplashActivity extends Activity implements ThreadCompleteListener {
         }
 
         Typeface materialTypeface = Typeface.createFromAsset(getAssets(), "fonts/material_design_icons.ttf"),
-                arolyTypeface = Typeface.createFromAsset(getAssets(), "fonts/aroly.ttf"),
                 jsLightTypeface = Typeface.createFromAsset(getAssets(), "fonts/josefin_light.ttf"),
                 lobsterTypeface = Typeface.createFromAsset(getAssets(), "fonts/lobster.ttf");
 

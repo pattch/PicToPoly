@@ -81,6 +81,8 @@ public class EdgePointMaker extends PixelPointMaker implements PointMaker {
 
         Log.d(TAG, "EdgeMaker points: " + this.points.size());
 
+        filteredMap.recycle();
+
         return this.points;
     }
 	
