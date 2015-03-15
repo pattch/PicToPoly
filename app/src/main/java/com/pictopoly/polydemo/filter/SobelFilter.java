@@ -142,9 +142,4 @@ public class SobelFilter implements ImageFilter {
         width = i.getWidth();
         edgeDetection(i);
     }
-
-    @Override
-    public int[] filter(int[] pixels, int width, int height) {
-        return edgeDetection(pixels,width,height);
-    }
 }

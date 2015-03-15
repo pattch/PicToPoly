@@ -21,9 +21,7 @@ public class TriangleSurfaceView extends SurfaceView {
     public static final int BG_COLOR = Color.DKGRAY;
     public static final int DRAW_TRIANGLES_OPAQUE = 1;
     public static final int DRAW_TRIANGLES_TRANSPARENT = 2;
-    public static final int DRAW_TRIANGLES_LINES = 4;
-    public static final int DRAW_LINES = 8;
-    public static final int DRAW_RAW = 16;
+    public static final int DRAW_RAW = 4;
     protected int drawingState = 1;
     protected Bitmap mTriangleMap, mLineMap, mRawMap;
 
@@ -87,19 +85,8 @@ public class TriangleSurfaceView extends SurfaceView {
             case DRAW_TRIANGLES_TRANSPARENT:
                 paint.setAlpha(255);
                 canvas.drawBitmap(mRawMap, xPivot, yPivot, paint);
-                paint.setAlpha(200);
+                paint.setAlpha(100);
                 canvas.drawBitmap(mTriangleMap, xPivot, yPivot, paint);
-                break;
-            case DRAW_TRIANGLES_LINES:
-                paint.setAlpha(255);
-                canvas.drawBitmap(mTriangleMap, xPivot, yPivot, paint);
-                paint.setAlpha(200);
-                canvas.drawBitmap(mLineMap, xPivot, yPivot, paint);
-                break;
-            case DRAW_LINES:
-                paint.setAlpha(255);
-                canvas.drawBitmap(mRawMap, xPivot, yPivot, paint);
-                canvas.drawBitmap(mLineMap, xPivot, yPivot, paint);
                 break;
             case DRAW_RAW:
                 paint.setAlpha(255);

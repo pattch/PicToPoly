@@ -10,10 +10,9 @@ import com.pictopoly.polydemo.filter.GradientMaker;
 public class GradientImageHandler extends ImageHandler {
     protected GradientMaker gm;
 
-    public GradientImageHandler(Bitmap sourceImage) {
-        super(sourceImage);
-        gm = new GradientMaker(sourceImage.getWidth(), sourceImage.getHeight(),
-                new int[] {sourceImage.getPixel(0,0), sourceImage.getPixel(sourceImage.getWidth(), sourceImage.getHeight()), }, true);
+    public GradientImageHandler(Bitmap sourceMap) {
+        super(sourceMap);
+        setImage(sourceMap);
     }
 
     /**
@@ -37,6 +36,13 @@ public class GradientImageHandler extends ImageHandler {
     public GradientImageHandler(GradientMaker gm) {
         super(gm.makeGradient());
         this.gm = gm;
+    }
+
+    @Override
+    public void setImage(Bitmap sourceMap) {
+        gm = new GradientMaker(sourceMap.getWidth(), sourceMap.getHeight(),
+                new int[] {sourceMap.getPixel(0,0), sourceMap.getPixel(sourceMap.getWidth(), sourceMap.getHeight()), }, true);
+        makeGradient();
     }
 
     public void setColors(int[] colors) {

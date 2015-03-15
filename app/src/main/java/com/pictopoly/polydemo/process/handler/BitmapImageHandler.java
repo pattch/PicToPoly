@@ -12,9 +12,4 @@ public class BitmapImageHandler extends ImageHandler {
     public BitmapImageHandler(Bitmap sourceMap) {
         super(sourceMap);
     }
-
-    public void setImage(Bitmap sourceImage) {
-        this.sourceMap = sourceImage;
-        this.processedMap = this.sourceMap.copy(Bitmap.Config.ARGB_8888,true);
-    }
 }

@@ -9,6 +9,8 @@ import android.util.Log;
 
 import java.util.List;
 
+import com.pictopoly.polydemo.process.handler.BitmapImageHandler;
+import com.pictopoly.polydemo.process.handler.ImageHandler;
 import com.pictopoly.polydemo.tri.DelaunayTriangulation;
 import com.pictopoly.polydemo.tri.Point;
 import com.pictopoly.polydemo.tri.Triangle;
@@ -19,7 +21,8 @@ public class ImageProcessor extends NotifyingRunnable {
     public static String PICTURE_PATH = "/Pictures/PicToPoly/";
 	protected PointMaker pointMaker;
 	protected Triangulation triangulation;
-	protected Bitmap rawImage, processedImage, lineImage;
+//	protected Bitmap rawImage, processedImage, lineImage;
+    protected ImageHandler imageHandler;
     protected int width, height;
 
     public static final boolean EXTRA_IMAGES = false;
@@ -34,14 +37,15 @@ public class ImageProcessor extends NotifyingRunnable {
 	
 	public Bitmap setImage(Bitmap bitmapToBeProcessed) {
         this.flush();
-        this.rawImage = bitmapToBeProcessed.copy(Bitmap.Config.ARGB_8888, true);
-        this.processedImage = rawImage.copy(Bitmap.Config.ARGB_8888, true);
-        this.lineImage = rawImage.copy(Bitmap.Config.ARGB_8888, true);
+//        this.rawImage = bitmapToBeProcessed.copy(Bitmap.Config.ARGB_8888, true);
+//        this.processedImage = rawImage.copy(Bitmap.Config.ARGB_8888, true);
+//        this.lineImage = rawImage.copy(Bitmap.Config.ARGB_8888, true);
+        imageHandler = new BitmapImageHandler(bitmapToBeProcessed);
         this.pointMaker = new RandomPointMaker(bitmapToBeProcessed);
-        this.pointMaker = new GridPointMaker(bitmapToBeProcessed);
-        this.width = rawImage.getWidth();
-        this.height = rawImage.getHeight();
-        return this.rawImage;
+//        this.pointMaker = new GridPointMaker(bitmapToBeProcessed);
+        this.width = imageHandler.getWidth();
+        this.height = imageHandler.getHeight();
+        return this.imageHandler.getSourceMap();
 	}
 
     @Override
@@ -51,25 +55,30 @@ public class ImageProcessor extends NotifyingRunnable {
     }
 	
 	public Bitmap processImage() {
-        if(rawImage != null) {
-            triangulation = new DelaunayTriangulation(pointMaker.makePoints(rawImage));
-            this.processedImage = renderTriangles(this.rawImage);
-            this.lineImage = renderLines(this.rawImage);
+        if(this.imageHandler != null && this.imageHandler.getSourceMap() != null) {
+            triangulation = new DelaunayTriangulation(pointMaker.makePoints(this.imageHandler.getSourceMap()));
+            this.imageHandler.setProcessedImage(renderTriangles(this.imageHandler.getSourceMap()));
+//            this.lineImage = renderLines(this.rawImage);
             Log.d(TAG, "Finished Processing");
-            return this.processedImage;
+            return this.imageHandler.getProcessedMap();
         } else return null;
 	}
 	
 	public Bitmap getProcessedImage() {
-		return this.processedImage;
+        if(this.imageHandler != null)
+		    return this.imageHandler.getProcessedMap();
+        return null;
 	}
 
+    /**
+     * GETTING RID OF THIS.
+     */
     public Bitmap getLineImage() {
-        return this.lineImage;
+        return this.imageHandler.getSourceMap();
     }
 	
 	public Bitmap getRawImage() {
-		return this.rawImage;
+		return this.imageHandler.getSourceMap();
 	}
 	
 	public Bitmap renderTriangles(Bitmap bitmapToBeRendered) {
@@ -88,17 +97,17 @@ public class ImageProcessor extends NotifyingRunnable {
     }
 
 	public void addPoint(Point point) {
-        if(rawImage != null
+        if(this.imageHandler != null
                 && point.getX() >= 0 && point.getY() >= 0
-                && point.getX() < rawImage.getWidth() && point.getY() < rawImage.getHeight())
+                && point.getX() < this.imageHandler.getWidth() && point.getY() < this.imageHandler.getHeight())
 		    triangulation.insertPoint(point);
 	}
 
     // Needs Work!
     public void removePoint(Point point) {
-        if(rawImage != null
+        if(this.imageHandler != null
                 && point.getX() >= 0 && point.getY() >= 0
-                && point.getX() < rawImage.getWidth() && point.getY() < rawImage.getHeight()) {
+                && point.getX() < this.imageHandler.getWidth() && point.getY() < this.imageHandler.getHeight()) {
             Point p = triangulation.findClosePoint(point);
             if(p != null)
                 triangulation.deletePoint(p);
@@ -106,20 +115,20 @@ public class ImageProcessor extends NotifyingRunnable {
     }
 
 	public Bitmap refreshTriangles() {
-        if(rawImage != null) {
-            TriangleRenderer.render(this.processedImage, this.rawImage, this.triangulation.getLastUpdatedTriangles());
-            TriangleRenderer.renderLines(this.lineImage, this.rawImage, this.triangulation.getLastUpdatedTriangles());
+        if(this.imageHandler != null && this.imageHandler.getSourceMap() != null) {
+            TriangleRenderer.render(this.imageHandler.getProcessedMap(), this.imageHandler.getSourceMap(), this.triangulation.getLastUpdatedTriangles());
+//            TriangleRenderer.renderLines(this.lineImage, this.rawImage, this.triangulation.getLastUpdatedTriangles());
 //        this.processedImage = renderTriangles(this.rawImage);
 //        this.lineImage = renderLines(this.rawImage);
-            return this.processedImage;
+            return this.imageHandler.getProcessedMap();
         } else return null;
 	}
 
-    public Bitmap rescale(int newWidth, int newHeight) {
-        if(this.width != newWidth || this.height != newHeight)
-            return setImage(getResizedBitmap(this.rawImage, newWidth, newHeight));
-        return rawImage;
-    }
+//    public Bitmap rescale(int newWidth, int newHeight) {
+//        if(this.width != newWidth || this.height != newHeight)
+//            return setImage(getResizedBitmap(this.rawImage, newWidth, newHeight));
+//        return rawImage;
+//    }
 
     public static Bitmap getResizedBitmap(Bitmap bm, int newWidth, int newHeight) {
         int width = bm.getWidth();
@@ -137,18 +146,8 @@ public class ImageProcessor extends NotifyingRunnable {
 
     public void flush() {
         this.triangulation = new DelaunayTriangulation();
-        if(this.rawImage != null) {
-            this.rawImage.recycle();
-            this.rawImage = null;
-        }
-        if(this.processedImage != null) {
-            this.processedImage.recycle();
-            this.processedImage = null;
-        }
-        if(this.lineImage != null) {
-            this.lineImage.recycle();
-            this.lineImage = null;
-        }
+        if(this.imageHandler != null)
+            this.imageHandler.flush();
     }
 
     public void setPointMaker(PointMaker pointMaker) {
