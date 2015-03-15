@@ -16,6 +16,7 @@ public class PolyActivity extends Activity implements ThreadCompleteListener {
     public static final int INTENT_CAMERA = 1;
     public static final int INTENT_SPLASH = 2;
     public static final int INTENT_RETURN = 4;
+    public static final int INTENT_GRADIENT = 8;
     protected static SurfaceProcessFragment surfaceFragment;
     protected static NavigationFragment navFragment;
     protected View rootView;

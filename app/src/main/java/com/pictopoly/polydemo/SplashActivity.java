@@ -13,13 +13,14 @@ import android.widget.TextView;
 import com.pictopoly.polydemo.filter.GradientMaker;
 import com.pictopoly.polydemo.nav.CameraIntentNavigationElement;
 import com.pictopoly.polydemo.nav.IntentNavigationElement;
+import com.pictopoly.polydemo.nav.MakeGradientIntentNavigationElement;
 import com.pictopoly.polydemo.nav.NavigationElement;
 import com.pictopoly.polydemo.nav.OpenImageIntentNavigationElement;
 import com.pictopoly.polydemo.nav.ReturnToImageIntentNavigationElement;
 import com.pictopoly.polydemo.process.ImageProcessor;
-import com.pictopoly.polydemo.process.pointmaker.PointMaker;
+import com.pictopoly.polydemo.process.PointMaker.PointMaker;
 import com.pictopoly.polydemo.process.ThreadCompleteListener;
-import com.pictopoly.polydemo.process.pointmaker.UniformPointMaker;
+import com.pictopoly.polydemo.process.PointMaker.UniformPointMaker;
 
 /**
  * Created by Marklar on 2/14/2015.
@@ -31,6 +32,7 @@ public class SplashActivity extends Activity implements ThreadCompleteListener {
             new CameraIntentNavigationElement(R.id.splash_camera),
             new OpenImageIntentNavigationElement(R.id.splash_open_image),
             new ReturnToImageIntentNavigationElement(R.id.splash_back),
+            new MakeGradientIntentNavigationElement(R.id.splash_gradient),
     };
     protected TriangleSurfaceView mTriangleSurfaceView;
     protected int[] colors = new int[] {Color.parseColor("#E65100"), Color.parseColor("#311B92"),};

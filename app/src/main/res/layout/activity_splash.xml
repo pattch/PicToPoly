@@ -24,6 +24,7 @@
         android:orientation="vertical"
         android:layout_gravity="center_horizontal|center_vertical">
 
+        <!--Logo Text-->
         <LinearLayout
             android:id="@+id/splash_logo_container"
             android:layout_width="wrap_content"
@@ -72,30 +73,86 @@
 
         </LinearLayout>
 
+        <!--Main Buttons-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <Button
-                style="?android:buttonBarButtonStyle"
-                android:id="@+id/splash_open_image"
-                android:text="@string/md_folder"
-                android:textColor="#fff"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textSize="48sp" />
+                android:orientation="vertical"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_weight="1">
 
-            <Button
-                style="?android:buttonBarButtonStyle"
-                android:id="@+id/splash_camera"
-                android:text="@string/md_camera_alt"
-                android:textColor="#fff"
+                <Button
+                    style="?android:buttonBarButtonStyle"
+                    android:id="@+id/splash_open_image"
+                    android:text="@string/md_folder"
+                    android:textColor="#fff"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="48sp" />
+
+                <TextView
+                    android:text="@string/splash_open_image"
+                    android:textSize="12sp"
+                    android:textColor="#fff"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textSize="48sp" />
+                android:orientation="vertical"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_weight="1">
+
+                <Button
+                    style="?android:buttonBarButtonStyle"
+                    android:id="@+id/splash_camera"
+                    android:text="@string/md_camera_alt"
+                    android:textColor="#fff"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="48sp" />
+
+                <TextView
+                    android:text="@string/splash_camera"
+                    android:textSize="12sp"
+                    android:textColor="#fff"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_weight="1">
+
+                <Button
+                    style="?android:buttonBarButtonStyle"
+                    android:id="@+id/splash_gradient"
+                    android:text="@string/md_gradient"
+                    android:textColor="#fff"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="48sp" />
+
+                <TextView
+                    android:text="@string/splash_gradient"
+                    android:textSize="12sp"
+                    android:textColor="#fff"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
 
         </LinearLayout>
 

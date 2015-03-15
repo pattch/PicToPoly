@@ -1,4 +1,4 @@
-package com.pictopoly.polydemo.process.pointmaker;
+package com.pictopoly.polydemo.process.PointMaker;
 
 import android.graphics.Bitmap;
 import android.util.Log;

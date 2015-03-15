@@ -1,4 +1,4 @@
-package com.pictopoly.polydemo.process.pointmaker;
+package com.pictopoly.polydemo.process.PointMaker;
 
 //import java.awt.Image;
 //import java.awt.image.BufferedImage;

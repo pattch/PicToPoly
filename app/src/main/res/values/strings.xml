@@ -7,6 +7,9 @@
     <string name="splash_pic">Pic</string>
     <string name="splash_to"> to </string>
     <string name="splash_poly">Poly</string>
+    <string name="splash_open_image">Pictures</string>
+    <string name="splash_camera">Camera</string>
+    <string name="splash_gradient">Gradient</string>
 
     // Navigation Strings
     <string name="nav_open_image">OPEN</string>

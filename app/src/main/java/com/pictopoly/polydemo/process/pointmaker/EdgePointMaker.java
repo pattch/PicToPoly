@@ -1,4 +1,4 @@
-package com.pictopoly.polydemo.process.pointmaker;
+package com.pictopoly.polydemo.process.PointMaker;
 
 /*
  * This Class takes an Image and generates Points using a Sobel Filter. This

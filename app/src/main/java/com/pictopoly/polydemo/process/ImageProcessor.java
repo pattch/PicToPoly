@@ -6,8 +6,8 @@ import android.util.Log;
 
 import java.util.List;
 
-import com.pictopoly.polydemo.process.pointmaker.PointMaker;
-import com.pictopoly.polydemo.process.pointmaker.RandomPointMaker;
+import com.pictopoly.polydemo.process.PointMaker.PointMaker;
+import com.pictopoly.polydemo.process.PointMaker.RandomPointMaker;
 import com.pictopoly.polydemo.process.handler.BitmapImageHandler;
 import com.pictopoly.polydemo.process.handler.ImageHandler;
 import com.pictopoly.polydemo.tri.DelaunayTriangulation;
