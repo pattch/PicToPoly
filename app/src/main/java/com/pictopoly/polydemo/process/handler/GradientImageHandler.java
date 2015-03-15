@@ -41,7 +41,7 @@ public class GradientImageHandler extends ImageHandler {
     @Override
     public void setImage(Bitmap sourceMap) {
         gm = new GradientMaker(sourceMap.getWidth(), sourceMap.getHeight(),
-                new int[] {sourceMap.getPixel(0,0), sourceMap.getPixel(sourceMap.getWidth(), sourceMap.getHeight()), }, true);
+                new int[] {sourceMap.getPixel(0,0), sourceMap.getPixel(sourceMap.getWidth() - 1, sourceMap.getHeight() - 1), }, true);
         makeGradient();
     }
 

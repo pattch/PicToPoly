@@ -17,9 +17,9 @@ import com.pictopoly.polydemo.nav.NavigationElement;
 import com.pictopoly.polydemo.nav.OpenImageIntentNavigationElement;
 import com.pictopoly.polydemo.nav.ReturnToImageIntentNavigationElement;
 import com.pictopoly.polydemo.process.ImageProcessor;
-import com.pictopoly.polydemo.process.PointMaker;
+import com.pictopoly.polydemo.process.pointmaker.PointMaker;
 import com.pictopoly.polydemo.process.ThreadCompleteListener;
-import com.pictopoly.polydemo.process.UniformPointMaker;
+import com.pictopoly.polydemo.process.pointmaker.UniformPointMaker;
 
 /**
  * Created by Marklar on 2/14/2015.

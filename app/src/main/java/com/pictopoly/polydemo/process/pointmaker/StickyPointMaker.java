@@ -1,9 +1,8 @@
-package com.pictopoly.polydemo.process;
+package com.pictopoly.polydemo.process.pointmaker;
 
 //import java.awt.Image;
 //import java.awt.image.BufferedImage;
 import android.graphics.Bitmap;
-import android.media.Image;
 import android.util.Log;
 
 import java.util.ArrayList;

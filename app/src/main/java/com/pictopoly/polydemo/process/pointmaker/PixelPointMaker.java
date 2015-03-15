@@ -1,10 +1,7 @@
-package com.pictopoly.polydemo.process;
-
-import android.graphics.Bitmap;
+package com.pictopoly.polydemo.process.pointmaker;
 
 import com.pictopoly.polydemo.tri.Point;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 /**

@@ -1,7 +1,6 @@
-package com.pictopoly.polydemo.process;
+package com.pictopoly.polydemo.process.pointmaker;
 
 import android.graphics.Bitmap;
-import android.util.Log;
 
 import com.pictopoly.polydemo.tri.Point;
 

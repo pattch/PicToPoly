@@ -4,8 +4,8 @@ import android.util.Log;
 import android.widget.SeekBar;
 
 import com.pictopoly.polydemo.ImageLayerHandler;
-import com.pictopoly.polydemo.process.PointMaker;
-import com.pictopoly.polydemo.process.RadiusPointMaker;
+import com.pictopoly.polydemo.process.pointmaker.PointMaker;
+import com.pictopoly.polydemo.process.pointmaker.RadiusPointMaker;
 
 /**
  * Created by Marklar on 3/2/2015.

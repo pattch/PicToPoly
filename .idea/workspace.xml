@@ -122,23 +122,23 @@
       <file leaf-file-name="GradientImageHandler.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pictopoly/polydemo/process/handler/GradientImageHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="25" max-vertical-offset="1292">
-              <caret line="24" column="75" selection-start-line="24" selection-start-column="75" selection-end-line="24" selection-end-column="75" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="408" max-vertical-offset="1292">
+              <caret line="43" column="122" selection-start-line="43" selection-start-column="122" selection-end-line="43" selection-end-column="122" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1931#1932#0" expanded="true" />
-                <element signature="e#1965#1966#0" expanded="true" />
-                <element signature="e#2006#2007#0" expanded="true" />
-                <element signature="e#2042#2043#0" expanded="true" />
+                <element signature="e#1939#1940#0" expanded="true" />
+                <element signature="e#1973#1974#0" expanded="true" />
+                <element signature="e#2014#2015#0" expanded="true" />
+                <element signature="e#2050#2051#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TriangleSurfaceView.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="TriangleSurfaceView.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pictopoly/polydemo/TriangleSurfaceView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1071" max-vertical-offset="2907">
+            <state vertical-scroll-proportion="0.4258189" vertical-offset="1071" max-vertical-offset="2907">
               <caret line="87" column="36" selection-start-line="87" selection-start-column="36" selection-end-line="87" selection-end-column="36" />
               <folding />
             </state>
@@ -148,7 +148,7 @@
       <file leaf-file-name="GradientMaker.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pictopoly/polydemo/filter/GradientMaker.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="654" max-vertical-offset="1292">
+            <state vertical-scroll-proportion="0.0" vertical-offset="408" max-vertical-offset="1292">
               <caret line="76" column="29" selection-start-line="76" selection-start-column="29" selection-end-line="76" selection-end-column="29" />
               <folding>
                 <element signature="e#2103#2104#0" expanded="true" />
@@ -162,11 +162,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ImageProcessor.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="ImageProcessor.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pictopoly/polydemo/process/ImageProcessor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.37764934" vertical-offset="552" max-vertical-offset="2397">
-              <caret line="62" column="55" selection-start-line="62" selection-start-column="55" selection-end-line="62" selection-end-column="55" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="552" max-vertical-offset="2397">
+              <caret line="63" column="5" selection-start-line="63" selection-start-column="5" selection-end-line="63" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -799,11 +799,11 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/pictopoly/polydemo/process/ImageHandler.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/pictopoly/polydemo/filter/GradientMaker.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/pictopoly/polydemo/process/handler/BitmapImageHandler.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/pictopoly/polydemo/process/handler/GradientImageHandler.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/pictopoly/polydemo/filter/SobelFilter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/pictopoly/polydemo/TriangleSurfaceView.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/pictopoly/polydemo/process/ImageProcessor.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/pictopoly/polydemo/process/handler/ImageHandler.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/pictopoly/polydemo/process/handler/GradientImageHandler.java" />
       </list>
     </option>
   </component>
@@ -1060,32 +1060,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="process" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PolyDemo" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="polydemo" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="process" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="handler" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1473,7 +1447,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3288889" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1488,11 +1462,11 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23666666" sideWeight="0.5469083" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39222223" sideWeight="0.6652452" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39222223" sideWeight="0.6476546" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.43956044" sideWeight="0.40511727" order="12" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20948827" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39222223" sideWeight="0.3347548" order="14" side_tool="true" content_ui="tabs" />
+      <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39222223" sideWeight="0.3523454" order="14" side_tool="true" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1536,14 +1510,14 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pictopoly/polydemo/process/RandomPointMaker.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pictopoly/polydemo/process/pointmaker/RandomPointMaker.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="663">
           <caret line="28" column="44" selection-start-line="28" selection-start-column="44" selection-end-line="28" selection-end-column="44" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pictopoly/polydemo/process/UniformPointMaker.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pictopoly/polydemo/process/pointmaker/UniformPointMaker.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="291" max-vertical-offset="799">
           <caret line="41" column="5" selection-start-line="41" selection-start-column="5" selection-end-line="41" selection-end-column="5" />
@@ -1662,7 +1636,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pictopoly/polydemo/process/RadiusPointMaker.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pictopoly/polydemo/process/pointmaker/RadiusPointMaker.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7465596" vertical-offset="318" max-vertical-offset="1190">
           <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
@@ -1738,14 +1712,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pictopoly/polydemo/process/EdgePointMaker.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pictopoly/polydemo/process/pointmaker/EdgePointMaker.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1785">
           <caret line="28" column="49" selection-start-line="28" selection-start-column="39" selection-end-line="28" selection-end-column="49" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pictopoly/polydemo/process/PointMaker.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pictopoly/polydemo/process/pointmaker/PointMaker.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="408">
           <caret line="8" column="17" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
@@ -1800,7 +1774,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pictopoly/polydemo/process/PixelPointMaker.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pictopoly/polydemo/process/pointmaker/PixelPointMaker.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="7" max-vertical-offset="901">
           <caret line="23" column="51" selection-start-line="23" selection-start-column="51" selection-end-line="23" selection-end-column="51" />
@@ -1884,18 +1858,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pictopoly/polydemo/process/handler/BitmapImageHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="357">
-          <caret line="13" column="5" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#312#313#0" expanded="true" />
-            <element signature="e#344#345#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pictopoly/polydemo/process/handler/ImageHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="1054">
@@ -1916,24 +1878,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pictopoly/polydemo/TriangleSurfaceView.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pictopoly/polydemo/process/ImageProcessor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1071" max-vertical-offset="2907">
-          <caret line="87" column="36" selection-start-line="87" selection-start-column="36" selection-end-line="87" selection-end-column="36" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="552" max-vertical-offset="2397">
+          <caret line="63" column="5" selection-start-line="63" selection-start-column="5" selection-end-line="63" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pictopoly/polydemo/process/handler/GradientImageHandler.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pictopoly/polydemo/process/handler/BitmapImageHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="25" max-vertical-offset="1292">
-          <caret line="24" column="75" selection-start-line="24" selection-start-column="75" selection-end-line="24" selection-end-column="75" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="357">
+          <caret line="13" column="5" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1931#1932#0" expanded="true" />
-            <element signature="e#1965#1966#0" expanded="true" />
-            <element signature="e#2006#2007#0" expanded="true" />
-            <element signature="e#2042#2043#0" expanded="true" />
+            <element signature="e#312#313#0" expanded="true" />
+            <element signature="e#344#345#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1953,10 +1913,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pictopoly/polydemo/process/ImageProcessor.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pictopoly/polydemo/process/handler/GradientImageHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37764934" vertical-offset="552" max-vertical-offset="2397">
-          <caret line="62" column="55" selection-start-line="62" selection-start-column="55" selection-end-line="62" selection-end-column="55" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="408" max-vertical-offset="1292">
+          <caret line="43" column="122" selection-start-line="43" selection-start-column="122" selection-end-line="43" selection-end-column="122" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1939#1940#0" expanded="true" />
+            <element signature="e#1973#1974#0" expanded="true" />
+            <element signature="e#2014#2015#0" expanded="true" />
+            <element signature="e#2050#2051#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pictopoly/polydemo/TriangleSurfaceView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4258189" vertical-offset="1071" max-vertical-offset="2907">
+          <caret line="87" column="36" selection-start-line="87" selection-start-column="36" selection-end-line="87" selection-end-column="36" />
           <folding />
         </state>
       </provider>

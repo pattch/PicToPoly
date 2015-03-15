@@ -1,4 +1,4 @@
-package com.pictopoly.polydemo.process;
+package com.pictopoly.polydemo.process.pointmaker;
 
 /*
  * This Class takes an Image and generates Points using a Sobel Filter. This
@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Random;
 
+import com.pictopoly.polydemo.process.ImageProcessor;
 import com.pictopoly.polydemo.tri.Point;
 
 import com.pictopoly.polydemo.filter.*;
