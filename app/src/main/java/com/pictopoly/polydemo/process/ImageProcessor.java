@@ -58,7 +58,7 @@ public class ImageProcessor extends NotifyingRunnable {
             triangulation = new DelaunayTriangulation(pointMaker.makePoints(this.imageHandler.getSourceMap()));
             this.imageHandler.setProcessedImage(renderTriangles(this.imageHandler.getSourceMap()));
 //            this.lineImage = renderLines(this.rawImage);
-            Log.d(TAG, "Finished Processing");
+            Log.d(TAG, "Finished Processing.");
             return this.imageHandler.getProcessedMap();
         } else return null;
 	}

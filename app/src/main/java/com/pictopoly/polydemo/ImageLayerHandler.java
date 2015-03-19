@@ -9,7 +9,8 @@ public class ImageLayerHandler {
     private static ImageLayerHandler ourInstance = new ImageLayerHandler();
     public static final int SPLASH_HANDLER = 0;
     public static final int POLY_HANDLER = 1;
-    public static final int NUM_LAYERS = 2;
+    public static final int GRADIENT_HANDLER = 2;
+    public static final int NUM_LAYERS = 3;
     protected ImageProcessor[] processors = new ImageProcessor[NUM_LAYERS];
     protected int currentProcessor = SPLASH_HANDLER;
 
@@ -29,6 +30,10 @@ public class ImageLayerHandler {
 
     public ImageProcessor getSplashProcessor() {
         return this.processors[SPLASH_HANDLER];
+    }
+
+    public ImageProcessor getGradientProcessor() {
+        return this.processors[GRADIENT_HANDLER];
     }
 
     public ImageProcessor getCurrentProcessor() {

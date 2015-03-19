@@ -7,11 +7,17 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/pic_to_poly"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+
         <activity
             android:name=".PolyActivity"
+            android:label="@string/app_name" >
+        </activity>
+
+        <activity
+            android:name=".GradientActivity"
             android:label="@string/app_name" >
         </activity>
 

@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--Background Triangle-->
+    <com.pictopoly.polydemo.TriangleSurfaceView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/grad_triangleSurfaceView" />
+
+    <!-- Top Options -->
+    <FrameLayout
+        android:id="@+id/nav_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/nav_bar"
+        android:orientation="horizontal"
+        android:padding="0dp"
+        android:layout_gravity="top|center_horizontal">
+
+        <LinearLayout
+            android:id="@+id/splash_logo_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:padding="0dp"
+            android:background="@drawable/shape">
+
+            <TextView
+                android:id="@+id/nav_logo_text_1"
+                android:text="@string/splash_pic"
+                android:textSize="36dp"
+                android:textColor="#fff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+
+            <TextView
+                android:id="@+id/nav_logo_text_2"
+                android:text="@string/splash_to"
+                android:textSize="24dp"
+                android:textStyle="italic"
+                android:textColor="#fff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+
+            <TextView
+                android:id="@+id/nav_logo_text_3"
+                android:text="@string/splash_poly"
+                android:textSize="36dp"
+                android:textColor="#fff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+
+        </LinearLayout>
+
+        <Button
+            style="?android:buttonBarButtonStyle"
+            android:id="@+id/nav_close_image"
+            android:text="@string/md_close"
+            android:textColor="#fff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center_vertical"
+            android:gravity="center_vertical|center_horizontal"
+            android:textSize="24dp" />
+
+    </FrameLayout>
+
+    <!--Content goes here-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="48dp"
+        android:padding="6dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:text="@string/grad_gradient"
+            android:textSize="24sp"
+            android:layout_marginBottom="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <!--Dimensions-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:text="@string/grad_dimensions"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="12dp"/>
+
+            <!--Dimensions EditText Views-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!--Dimensions Width-->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="36dp"
+                    android:layout_marginEnd="6dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:text="@string/grad_dimensions_width"
+                        android:layout_gravity="top"
+                        android:layout_marginStart="6dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <EditText
+                        android:id="@+id/grad_width_edit_text"
+                        android:minEms="5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:inputType="number" />
+
+                </LinearLayout>
+
+                <!--Dimensions Height-->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginEnd="36dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:text="@string/grad_dimensions_height"
+                        android:layout_gravity="top"
+                        android:layout_marginStart="6dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <EditText
+                        android:id="@+id/grad_height_edit_text"
+                        android:minEms="5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:inputType="number" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!--Colors-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:text="@string/grad_colors"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="6dp"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/color_1"
+                    android:background="@drawable/grad_colors_shape"
+                    style="?android:buttonBarButtonStyle"
+                    android:layout_weight="1"
+                    android:text="+"
+                    android:textColor="#fff"
+                    android:padding="0dp"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="6dp"
+                    android:textSize="36dp"/>
+
+                <Button
+                    android:id="@+id/color_2"
+                    android:background="@drawable/grad_colors_shape"
+                    style="?android:buttonBarButtonStyle"
+                    android:layout_weight="1"
+                    android:text="+"
+                    android:textColor="#fff"
+                    android:padding="0dp"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginEnd="6dp"
+                    android:textSize="36dp"/>
+
+                <Button
+                    android:id="@+id/color_3"
+                    android:background="@drawable/grad_colors_shape"
+                    style="?android:buttonBarButtonStyle"
+                    android:layout_weight="1"
+                    android:text="+"
+                    android:textColor="#fff"
+                    android:padding="0dp"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginEnd="6dp"
+                    android:textSize="36dp"/>
+
+                <Button
+                    android:id="@+id/color_4"
+                    android:background="@drawable/grad_colors_shape"
+                    style="?android:buttonBarButtonStyle"
+                    android:layout_weight="1"
+                    android:text="+"
+                    android:textColor="#fff"
+                    android:padding="0dp"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginEnd="6dp"
+                    android:textSize="36dp"/>
+
+                <Button
+                    android:id="@+id/color_5"
+                    android:background="@drawable/grad_colors_shape"
+                    style="?android:buttonBarButtonStyle"
+                    android:layout_weight="1"
+                    android:text="+"
+                    android:textColor="#fff"
+                    android:padding="0dp"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginEnd="24dp"
+                    android:textSize="36dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!--Triangle Size-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:text="@string/grad_triangle_size"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="12dp"/>
+
+            <SeekBar
+                android:id="@+id/grad_triangle_size"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginEnd="48dp"
+                android:max="100"/>
+
+        </LinearLayout>
+
+        <!--Direction-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:text="@string/grad_direction"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="12dp"/>
+
+            <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:orientation="horizontal">
+
+                <RadioButton android:id="@+id/grad_direction_horizontal_radio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/grad_direction_horizontal"/>
+
+                <RadioButton android:id="@+id/grad_direction_vertical_radio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/grad_direction_vertical"/>
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <Button
+            android:background="@drawable/grad_colors_shape"
+            style="?android:buttonBarButtonStyle"
+            android:text="@string/grad_apply"
+            android:textColor="#fff"
+            android:layout_width="96dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:layout_marginEnd="36dp"
+            android:layout_gravity="bottom|end"/>
+
+    </LinearLayout>
+
+</FrameLayout>

@@ -46,71 +46,15 @@ public class NavigationFragment extends Fragment {
         textView = (TextView)view.findViewById(R.id.nav_poly_settings_text);
         textView.setTypeface(jsLightTypeface);
 
-        // Make Options Invisible
-//        navAddImageOptions = view.findViewById(R.id.nav_image_options);
-//        if(navAddImageOptions != null)
-//            navAddImageOptions.setVisibility(View.INVISIBLE);
-//        navPointOptions = view.findViewById(R.id.nav_point_options);
-//        if(navPointOptions != null)
-//            navPointOptions.setVisibility(View.INVISIBLE);
         navAutoSettings = view.findViewById(R.id.nav_auto_settings);
         if(navAutoSettings != null)
             navAutoSettings.setVisibility(View.INVISIBLE);
-//        Activity a = (Activity)view.getContext();
-//        if(a instanceof PolyActivity)
-//            ((PolyActivity)a).clearAllOptions();
 
 
-        // 5 Main Buttons
-        //navElements.add(new AddImageNavigationElement(R.id.nav_add_image));
-        //navElements.add(new PointOptionsNavigationElement(R.id.nav_add_points));
-        //navElements.add(new AutoSettingsNavigationElement(R.id.nav_edit_image));                  // Needs its own Option Nav El Class
+        // Main Buttons
         navElements.add(new ChangeTriangleViewNavigationElement(R.id.nav_change_view));
         navElements.add(new SaveImageNavigationElement(R.id.nav_save_image));
-
-        // Add Image Options
-        navElements.add(new OpenImageIntentNavigationElement(R.id.nav_open_image));
-        navElements.add(new CameraIntentNavigationElement(R.id.nav_camera));
-
-        // Add Point Options
         navElements.add(new ProcessImageNavigationElement(R.id.nav_process_image));
-        navElements.add(new NavigationElement(R.id.nav_add_single_point) {
-            @Override
-            public void onClick(View view) {
-                Activity a = NavigationFragment.this.getActivity();
-                if(a instanceof PolyActivity)
-                    ((PolyActivity)a).setChangingSinglePoint(true);
-            }
-        });
-        navElements.add(new NavigationElement(R.id.nav_add_line_point) {
-            @Override
-            public void onClick(View view) {
-                Activity a = NavigationFragment.this.getActivity();
-                if(a instanceof PolyActivity)
-                    ((PolyActivity)a).setChangingSinglePoint(false);
-            }
-        });
-
-        // Add Insert/Remove Buttons
-//        navElements.add(new NavigationElement(R.id.nav_insert_points) {
-//            @Override
-//            public void onClick(View view) {
-//                Activity a = NavigationFragment.this.getActivity();
-//                if(a instanceof PolyActivity)
-//                    ((PolyActivity)a).setAddingPoints(true);
-//            }
-//        });
-//        navElements.add(new NavigationElement(R.id.nav_remove_points) {
-//            @Override
-//            public void onClick(View view) {
-//                Activity a = NavigationFragment.this.getActivity();
-//                if(a instanceof PolyActivity)
-//                    ((PolyActivity)a).setAddingPoints(false);
-//            }
-//        });
-
-        // Add Color Picker
-        // navElements.add(new ChangeNavColorsNavigationElement(R.id.nav_change_color));
 
         // Add Auto Settings Opener
         navElements.add(new AutoSettingsNavigationElement(R.id.nav_change_auto_settings));

@@ -23,7 +23,7 @@ import com.pictopoly.polydemo.process.ThreadCompleteListener;
 import com.pictopoly.polydemo.process.PointMaker.UniformPointMaker;
 
 /**
- * Created by Marklar on 2/14/2015.
+ * This is the opening Activity that users are first exposed to.
  */
 public class SplashActivity extends Activity implements ThreadCompleteListener {
     protected ImageProcessor handler;
@@ -35,7 +35,7 @@ public class SplashActivity extends Activity implements ThreadCompleteListener {
             new MakeGradientIntentNavigationElement(R.id.splash_gradient),
     };
     protected TriangleSurfaceView mTriangleSurfaceView;
-    protected int[] colors = new int[] {Color.parseColor("#E65100"), Color.parseColor("#311B92"),};
+    protected int[] splashActivityBackgroundColors = new int[] { Color.parseColor("#E65100"), Color.parseColor("#311B92"), };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +64,7 @@ public class SplashActivity extends Activity implements ThreadCompleteListener {
 //            Display display = getWindowManager().getDefaultDisplay();
 //            android.graphics.Point size = new android.graphics.Point();
 //            display.getSize(size);
-            Bitmap gradient = GradientMaker.makeGradient(1000, 1000, this.colors, true);
+            Bitmap gradient = GradientMaker.makeGradient(1000, 1000, this.splashActivityBackgroundColors, true);
             handler.setImage(gradient);
             PointMaker pm = new UniformPointMaker();
             handler.setPointMaker(pm);

@@ -11,6 +11,18 @@
     <string name="splash_camera">Camera</string>
     <string name="splash_gradient">Gradient</string>
 
+    // Gradient Strings
+    <string name="grad_gradient">Gradient</string>
+    <string name="grad_dimensions">Resolution</string>
+    <string name="grad_dimensions_width">Width</string>
+    <string name="grad_dimensions_height">Height</string>
+    <string name="grad_colors">Colors</string>
+    <string name="grad_triangle_size">Triangle Size</string>
+    <string name="grad_direction">Direction</string>
+    <string name="grad_direction_horizontal">Left-to-Right</string>
+    <string name="grad_direction_vertical">Top-to-Bottom</string>
+    <string name="grad_apply">APPLY</string>
+
     // Navigation Strings
     <string name="nav_open_image">OPEN</string>
     <string name="nav_process_image">PROC</string>

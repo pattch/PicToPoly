@@ -79,6 +79,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
+            <!--Open Images Button-->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -104,6 +105,7 @@
 
             </LinearLayout>
 
+            <!--Camera Button-->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -129,6 +131,7 @@
 
             </LinearLayout>
 
+            <!--Gradient Button-->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

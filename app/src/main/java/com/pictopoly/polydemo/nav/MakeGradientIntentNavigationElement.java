@@ -3,6 +3,7 @@ package com.pictopoly.polydemo.nav;
 import android.content.Intent;
 import android.view.View;
 
+import com.pictopoly.polydemo.GradientActivity;
 import com.pictopoly.polydemo.PolyActivity;
 
 /**
@@ -20,8 +21,7 @@ public class MakeGradientIntentNavigationElement extends IntentNavigationElement
 
     @Override
     public Intent getIntent() {
-        // TODO: Instead, should make a GradientActivity so the user can pick their colors and route them there with this method.
-        return new Intent(this.view.getContext(), PolyActivity.class);
+        return new Intent(this.view.getContext(), GradientActivity.class);
     }
 
     @Override
