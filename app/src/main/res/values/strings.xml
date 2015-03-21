@@ -22,6 +22,32 @@
     <string name="grad_direction_horizontal">Left-to-Right</string>
     <string name="grad_direction_vertical">Top-to-Bottom</string>
     <string name="grad_apply">APPLY</string>
+    <string name="grad_choose_color">Pick a Color</string>
+    <string name="grad_color_cancel">Cancel</string>
+    <string name="grad_select_color">OK</string>
+
+    // Gradient Colors
+    <string name="grad_red">Red</string>
+    <string name="grad_pink">Pink</string>
+    <string name="grad_purple">Purple</string>
+    <string name="grad_deep_purple">Deep Purple</string>
+    <string name="grad_indigo">Indigo</string>
+    <string name="grad_blue">Blue</string>
+    <string name="grad_light_blue">Light Blue</string>
+    <string name="grad_cyan">Cyan</string>
+    <string name="grad_teal">Teal</string>
+    <string name="grad_green">Green</string>
+    <string name="grad_light_green">Light Green</string>
+    <string name="grad_lime">Lime</string>
+    <string name="grad_yellow">Yellow</string>
+    <string name="grad_amber">Amber</string>
+    <string name="grad_orange">Orange</string>
+    <string name="grad_deep_orange">Deep Orange</string>
+    <string name="grad_brown">Brown</string>
+    <string name="grad_grey">Grey</string>
+    <string name="grad_blue_grey">Blue Grey</string>
+    <string name="grad_black">Black</string>
+    <string name="grad_white">White</string>
 
     // Navigation Strings
     <string name="nav_open_image">OPEN</string>
