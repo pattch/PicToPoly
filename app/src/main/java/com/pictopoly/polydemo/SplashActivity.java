@@ -48,19 +48,6 @@ public class SplashActivity extends Activity implements ThreadCompleteListener {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        ImageProcessor ph = ImageLayerHandler.getInstance().getProcessor();
-        if(ph.getProcessedImage() == null) {
-            // Make Back Button Invisible, since we haven't opened/captured an Image yet
-            View v = findViewById(R.id.splash_back);
-            if(v != null)
-                v.setVisibility(View.INVISIBLE);
-        } else {
-            // Expose Back Button, since we have a previous opened/captured Image
-            View v = findViewById(R.id.splash_back);
-            if(v != null)
-                v.setVisibility(View.VISIBLE);
-        }
-
         // First Time Running SplashActivity
         if (savedInstanceState == null && handler.getProcessedImage() == null) {
             Log.d(TAG, "Making new pointMaker, loading bitmap etc.");
@@ -95,6 +82,11 @@ public class SplashActivity extends Activity implements ThreadCompleteListener {
         textView = (TextView)findViewById(R.id.splash_logo_text_3);
         textView.setTypeface(jsLightTypeface);
 
+        // Hide the Back Button
+        View backButton = findViewById(R.id.splash_back);
+        if(backButton != null)
+            backButton.setVisibility(View.INVISIBLE);
+
         for(final NavigationElement navEl : navElements) {
             View v = findViewById(navEl.getId());
             navEl.setView(v);
@@ -117,6 +109,7 @@ public class SplashActivity extends Activity implements ThreadCompleteListener {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.d(TAG, "Returned From Activity");
+
         if(resultCode == Activity.RESULT_OK) {
             int rCode = requestCode;
 
@@ -134,6 +127,21 @@ public class SplashActivity extends Activity implements ThreadCompleteListener {
             }
         } else
             Log.d(TAG, "Result: " + resultCode);
+
+
+        ImageProcessor ph = ImageLayerHandler.getInstance().getProcessor();
+        View v = findViewById(R.id.splash_back);
+        if(v != null) {
+            if (ph.getProcessedImage() == null) {
+                // Make Back Button Invisible, since we haven't opened/captured an Image yet
+                v.setVisibility(View.INVISIBLE);
+            } else {
+                // Expose Back Button, since we have a previous opened/captured Image
+                Log.d(TAG, "IMAGE");
+                v.setVisibility(View.VISIBLE);
+            }
+        }
+
         super.onActivityResult(requestCode, resultCode, data);
     }
 
