@@ -38,7 +38,7 @@ public class ImageProcessor extends NotifyingRunnable {
         this.flush();
         imageHandler = new BitmapImageHandler(bitmapToBeProcessed);
         if(null == this.pointMaker)
-            this.pointMaker = new RandomPointMaker(bitmapToBeProcessed);
+            this.setDefaultPointMaker();
         else
             this.pointMaker.clearPoints();
         this.width = imageHandler.getWidth();
@@ -160,5 +160,9 @@ public class ImageProcessor extends NotifyingRunnable {
 
     public boolean isProcessing() {
         return this.isProcessing;
+    }
+
+    public void setDefaultPointMaker() {
+        this.pointMaker = new RandomPointMaker(this.getRawImage());
     }
 }
