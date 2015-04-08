@@ -60,8 +60,8 @@ public class NavigationFragment extends Fragment {
         navElements.add(new AutoSettingsNavigationElement(R.id.nav_change_auto_settings));
         navElements.add(new AutoSettingsNavigationElement(R.id.nav_auto_settings));
 
-        // Add Close, Undo Buttons
-        navElements.add(new CloseImageIntentNavigationElement(R.id.nav_close_image));
+        // Add Close Button
+        navElements.add(new CloseActivityNavigationElement(R.id.nav_close_image));
 
         // Auto Process Settings
         navElements.add(new ProcessImageNavigationElement(R.id.nav_triangle_button));

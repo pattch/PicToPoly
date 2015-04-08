@@ -7,9 +7,6 @@ import com.pictopoly.polydemo.ImageLayerHandler;
 import com.pictopoly.polydemo.process.PointMaker.EdgePointMaker;
 import com.pictopoly.polydemo.process.PointMaker.PointMaker;
 
-/**
- * Created by Marklar on 3/2/2015.
- */
 public class EdgePointsSliderElement extends PointsSliderElement {
     public EdgePointsSliderElement(int id) {
         super(id);

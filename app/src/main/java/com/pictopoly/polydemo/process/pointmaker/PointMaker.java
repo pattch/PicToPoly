@@ -19,4 +19,6 @@ public interface PointMaker {
 	public Collection<Point> getPoints();
 	
 	public void setBitmap(Bitmap bitmapToBeProcessed);
+
+    public void clearPoints();
 }

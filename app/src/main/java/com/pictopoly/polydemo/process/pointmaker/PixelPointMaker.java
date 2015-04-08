@@ -46,4 +46,10 @@ public abstract class PixelPointMaker implements PointMaker {
         points.add(new Point(width - 1,0));
         points.add(new Point(width - 1, height - 1));
     }
+
+    @Override
+    public void clearPoints() {
+        if(this.points != null && this.points.size() > 0)
+            points.clear();
+    }
 }

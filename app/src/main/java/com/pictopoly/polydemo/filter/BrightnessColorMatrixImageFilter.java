@@ -3,9 +3,6 @@ package com.pictopoly.polydemo.filter;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 
-/**
- * Created by Marklar on 3/11/2015.
- */
 public class BrightnessColorMatrixImageFilter extends ColorMatrixImageFilter {
 
     protected float brightness;

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 
 import com.pictopoly.polydemo.process.ImageProcessor;
 import com.pictopoly.polydemo.process.ThreadCompleteListener;
@@ -30,6 +31,9 @@ public class PolyActivity extends Activity implements ThreadCompleteListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_poly);
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         // First Time Running
         if (savedInstanceState == null) {

@@ -7,9 +7,6 @@ import com.pictopoly.polydemo.ImageLayerHandler;
 import com.pictopoly.polydemo.process.PointMaker.PointMaker;
 import com.pictopoly.polydemo.process.PointMaker.RadiusPointMaker;
 
-/**
- * Created by Marklar on 3/3/2015.
- */
 public class NearEdgeDistanceSliderElement extends PointsSliderElement {
     public NearEdgeDistanceSliderElement(int id) {
         super(id);

@@ -25,6 +25,8 @@
     <string name="grad_choose_color">Pick a Color</string>
     <string name="grad_color_cancel">Cancel</string>
     <string name="grad_select_color">OK</string>
+    <string name="grad_width_not_number_error">Oops! The width needs to be a number.</string>
+    <string name="grad_height_not_number_error">Oops! The height needs to be a number.</string>
 
     // Gradient Colors
     <string name="grad_red">Red</string>

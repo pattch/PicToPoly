@@ -5,9 +5,6 @@ import android.view.View;
 
 import com.pictopoly.polydemo.R;
 
-/**
- * Created by Marklar on 3/2/2015.
- */
 public class AutoSettingsNavigationElement extends NavigationElement {
     public AutoSettingsNavigationElement(int id) {
         super(id);

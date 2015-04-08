@@ -44,4 +44,8 @@ public class UniformPointMaker extends PixelPointMaker {
     public void setNumberOfPoints(int i) {
         this.numberOfUniformPoints = i;
     }
+
+    public int getNumberOfPoints() {
+        return this.numberOfUniformPoints;
+    }
 }

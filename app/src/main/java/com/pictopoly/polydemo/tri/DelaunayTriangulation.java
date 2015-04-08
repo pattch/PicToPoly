@@ -1069,8 +1069,7 @@ public class DelaunayTriangulation implements Triangulation {
 	public Triangle find(Point p, Triangle start) {
 		if (start == null)
 			start = this.startTriangle;
-		Triangle T = find(start, p);
-		return T;
+		return find(start, p);
 	}
 
 	private static Triangle find(Triangle curr, Point p) {
@@ -1458,7 +1457,6 @@ public class DelaunayTriangulation implements Triangulation {
 		if (this.size() <= 2)
 			triangles = new Vector<Triangle>();
 		initTriangles();
-		List<Triangle> triangulation = new ArrayList<Triangle>(triangles);
-		return triangulation;
+		return new ArrayList<Triangle>(triangles);
 	}
 }

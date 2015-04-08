@@ -7,9 +7,6 @@ import android.view.View;
 import com.pictopoly.polydemo.PolyActivity;
 import com.pictopoly.polydemo.TriangleSurfaceView;
 
-/**
- * Created by Marklar on 2/6/2015.
- */
 public class ChangeTriangleViewNavigationElement extends NavigationElement {
     public ChangeTriangleViewNavigationElement(int id) {
         super(id);

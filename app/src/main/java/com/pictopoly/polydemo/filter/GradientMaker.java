@@ -9,9 +9,6 @@ import android.graphics.Shader;
 
 import java.util.List;
 
-/**
- * Created by Marklar on 3/6/2015.
- */
 public class GradientMaker {
     protected Bitmap gradientBitmap;
     protected int width, height;

@@ -20,9 +20,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-/**
- * Created by Marklar on 1/26/2015.
- */
 public class CameraIntentNavigationElement extends IntentNavigationElement {
     private String TAG = this.getClass().getSimpleName();
     protected Uri imageFileLocation;

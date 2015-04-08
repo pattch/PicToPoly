@@ -13,28 +13,25 @@ import android.view.SurfaceView;
 import com.pictopoly.polydemo.process.ImageProcessor;
 import com.pictopoly.polydemo.tri.Point;
 
-/**
- * Created by Marklar on 1/26/2015.
- */
 public class TriangleSurfaceView extends SurfaceView {
     private final String TAG = this.getClass().getSimpleName();
-    public static final int BG_COLOR = Color.DKGRAY;
-    public static final int DRAW_TRIANGLES_OPAQUE = 1;
-    public static final int DRAW_TRIANGLES_TRANSPARENT = 2;
-    public static final int DRAW_RAW = 4;
-    protected int drawingState = 1;
-    protected Bitmap mTriangleMap, mLineMap, mRawMap;
+    private static final int BG_COLOR = Color.DKGRAY;
+    private static final int DRAW_TRIANGLES_OPAQUE = 1;
+    private static final int DRAW_TRIANGLES_TRANSPARENT = 2;
+    private static final int DRAW_RAW = 4;
+    private int drawingState = 1;
+    private Bitmap mTriangleMap, mLineMap, mRawMap;
 
-    protected final Paint paint = new Paint();
+    private final Paint paint = new Paint();
     //protected Rect surfaceBounds;
-    protected ImageProcessor handler;
+    private ImageProcessor handler;
 
-    protected int mWidth, mHeight;
-    protected float mScale, xPivot, yPivot;
+    private int mWidth, mHeight;
+    private float mScale, xPivot, yPivot;
 
-    protected boolean changingSinglePoint = false;
-    protected boolean addingPoints = true;
-    protected boolean fillingScreen = false;
+    private boolean changingSinglePoint = false;
+    private boolean addingPoints = true;
+    private boolean fillingScreen = false;
 
     public TriangleSurfaceView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -104,7 +101,7 @@ public class TriangleSurfaceView extends SurfaceView {
         this.handler = handler;
     }
 
-    public void initMaps() {
+    void initMaps() {
         mTriangleMap = handler.getProcessedImage();
         mLineMap = handler.getLineImage();
         mRawMap = handler.getRawImage();
@@ -143,25 +140,28 @@ public class TriangleSurfaceView extends SurfaceView {
     }
 
     public boolean handleTouch(MotionEvent event) {
-        Log.d(TAG,"adding pt (" + event.getX() + "," + event.getY() + ") - adding single? " + changingSinglePoint);
-        //int offsetX = surfaceBounds.left,
-        //        offsetY = surfaceBounds.top;
-        double ptX = (int)(event.getX()/mScale),
-            ptY = (int)(event.getY()/mScale);
-        ptX -= xPivot;
-        ptY -= yPivot;
+        if(!handler.isProcessing()) {
+            Log.d(TAG, "adding pt (" + event.getX() + "," + event.getY() + ") - adding single? " + changingSinglePoint);
+            //int offsetX = surfaceBounds.left,
+            //        offsetY = surfaceBounds.top;
+            double ptX = (int) (event.getX() / mScale),
+                    ptY = (int) (event.getY() / mScale);
+            ptX -= xPivot;
+            ptY -= yPivot;
 
-        if(addingPoints)
-            handler.addPoint(new Point(ptX, ptY));
-        else
-            handler.removePoint(new Point(ptX, ptY));
-        handler.refreshTriangles();
+            if (addingPoints)
+                handler.addPoint(new Point(ptX, ptY));
+            else
+                handler.removePoint(new Point(ptX, ptY));
+            handler.refreshTriangles();
 
-        this.invalidate();
-        return true;
+            this.invalidate();
+            return true;
+        }
+        return false;
     }
 
-    public void setRenderType(int state) {
+    void setRenderType(int state) {
         if(drawingState >= 0 && state <= DRAW_RAW)
             drawingState = state;
         else

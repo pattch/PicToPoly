@@ -1,25 +1,32 @@
 package com.pictopoly.polydemo;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.pictopoly.polydemo.filter.GradientMaker;
+import com.pictopoly.polydemo.nav.CloseActivityNavigationElement;
+import com.pictopoly.polydemo.nav.CloseImageIntentNavigationElement;
+import com.pictopoly.polydemo.nav.NavigationElement;
 import com.pictopoly.polydemo.process.ImageProcessor;
-import com.pictopoly.polydemo.process.NotifyingRunnable;
 import com.pictopoly.polydemo.process.PointMaker.PointMaker;
 import com.pictopoly.polydemo.process.PointMaker.UniformPointMaker;
 import com.pictopoly.polydemo.process.ThreadCompleteListener;
@@ -27,58 +34,70 @@ import com.pictopoly.polydemo.process.ThreadCompleteListener;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Marklar on 3/15/2015.
- */
 public class GradientActivity extends Activity implements ThreadCompleteListener {
     private final String TAG = this.getClass().getSimpleName();
-    protected ImageProcessor processor;
+    protected ImageProcessor gradientProcessor;
     protected TriangleSurfaceView mTriangleSurfaceView;
     protected int[] gradActivityBackgroundColors = new int[] { Color.parseColor("#ffffff"), Color.parseColor("#aaaaaa"), };
-    protected int mWidth, mHeight;
+//    protected int mWidth, mHeight;
 
+    // Array of Colors to be used in Gradient
     protected int[] gradientColors = new int[5];
-    protected List<String> gradientActivityColorIds;        // The Id's for the colors in activity_gradient.xml
-    private final int numberOfColorsPerColorGroup = 5;
-    private final int numberOfColorGroups = 7;
-    private final int numberOfColors = 5;
-    private final String idBase = "color_";
-    protected int currentColor, currentColorPosition, gradientWidth, gradientHeight;
-    protected boolean isPortrait;
+
+    // Orientation of the Gradient
+    protected boolean isPortrait = true;
+
+    // PointMaker to be used to make the Gradient, uses Triangle Size
     protected PointMaker pm;
+
+    // The dimensions of the Gradient to be made
+    protected int gradientWidth, gradientHeight;
+
+    protected List<String> gradientActivityColorIds;        // The Id's for the colors in activity_gradient.xml
+    private final int numberOfColorsPerColorGroup   = 5;
+    private final int numberOfColorGroups           = 7;
+    private final int numberOfColors                = 5;
+    private final int PointScale                    = 5;
+    private final int MaxPointCount                 = 110;
+    private final int DefaultTriangleSize           = 50;
+    private final String idBase = "color_";
+    protected int currentColor, currentColorPosition, backgroundGradientWidth, backgroundGradientHeight, triangleSize;
     protected View lastPickedView;
+
+    protected NavigationElement closeGradient = new CloseActivityNavigationElement(R.id.grad_close_image);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gradient);
-        processor = ImageLayerHandler.getInstance().getGradientProcessor();
+        gradientProcessor = ImageLayerHandler.getInstance().getGradientProcessor();
         mTriangleSurfaceView = (TriangleSurfaceView) findViewById(R.id.grad_triangleSurfaceView);
 
-        // Set up the Color Buttons
-        initGradientActivityColorIds();
-        initDefaults();
-        setColorListeners();
-        setDirectionListeners();
-        hideColorPicker();
-        setAddColorListeners();
-        setColorPickerVisibilityListeners();
-        setColorPickerButtonListeners();
-        setMaterialTypeFaces();
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        // First Time Running SplashActivity
-        if (savedInstanceState == null && processor.getProcessedImage() == null) {
-            Bitmap gradient = GradientMaker.makeGradient(1000, 1000, this.gradActivityBackgroundColors, true);
-            processor.setImage(gradient);
-            PointMaker pm = new UniformPointMaker();
-            processor.setPointMaker(pm);
-            processor.addListener(this);
-            processor.processImage();
+//        String colors = "Colors: ";
+//        for(int colorEl = 0; colorEl < numberOfColors; colorEl++)
+//            colors += gradientColors[colorEl] + " ";
+//        Log.d(TAG, colors);
+
+        // Set up the Color Buttons
+        initDefaults();
+        setListeners();
+
+        // First Time Running GradientActivity
+        if (savedInstanceState == null && gradientProcessor.getProcessedImage() == null) {
+            Bitmap gradient = GradientMaker.makeGradient(this.backgroundGradientWidth, this.backgroundGradientHeight, this.gradActivityBackgroundColors, true);
+            gradientProcessor.setImage(gradient);
+            PointMaker gradientPointMaker = new UniformPointMaker();
+            gradientProcessor.setPointMaker(gradientPointMaker);
+            gradientProcessor.addListener(this);
+            gradientProcessor.processImage();
         }
 
-        if (mTriangleSurfaceView != null && processor.getProcessedImage() != null) {
+        if (mTriangleSurfaceView != null && gradientProcessor.getProcessedImage() != null) {
             mTriangleSurfaceView.setFillingScreen(true);
-            mTriangleSurfaceView.setImageHandler(processor);
+            mTriangleSurfaceView.setImageHandler(gradientProcessor);
         } else {
             Log.d(TAG, "TriangleSurfaceView not Persisting");
         }
@@ -91,13 +110,55 @@ public class GradientActivity extends Activity implements ThreadCompleteListener
             public void run() {
                 if (mTriangleSurfaceView != null) {
                     mTriangleSurfaceView.setFillingScreen(true);
-                    mTriangleSurfaceView.setImage(processor.processImage());
+                    mTriangleSurfaceView.setImage(gradientProcessor.processImage());
                     mTriangleSurfaceView.invalidate();
                 }
             }
         });
     }
 
+    private void setListeners() {
+        setColorListeners();
+        setDirectionListeners();
+        setAddColorListeners();
+        setColorPickerVisibilityListeners();
+        setColorPickerButtonListeners();
+        setTriangleSizeListener();
+        setDimensionListener();
+
+        View view = findViewById(closeGradient.getId());
+        closeGradient.setView(view);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                closeGradient.onClick(v);
+            }
+        });
+
+        view = findViewById(R.id.grad_apply);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ImageProcessor processor = ImageLayerHandler.getInstance().getProcessor();
+                int[] fixedColors = fixColors();
+                Bitmap map = GradientMaker.makeGradient(gradientWidth,gradientHeight,fixedColors,isPortrait);
+                processor.setImage(map);
+                processor.processImage();
+
+                Log.d(TAG,"processor's pm is a " + processor.getPointMaker().getClass().getSimpleName());
+                Intent i = new Intent(GradientActivity.this, PolyActivity.class);
+                startActivity(i);
+            }
+        });
+    }
+
+    /**
+     * Sets up the List gradientActivityColorIds. Uses the constants numberOfColorGroups and
+     * numberOfColorsPerColorGroup to build up Strings that look like "color_1_1" to "color_m_n"
+     * where m = numberOfColorGroups, n = numberOfColorsPerColorGroup. These Strings are to be used
+     * to get the Color, as a String of the Views in the color picker. This is done by accessing the Tag
+     * field of the views with the Ids built here.
+     */
     private void initGradientActivityColorIds() {
         int numIds = numberOfColorGroups*numberOfColorsPerColorGroup;
         gradientActivityColorIds = new ArrayList<>(numIds);
@@ -127,6 +188,65 @@ public class GradientActivity extends Activity implements ThreadCompleteListener
         }
     }
 
+    private void setDimensionListener() {
+        setWidthListener();
+        setHeightListener();
+    }
+
+    private void setWidthListener() {
+        View widthView = findViewById(R.id.grad_width_edit_text);
+        if(widthView != null && widthView instanceof EditText) {
+            EditText widthText = (EditText)widthView;
+            widthText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {}
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    String text = s.toString();
+                    int width;
+                    try {
+                        width = Integer.parseInt(text);
+                        gradientWidth = width;
+                    } catch (NumberFormatException e) {
+                        Log.d(TAG, "Width not a number.");
+                        Toast.makeText(GradientActivity.this, R.string.grad_width_not_number_error, Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+    }
+
+    private void setHeightListener() {
+        View heightView = findViewById(R.id.grad_height_edit_text);
+        if(heightView != null && heightView instanceof EditText) {
+            EditText heightText = (EditText)heightView;
+            heightText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {}
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    String text = s.toString();
+                    int height;
+                    try {
+                        height = Integer.parseInt(text);
+                        gradientHeight = height;
+                    } catch (NumberFormatException e) {
+                        Log.d(TAG, "Height not a number.");
+                        Toast.makeText(GradientActivity.this, R.string.grad_height_not_number_error, Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+    }
+
     private void setCurrentColor(int color) {
         this.currentColor = color;
     }
@@ -143,26 +263,65 @@ public class GradientActivity extends Activity implements ThreadCompleteListener
         return this.currentColorPosition;
     }
 
-    private void chooseColor(View view) {
+    /**
+     * Sets the current color (currentColor) to the value given by the Tag in the View colorView
+     *
+     * @param colorView     The View with the color chosen by the user.
+     */
+    private void chooseColor(View colorView) {
         if(lastPickedView != null) {
             if(lastPickedView instanceof TextView)
                 ((TextView)lastPickedView).setText("");
         }
 
-        int currColor = Color.parseColor((String)view.getTag());
+        int currColor = Color.parseColor((String)colorView.getTag());
 
-        if(view instanceof TextView) {
-            TextView tv = (TextView)view;
+        if(colorView instanceof TextView) {
+            TextView tv = (TextView)colorView;
             tv.setText(R.string.md_done);
-            if(currColor == Color.WHITE)
-                tv.setTextColor(Color.BLACK);
-            else
-                tv.setTextColor(Color.WHITE);
+
+            // These color options are too light, so set the text to black.
+            int[] lightColors = new int[] {
+                    Color.WHITE,
+                    Color.parseColor("#FFFF8D"),    // Not magic at all
+                    Color.parseColor("#F4FF81"),
+                    Color.parseColor("#E0E0E0"),
+                    Color.parseColor("#B9F6CA"),
+                    Color.parseColor("#FFEB3B"),
+                    Color.parseColor("#FFD180"),
+                    Color.parseColor("#CDDC39"),
+            };
+            tv.setTextColor(Color.WHITE);
+            for(int lc : lightColors)
+                if(currColor == lc)
+                    tv.setTextColor(Color.BLACK);
         }
 
         setCurrentColor(currColor);
 
-        lastPickedView = view;
+        lastPickedView = colorView;
+    }
+
+    /**
+     * Updates the number of points in the pointMaker to be used in the Gradient
+     */
+    private void setTriangleSizeListener() {
+        SeekBar seekBar = (SeekBar)findViewById(R.id.grad_triangle_size);
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                triangleSize = progress;
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {}
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+//                Toast.makeText(GradientActivity.this,"Changed number of points by triangle size: " + triangleSize, Toast.LENGTH_SHORT).show();
+                updateNumPoints(triangleSize);
+            }
+        });
     }
 
     private void hideColorPicker() {
@@ -183,20 +342,39 @@ public class GradientActivity extends Activity implements ThreadCompleteListener
         String id = idBase + colorEl;
         int resID = getResources().getIdentifier(id, "id", "com.pictopoly.polydemo");
         View v = findViewById(resID);
-        if(v != null) {
+        if(v != null && v instanceof TextView) {
             GradientDrawable drawable = (GradientDrawable) v.getBackground();
             drawable.setColor(currentColor);
 
-            if(v instanceof TextView) {
-                TextView textView = (TextView)v;
-                if (currentColor == Color.parseColor("#ffffff"))
-                    textView.setTextColor(Color.parseColor("#000000"));
-                else
-                    textView.setTextColor(Color.parseColor("#ffffff"));
+            TextView textView = (TextView)v;
+            if (currentColor == Color.parseColor("#ffffff"))
+                textView.setTextColor(Color.parseColor("#000000"));
+            else
+                textView.setTextColor(Color.parseColor("#ffffff"));
 
-                textView.setText(R.string.md_done);
-            }
+            textView.setText(R.string.md_done);
         }
+    }
+
+    private int[] fixColors() {
+        int pickedColors = 0;
+        for(int i : gradientColors)
+            if(i != 0) pickedColors++;
+
+        int[] fixedColors;
+        if(pickedColors > 0) {
+            fixedColors = new int[pickedColors];
+            pickedColors = 0;
+            for(int i : gradientColors)
+                if(i != 0)
+                    fixedColors[pickedColors++] = i;
+        } else {
+            fixedColors = new int[2];
+            fixedColors[0] = Color.parseColor("#ffffff");
+            fixedColors[1] = Color.parseColor("#000000");
+        }
+
+        return fixedColors;
     }
 
     private void setAddColorListeners() {
@@ -219,7 +397,7 @@ public class GradientActivity extends Activity implements ThreadCompleteListener
     }
 
     private void setColorPickerVisibilityListeners() {
-        int[] hideColorPickerIds = new int[] {R.id.grad_pick_color_ok_button, R.id.grad_pick_color_cancel_button,};
+        int[] hideColorPickerIds = new int[] {R.id.grad_pick_color_ok_button, R.id.grad_pick_color_cancel_button, R.id.grad_root};
         int[] showColorPickerIds = new int[] {R.id.grad_pick_color,};
 
         for(int i : hideColorPickerIds)
@@ -255,12 +433,6 @@ public class GradientActivity extends Activity implements ThreadCompleteListener
 
     private void setMaterialTypeFaces() {
         Typeface materialTypeface = Typeface.createFromAsset(getAssets(), "fonts/material_design_icons.ttf");
-//        int[] materialTextIds = new int[] {R.id.grad_close_image,
-//                R.id.color_1,
-//                R.id.color_2,
-//                R.id.color_3,
-//                R.id.color_4,
-//                R.id.color_5,};
 
         List<Integer> mTextIds = new ArrayList<>();
         mTextIds.add(R.id.grad_close_image);
@@ -290,64 +462,82 @@ public class GradientActivity extends Activity implements ThreadCompleteListener
     }
 
     private void initDefaults() {
+        initGradientActivityColorIds();
         initResolution();
         initColors();
         initTriangleSize();
         initDirection();
+        hideColorPicker();
+        setMaterialTypeFaces();
     }
 
+    /**
+     * Sets the defaults for the Gradient to be built according to the screen size.
+     * Modifies the variables backgroundGradientWidth and backgroundGradientHeight, as well as the text
+     * values for the EditText Views exposed to the user. Also initializes gradientWidth as well as gradientHeight
+     */
     private void initResolution() {
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
-        int width = size.x;
-        int height = size.y;
+        gradientWidth = size.x;
+        gradientHeight = size.y;
 
         View v = findViewById(R.id.grad_width_edit_text);
         if(v != null && v instanceof EditText)
-            ((EditText)v).setText("" + width);
+            ((EditText)v).setText("" + gradientWidth);
         v = findViewById(R.id.grad_height_edit_text);
         if(v != null && v instanceof EditText)
-            ((EditText)v).setText("" + height);
+            ((EditText)v).setText("" + gradientHeight);
 
-        this.gradientWidth = width;
-        this.gradientHeight = height;
+        this.backgroundGradientWidth = gradientWidth;
+        this.backgroundGradientHeight = gradientHeight;
     }
 
     private void initColors() {
         for(int i = 0; i < gradientColors.length; i++)
             gradientColors[i] = 0;
+
+        for(int colorEl = 1; colorEl <= numberOfColors; colorEl++) {
+            String id = idBase + colorEl;
+            int resID = getResources().getIdentifier(id, "id", "com.pictopoly.polydemo");
+            View v = findViewById(resID);
+            if(v != null && v instanceof TextView) {
+                GradientDrawable drawable = (GradientDrawable) v.getBackground();
+                drawable.setColor(Color.parseColor("#666666"));
+            }
+        }
+
     }
 
-    private int[] fixColors() {
-        int numColors = 0;
-        for(int i : gradientColors)
-            if(i != 0)
-                numColors++;
-
-
-        int[] colors = new int[numColors];
-        int temp = 0;
-        for(int i : gradientColors)
-            if(i != 0)
-                colors[temp++] = gradientColors[i];
-
-        return colors;
-    }
-
+    /**
+     * Sets the default size of the triangles in the generated Gradient.
+     */
     private void initTriangleSize() {
-        pm = new UniformPointMaker();
-        updateNumPoints(50);
+        this.pm = new UniformPointMaker();
+        updateNumPoints(DefaultTriangleSize);
     }
 
-    private void updateNumPoints(int i) {
-        int temp = 110 - i;
-        temp *= 5;
+    /**
+     * This method updates the abount of points the pointMaker will generate in the triangulation for
+     * the gradient. Since the amount of points varies inversely with  triangleSize, the number used
+     * to set the amountof points is equal to the MaxPointCount less the triangleSize. This number is
+     * then scaled by a factor of PointScale.
+     *
+     * @param triangleSize      Indicates how large the triangles will be in the generated Gradient
+     */
+    private void updateNumPoints(int triangleSize) {
+        int temp = MaxPointCount - triangleSize; // Not Magic at all!
+        temp *= PointScale;
 
         ((UniformPointMaker)pm).setNumberOfPoints(temp);
 
         ImageProcessor processor = ImageLayerHandler.getInstance().getProcessor();
         processor.setPointMaker(pm);
+        if(processor.getPointMaker() instanceof UniformPointMaker)
+            Log.d(TAG,"processor's pm is a UniformPointMaker");
+        else
+            Log.d(TAG,"processor's pm is a " + processor.getPointMaker().getClass().getSimpleName());
     }
 
     private void initDirection() {

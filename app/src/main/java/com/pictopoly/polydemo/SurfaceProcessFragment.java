@@ -11,9 +11,6 @@ import android.view.ViewGroup;
 
 import com.pictopoly.polydemo.process.ImageProcessor;
 
-/**
- * Created by Marklar on 1/26/2015.
- */
 public class SurfaceProcessFragment extends Fragment {
     protected TriangleSurfaceView mTriangleSurfaceView;
     protected ImageProcessor handler = ImageLayerHandler.getInstance().getProcessor();

@@ -8,6 +8,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.pictopoly.polydemo.filter.GradientMaker;
@@ -43,6 +44,9 @@ public class SplashActivity extends Activity implements ThreadCompleteListener {
         setContentView(R.layout.activity_splash);
         handler = ImageLayerHandler.getInstance().getSplashProcessor();
         mTriangleSurfaceView = (TriangleSurfaceView) findViewById(R.id.splash_triangleSurfaceView);
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         ImageProcessor ph = ImageLayerHandler.getInstance().getProcessor();
         if(ph.getProcessedImage() == null) {

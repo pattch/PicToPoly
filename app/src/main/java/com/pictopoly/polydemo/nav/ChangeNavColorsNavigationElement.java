@@ -7,9 +7,6 @@ import android.widget.Toast;
 
 import com.pictopoly.polydemo.PolyActivity;
 
-/**
- * Created by Marklar on 3/2/2015.
- */
 public class ChangeNavColorsNavigationElement extends NavigationElement {
     /*  #F44336 Red
         #E91E63 Pink

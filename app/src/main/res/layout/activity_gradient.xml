@@ -371,6 +371,7 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/grad_apply"
             style="?android:buttonBarButtonStyle"
             android:text="@string/grad_apply"
             android:textColor="#222"

@@ -6,9 +6,6 @@ import android.view.View;
 import com.pictopoly.polydemo.GradientActivity;
 import com.pictopoly.polydemo.PolyActivity;
 
-/**
- * Created by Marklar on 3/14/2015.
- */
 public class MakeGradientIntentNavigationElement extends IntentNavigationElement {
     public MakeGradientIntentNavigationElement(int id) {
         super(id, PolyActivity.INTENT_GRADIENT);

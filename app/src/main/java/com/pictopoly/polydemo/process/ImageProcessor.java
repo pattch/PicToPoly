@@ -20,11 +20,11 @@ public class ImageProcessor extends NotifyingRunnable {
     public static String PICTURE_PATH = "/Pictures/PicToPoly/";
 	protected PointMaker pointMaker;
 	protected Triangulation triangulation;
-//	protected Bitmap rawImage, processedImage, lineImage;
     protected ImageHandler imageHandler;
+    protected boolean isProcessing = false;
     protected int width, height;
 
-    public static final boolean EXTRA_IMAGES = false;
+//    public static final boolean EXTRA_IMAGES = false;
 	
 	public ImageProcessor() {
 		this.triangulation = new DelaunayTriangulation();
@@ -36,12 +36,11 @@ public class ImageProcessor extends NotifyingRunnable {
 	
 	public Bitmap setImage(Bitmap bitmapToBeProcessed) {
         this.flush();
-//        this.rawImage = bitmapToBeProcessed.copy(Bitmap.Config.ARGB_8888, true);
-//        this.processedImage = rawImage.copy(Bitmap.Config.ARGB_8888, true);
-//        this.lineImage = rawImage.copy(Bitmap.Config.ARGB_8888, true);
         imageHandler = new BitmapImageHandler(bitmapToBeProcessed);
-        this.pointMaker = new RandomPointMaker(bitmapToBeProcessed);
-//        this.pointMaker = new GridPointMaker(bitmapToBeProcessed);
+        if(null == this.pointMaker)
+            this.pointMaker = new RandomPointMaker(bitmapToBeProcessed);
+        else
+            this.pointMaker.clearPoints();
         this.width = imageHandler.getWidth();
         this.height = imageHandler.getHeight();
         return this.imageHandler.getSourceMap();
@@ -50,7 +49,9 @@ public class ImageProcessor extends NotifyingRunnable {
     @Override
     public void doRun() {
         android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
+        isProcessing = true;
         processImage();
+        isProcessing = false;
     }
 	
 	public Bitmap processImage() {
@@ -157,5 +158,7 @@ public class ImageProcessor extends NotifyingRunnable {
         return this.pointMaker;
     }
 
-
+    public boolean isProcessing() {
+        return this.isProcessing;
+    }
 }

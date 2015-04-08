@@ -15,9 +15,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-/**
- * Created by Marklar on 1/26/2015.
- */
 public class OpenImageIntentNavigationElement extends IntentNavigationElement {
     private String TAG = this.getClass().getSimpleName();
 

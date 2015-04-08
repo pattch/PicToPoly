@@ -7,9 +7,6 @@ import android.view.View;
 
 import com.pictopoly.polydemo.PolyActivity;
 
-/**
- * Created by Marklar on 1/26/2015.
- */
 public abstract class IntentNavigationElement extends NavigationElement {
     protected int REQUEST_CODE;
 

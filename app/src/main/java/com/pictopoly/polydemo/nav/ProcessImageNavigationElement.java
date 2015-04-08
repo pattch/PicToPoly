@@ -22,15 +22,19 @@ public class ProcessImageNavigationElement extends NavigationElement {
 
     @Override
     public void onClick(View view) {
-        ImageProcessor handler = ImageLayerHandler.getInstance().getProcessor();
-        Activity a = (Activity)view.getContext();
-        if (a instanceof PolyActivity) {
-            Log.d(getClass().getSimpleName(), "Processing from Nav");
-            PolyActivity pa = (PolyActivity)a;
-            pa.showLoadingPanel();
-        } else
-            Log.d(getClass().getSimpleName(), "Activity for ProcessNavEl not PolyActivity");
-        Thread processThread = new Thread(handler);
-        processThread.start();
+        ImageProcessor processor = ImageLayerHandler.getInstance().getProcessor();
+        if(!processor.isProcessing()) {
+            Activity a = (Activity) view.getContext();
+            if (a instanceof PolyActivity) {
+                Log.d(getClass().getSimpleName(), "Processing from Nav");
+                PolyActivity pa = (PolyActivity) a;
+                pa.showLoadingPanel();
+            } else
+                Log.d(getClass().getSimpleName(), "Activity for ProcessNavEl not PolyActivity");
+
+
+            Thread processThread = new Thread(processor);
+            processThread.start();
+        }
     }
 }
