@@ -21,7 +21,7 @@
         android:layout_gravity="top|center_horizontal">
 
         <LinearLayout
-            android:id="@+id/splash_logo_container"
+            android:id="@+id/grad_logo_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -30,7 +30,7 @@
             android:background="@drawable/shape">
 
             <TextView
-                android:id="@+id/nav_logo_text_1"
+                android:id="@+id/grad_logo_text_1"
                 android:text="@string/splash_pic"
                 android:textSize="36dp"
                 android:textColor="#fff"
@@ -40,7 +40,7 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
 
             <TextView
-                android:id="@+id/nav_logo_text_2"
+                android:id="@+id/grad_logo_text_2"
                 android:text="@string/splash_to"
                 android:textSize="24dp"
                 android:textStyle="italic"
@@ -53,7 +53,7 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
 
             <TextView
-                android:id="@+id/nav_logo_text_3"
+                android:id="@+id/grad_logo_text_3"
                 android:text="@string/splash_poly"
                 android:textSize="36dp"
                 android:textColor="#fff"

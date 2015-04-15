@@ -355,6 +355,7 @@ public class GradientActivity extends Activity implements ThreadCompleteListener
                 fixDimensions();
                 Bitmap map = GradientMaker.makeGradient(gradientWidth,gradientHeight,fixedColors,isPortrait);
                 processor.setImage(map);
+                processor.setPointMaker(pm);
                 processor.processImage();
 
                 Log.d(TAG,"processor's pm is a " + processor.getPointMaker().getClass().getSimpleName());
@@ -484,6 +485,20 @@ public class GradientActivity extends Activity implements ThreadCompleteListener
         }
     }
 
+    private void setLogoTypeFaces() {
+        Typeface materialTypeface = Typeface.createFromAsset(getAssets(), "fonts/material_design_icons.ttf"),
+                jsLightTypeface = Typeface.createFromAsset(getAssets(), "fonts/josefin_light.ttf"),
+                lobsterTypeface = Typeface.createFromAsset(getAssets(), "fonts/lobster.ttf");
+
+        // Change Fonts of Splash Text
+        TextView textView = (TextView)findViewById(R.id.grad_logo_text_1);
+        textView.setTypeface(jsLightTypeface);
+        textView = (TextView)findViewById(R.id.grad_logo_text_2);
+        textView.setTypeface(lobsterTypeface);
+        textView = (TextView)findViewById(R.id.grad_logo_text_3);
+        textView.setTypeface(jsLightTypeface);
+    }
+
     private void initDefaults() {
         initGradientActivityColorIds();
         initResolution();
@@ -492,6 +507,7 @@ public class GradientActivity extends Activity implements ThreadCompleteListener
         initDirection();
         hideColorPicker();
         setMaterialTypeFaces();
+        setLogoTypeFaces();
     }
 
     /**
@@ -554,13 +570,6 @@ public class GradientActivity extends Activity implements ThreadCompleteListener
         temp *= PointScale;
 
         ((UniformPointMaker)pm).setNumberOfPoints(temp);
-
-        ImageProcessor processor = ImageLayerHandler.getInstance().getProcessor();
-        processor.setPointMaker(pm);
-        if(processor.getPointMaker() instanceof UniformPointMaker)
-            Log.d(TAG,"processor's pm is a UniformPointMaker");
-        else
-            Log.d(TAG,"processor's pm is a " + processor.getPointMaker().getClass().getSimpleName());
     }
 
     private void initDirection() {

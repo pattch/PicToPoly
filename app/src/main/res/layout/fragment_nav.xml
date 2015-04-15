@@ -109,7 +109,7 @@
         android:layout_alignParentLeft="true">
 
         <LinearLayout
-            android:id="@+id/splash_logo_container"
+            android:id="@+id/nav_logo_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
