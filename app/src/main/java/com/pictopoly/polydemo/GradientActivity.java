@@ -54,12 +54,15 @@ public class GradientActivity extends Activity implements ThreadCompleteListener
     protected int gradientWidth, gradientHeight;
 
     protected List<String> gradientActivityColorIds;        // The Id's for the colors in activity_gradient.xml
-    private final int numberOfColorsPerColorGroup   = 5;
-    private final int numberOfColorGroups           = 7;
-    private final int numberOfColors                = 5;
-    private final int PointScale                    = 5;
-    private final int MaxPointCount                 = 110;
-    private final int DefaultTriangleSize           = 50;
+    private final int numberOfColorsPerColorGroup       = 5;
+    private final int numberOfColorGroups               = 7;
+    private final int numberOfColors                    = 5;
+    private final int PointScale                        = 5;
+    private final int MaxPointCount                     = 110;
+    private final int DefaultTriangleSize               = 50;
+    private final int minimumAmountOfColorsInGradient   = 2;
+    private final int minimumGradientWidth              = 2;
+    private final int minimumGradientHeight             = 2;
     private final String idBase = "color_";
     protected int currentColor, currentColorPosition, backgroundGradientWidth, backgroundGradientHeight, triangleSize;
     protected View lastPickedView;
@@ -125,6 +128,7 @@ public class GradientActivity extends Activity implements ThreadCompleteListener
         setColorPickerButtonListeners();
         setTriangleSizeListener();
         setDimensionListener();
+        setApplyListener();
 
         View view = findViewById(closeGradient.getId());
         closeGradient.setView(view);
@@ -132,22 +136,6 @@ public class GradientActivity extends Activity implements ThreadCompleteListener
             @Override
             public void onClick(View v) {
                 closeGradient.onClick(v);
-            }
-        });
-
-        view = findViewById(R.id.grad_apply);
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ImageProcessor processor = ImageLayerHandler.getInstance().getProcessor();
-                int[] fixedColors = fixColors();
-                Bitmap map = GradientMaker.makeGradient(gradientWidth,gradientHeight,fixedColors,isPortrait);
-                processor.setImage(map);
-                processor.processImage();
-
-                Log.d(TAG,"processor's pm is a " + processor.getPointMaker().getClass().getSimpleName());
-                Intent i = new Intent(GradientActivity.this, PolyActivity.class);
-                startActivity(i);
             }
         });
     }
@@ -196,7 +184,7 @@ public class GradientActivity extends Activity implements ThreadCompleteListener
     private void setWidthListener() {
         View widthView = findViewById(R.id.grad_width_edit_text);
         if(widthView != null && widthView instanceof EditText) {
-            EditText widthText = (EditText)widthView;
+            final EditText widthText = (EditText)widthView;
             widthText.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -212,7 +200,7 @@ public class GradientActivity extends Activity implements ThreadCompleteListener
                         width = Integer.parseInt(text);
                         gradientWidth = width;
                     } catch (NumberFormatException e) {
-                        Log.d(TAG, "Width not a number.");
+                        Log.d(TAG, "Width not a number. gradientWidth: " + gradientWidth);
                         Toast.makeText(GradientActivity.this, R.string.grad_width_not_number_error, Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -223,7 +211,7 @@ public class GradientActivity extends Activity implements ThreadCompleteListener
     private void setHeightListener() {
         View heightView = findViewById(R.id.grad_height_edit_text);
         if(heightView != null && heightView instanceof EditText) {
-            EditText heightText = (EditText)heightView;
+            final EditText heightText = (EditText)heightView;
             heightText.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -239,7 +227,7 @@ public class GradientActivity extends Activity implements ThreadCompleteListener
                         height = Integer.parseInt(text);
                         gradientHeight = height;
                     } catch (NumberFormatException e) {
-                        Log.d(TAG, "Height not a number.");
+                        Log.d(TAG, "Height not a number. gradientHeight: " + gradientHeight);
                         Toast.makeText(GradientActivity.this, R.string.grad_height_not_number_error, Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -356,22 +344,57 @@ public class GradientActivity extends Activity implements ThreadCompleteListener
         }
     }
 
+    private void setApplyListener() {
+        // Apply Button Listener
+        View view = findViewById(R.id.grad_apply);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ImageProcessor processor = ImageLayerHandler.getInstance().getProcessor();
+                int[] fixedColors = fixColors();
+                fixDimensions();
+                Bitmap map = GradientMaker.makeGradient(gradientWidth,gradientHeight,fixedColors,isPortrait);
+                processor.setImage(map);
+                processor.processImage();
+
+                Log.d(TAG,"processor's pm is a " + processor.getPointMaker().getClass().getSimpleName());
+                Intent i = new Intent(GradientActivity.this, PolyActivity.class);
+                startActivity(i);
+            }
+        });
+    }
+
+    private void fixDimensions() {
+        if(gradientWidth < minimumGradientWidth)
+            gradientWidth = minimumGradientWidth;
+        if(gradientHeight < minimumGradientHeight)
+            gradientHeight = minimumGradientHeight;
+    }
+
     private int[] fixColors() {
         int pickedColors = 0;
         for(int i : gradientColors)
             if(i != 0) pickedColors++;
 
         int[] fixedColors;
-        if(pickedColors > 0) {
+        if(pickedColors >= minimumAmountOfColorsInGradient) {   // 2
             fixedColors = new int[pickedColors];
             pickedColors = 0;
             for(int i : gradientColors)
                 if(i != 0)
                     fixedColors[pickedColors++] = i;
-        } else {
+        } else if(pickedColors == 0) {                          // Default if no Colors Picked
             fixedColors = new int[2];
-            fixedColors[0] = Color.parseColor("#ffffff");
-            fixedColors[1] = Color.parseColor("#000000");
+            fixedColors[0] = Color.WHITE;
+            fixedColors[1] = Color.BLACK;
+        } else {                                                // Only one Color Picked
+            int color = 0;
+            for(int i : gradientColors)
+                if(i != 0)
+                    color = i;
+            fixedColors = new int[2];
+            fixedColors[0] = color;
+            fixedColors[1] = Color.BLACK;
         }
 
         return fixedColors;
