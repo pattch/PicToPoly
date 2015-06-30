@@ -141,7 +141,7 @@ public class TriangleSurfaceView extends SurfaceView {
 
     public boolean handleTouch(MotionEvent event) {
         if(!handler.isProcessing()) {
-            Log.d(TAG, "adding pt (" + event.getX() + "," + event.getY() + ") - adding single? " + changingSinglePoint);
+//            Log.d(TAG, "adding pt (" + event.getX() + "," + event.getY() + ") - adding single? " + changingSinglePoint);
             //int offsetX = surfaceBounds.left,
             //        offsetY = surfaceBounds.top;
             double ptX = (int) (event.getX() / mScale),

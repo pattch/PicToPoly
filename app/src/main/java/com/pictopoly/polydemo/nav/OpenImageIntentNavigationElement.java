@@ -36,7 +36,7 @@ public class OpenImageIntentNavigationElement extends IntentNavigationElement {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d(TAG, "Returning from Activity");
+//        Log.d(TAG, "Returning from Activity");
         Activity activity = (Activity) view.getContext();
 
         try {

@@ -18,7 +18,7 @@ public class ChangeTriangleViewNavigationElement extends NavigationElement {
 
     @Override
     public void onClick(View view) {
-        Log.d(this.getClass().getSimpleName(), "Changing Triangle View");
+//        Log.d(this.getClass().getSimpleName(), "Changing Triangle View");
         Activity a = (Activity)view.getContext();
         if(a instanceof PolyActivity) {
             PolyActivity pa = (PolyActivity)a;

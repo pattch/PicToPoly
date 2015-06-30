@@ -27,8 +27,8 @@ import com.pictopoly.polydemo.nav.CloseActivityNavigationElement;
 import com.pictopoly.polydemo.nav.CloseImageIntentNavigationElement;
 import com.pictopoly.polydemo.nav.NavigationElement;
 import com.pictopoly.polydemo.process.ImageProcessor;
-import com.pictopoly.polydemo.process.PointMaker.PointMaker;
-import com.pictopoly.polydemo.process.PointMaker.UniformPointMaker;
+import com.pictopoly.polydemo.process.pointmaker.PointMaker;
+import com.pictopoly.polydemo.process.pointmaker.UniformPointMaker;
 import com.pictopoly.polydemo.process.ThreadCompleteListener;
 
 import java.util.ArrayList;
@@ -102,7 +102,7 @@ public class GradientActivity extends Activity implements ThreadCompleteListener
             mTriangleSurfaceView.setFillingScreen(true);
             mTriangleSurfaceView.setImageHandler(gradientProcessor);
         } else {
-            Log.d(TAG, "TriangleSurfaceView not Persisting");
+//            Log.d(TAG, "TriangleSurfaceView not Persisting");
         }
     }
 
@@ -149,7 +149,7 @@ public class GradientActivity extends Activity implements ThreadCompleteListener
      */
     private void initGradientActivityColorIds() {
         int numIds = numberOfColorGroups*numberOfColorsPerColorGroup;
-        gradientActivityColorIds = new ArrayList<>(numIds);
+        gradientActivityColorIds = new ArrayList<String>(numIds);
 
         String temp;
         for(int colorGroup = 1; colorGroup <= numberOfColorGroups; colorGroup++) {
@@ -200,7 +200,7 @@ public class GradientActivity extends Activity implements ThreadCompleteListener
                         width = Integer.parseInt(text);
                         gradientWidth = width;
                     } catch (NumberFormatException e) {
-                        Log.d(TAG, "Width not a number. gradientWidth: " + gradientWidth);
+//                        Log.d(TAG, "Width not a number. gradientWidth: " + gradientWidth);
                         Toast.makeText(GradientActivity.this, R.string.grad_width_not_number_error, Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -227,7 +227,7 @@ public class GradientActivity extends Activity implements ThreadCompleteListener
                         height = Integer.parseInt(text);
                         gradientHeight = height;
                     } catch (NumberFormatException e) {
-                        Log.d(TAG, "Height not a number. gradientHeight: " + gradientHeight);
+//                        Log.d(TAG, "Height not a number. gradientHeight: " + gradientHeight);
                         Toast.makeText(GradientActivity.this, R.string.grad_height_not_number_error, Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -358,7 +358,7 @@ public class GradientActivity extends Activity implements ThreadCompleteListener
                 processor.setPointMaker(pm);
                 processor.processImage();
 
-                Log.d(TAG,"processor's pm is a " + processor.getPointMaker().getClass().getSimpleName());
+//                Log.d(TAG,"processor's pm is a " + processor.getPointMaker().getClass().getSimpleName());
                 Intent i = new Intent(GradientActivity.this, PolyActivity.class);
                 startActivity(i);
             }
@@ -458,7 +458,7 @@ public class GradientActivity extends Activity implements ThreadCompleteListener
     private void setMaterialTypeFaces() {
         Typeface materialTypeface = Typeface.createFromAsset(getAssets(), "fonts/material_design_icons.ttf");
 
-        List<Integer> mTextIds = new ArrayList<>();
+        List<Integer> mTextIds = new ArrayList<Integer>();
         mTextIds.add(R.id.grad_close_image);
         mTextIds.add(R.id.grad_small_triangle);
         mTextIds.add(R.id.grad_large_triangle);
@@ -585,11 +585,11 @@ public class GradientActivity extends Activity implements ThreadCompleteListener
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if(verticalRadio.isChecked()) {
                     GradientActivity.this.isPortrait = true;
-                    Log.d(TAG,"Vertical");
+//                    Log.d(TAG,"Vertical");
                 }
                 else if(horizontalRadio.isChecked()) {
                     GradientActivity.this.isPortrait = false;
-                    Log.d(TAG,"Horizontal");
+//                    Log.d(TAG,"Horizontal");
                 }
             }
         });

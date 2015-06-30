@@ -72,7 +72,7 @@ public class TriangleRenderer {
     }
 
     public static void render(Canvas canvas, Bitmap map, Collection<Triangle> triangles, boolean fillPaint) {
-        Log.d(TAG, "Rendering Triangles");
+//        Log.d(TAG, "Rendering Triangles");
         initPaint();
         for(Triangle t : triangles)
             renderTriangle(canvas, map, t, fillPaint);
@@ -91,7 +91,7 @@ public class TriangleRenderer {
     }
 
     public static void render(Canvas canvas, Bitmap map, Iterator<Triangle> updatedTriangles, boolean fillPaint) {
-        Log.d(TAG, "Rendering Triangles");
+//        Log.d(TAG, "Rendering Triangles");
         initPaint();
         while(updatedTriangles.hasNext())
             renderTriangle(canvas,map,updatedTriangles.next(), fillPaint);

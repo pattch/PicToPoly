@@ -45,7 +45,7 @@ public class CameraIntentNavigationElement extends IntentNavigationElement {
             } else
                 return null;
         } catch (IOException e) {
-            Log.v(TAG, "Cannot create file for taking picture.");
+//            Log.v(TAG, "Cannot create file for taking picture.");
             return null;
         }
         imageFileLocation = Uri.fromFile(image);
@@ -56,7 +56,7 @@ public class CameraIntentNavigationElement extends IntentNavigationElement {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d(TAG, "Returned from Activity");
+//        Log.d(TAG, "Returned from Activity");
         Activity activity = (Activity)view.getContext();
         activity.getContentResolver().notifyChange(imageFileLocation,null);
         ContentResolver cr = activity.getContentResolver();
@@ -80,7 +80,7 @@ public class CameraIntentNavigationElement extends IntentNavigationElement {
 
     @Override
     public void onClick(View view, Fragment container) {
-        Log.d(TAG,"Starting Activity");
+//        Log.d(TAG,"Starting Activity");
         container.startActivityForResult(getIntent(),REQUEST_CODE);
     }
 }

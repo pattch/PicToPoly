@@ -1,4 +1,4 @@
-package com.pictopoly.polydemo.process.PointMaker;
+package com.pictopoly.polydemo.process.pointmaker;
 
 /*
  * This Class takes an Image and generates Points using a Sobel Filter. This
@@ -56,7 +56,7 @@ public class EdgePointMaker extends PixelPointMaker implements PointMaker {
         if(this.points != null && this.points.size() > 0)
             this.points.clear();
         else if(this.points == null)
-            this.points = new ArrayList<>(pointCount);
+            this.points = new ArrayList<Point>(pointCount);
 
         int newWidth = bitmapToBeProcessed.getWidth() / imageQuality,
                 newHeight = bitmapToBeProcessed.getHeight() / imageQuality;
@@ -65,7 +65,7 @@ public class EdgePointMaker extends PixelPointMaker implements PointMaker {
         new GreyScaleFilter().filter(filteredMap);
         new SobelFilter().filter(filteredMap);
 
-        Collection<Point> newPoints = new ArrayList<>();
+        Collection<Point> newPoints = new ArrayList<Point>();
 
         Random r = new Random();
         // Go through either all of the points in the new Image, or until we have enough uniformly distributed Edge Points
@@ -80,7 +80,7 @@ public class EdgePointMaker extends PixelPointMaker implements PointMaker {
 
         this.points.addAll(newPoints);
 
-        Log.d(TAG, "EdgeMaker points: " + this.points.size());
+//        Log.d(TAG, "EdgeMaker points: " + this.points.size());
 
         filteredMap.recycle();
 

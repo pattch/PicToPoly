@@ -19,9 +19,9 @@ import com.pictopoly.polydemo.nav.NavigationElement;
 import com.pictopoly.polydemo.nav.OpenImageIntentNavigationElement;
 import com.pictopoly.polydemo.nav.ReturnToImageIntentNavigationElement;
 import com.pictopoly.polydemo.process.ImageProcessor;
-import com.pictopoly.polydemo.process.PointMaker.PointMaker;
+import com.pictopoly.polydemo.process.pointmaker.PointMaker;
 import com.pictopoly.polydemo.process.ThreadCompleteListener;
-import com.pictopoly.polydemo.process.PointMaker.UniformPointMaker;
+import com.pictopoly.polydemo.process.pointmaker.UniformPointMaker;
 
 /**
  * This is the opening Activity that users are first exposed to.
@@ -50,7 +50,7 @@ public class SplashActivity extends Activity implements ThreadCompleteListener {
 
         // First Time Running SplashActivity
         if (savedInstanceState == null && handler.getProcessedImage() == null) {
-            Log.d(TAG, "Making new pointMaker, loading bitmap etc.");
+//            Log.d(TAG, "Making new pointMaker, loading bitmap etc.");
 //            Bitmap gradient = BitmapFactory.decodeResource(getResources(), R.drawable.gradient);
 //            Display display = getWindowManager().getDefaultDisplay();
 //            android.graphics.Point size = new android.graphics.Point();
@@ -67,7 +67,7 @@ public class SplashActivity extends Activity implements ThreadCompleteListener {
             mTriangleSurfaceView.setFillingScreen(true);
             mTriangleSurfaceView.setImageHandler(handler);
         } else {
-            Log.d(TAG, "TriangleSurfaceView not Persisting");
+//            Log.d(TAG, "TriangleSurfaceView not Persisting");
         }
 
         Typeface materialTypeface = Typeface.createFromAsset(getAssets(), "fonts/material_design_icons.ttf"),
@@ -94,9 +94,10 @@ public class SplashActivity extends Activity implements ThreadCompleteListener {
             if(v instanceof TextView)
                 ((TextView) v).setTypeface(materialTypeface);
 
-            if(null == v)
-                Log.d(TAG, navEl.getClass().getSimpleName() + " " + navEl.getId());
-            else
+//            if(null == v)
+//                Log.d(TAG, navEl.getClass().getSimpleName() + " " + navEl.getId());
+//            else
+            if(null != v)
                 v.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -108,7 +109,7 @@ public class SplashActivity extends Activity implements ThreadCompleteListener {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d(TAG, "Returned From Activity");
+//        Log.d(TAG, "Returned From Activity");
 
         if(resultCode == Activity.RESULT_OK) {
             int rCode = requestCode;
@@ -117,7 +118,7 @@ public class SplashActivity extends Activity implements ThreadCompleteListener {
                 if (navEl instanceof IntentNavigationElement) {
                     IntentNavigationElement intentNav = (IntentNavigationElement) navEl;
                     if (intentNav.getRequestCode() == rCode) {
-                        Log.d(TAG,navEl.getClass().getSimpleName());
+//                        Log.d(TAG,navEl.getClass().getSimpleName());
                         intentNav.onActivityResult(requestCode,resultCode,data);
                         Intent i = new Intent(SplashActivity.this, PolyActivity.class);
 //                        i.putExtra(CheatActivity.EXTRA_ANSWER_IS_TRUE, mQuestionBank[mCurrentIndex].getTrueQuestion());
@@ -125,8 +126,9 @@ public class SplashActivity extends Activity implements ThreadCompleteListener {
                     }
                 }
             }
-        } else
-            Log.d(TAG, "Result: " + resultCode);
+        }
+//        else
+//            Log.d(TAG, "Result: " + resultCode);
 
 
         ImageProcessor ph = ImageLayerHandler.getInstance().getProcessor();
@@ -137,7 +139,7 @@ public class SplashActivity extends Activity implements ThreadCompleteListener {
                 v.setVisibility(View.INVISIBLE);
             } else {
                 // Expose Back Button, since we have a previous opened/captured Image
-                Log.d(TAG, "IMAGE");
+//                Log.d(TAG, "IMAGE");
                 v.setVisibility(View.VISIBLE);
             }
         }

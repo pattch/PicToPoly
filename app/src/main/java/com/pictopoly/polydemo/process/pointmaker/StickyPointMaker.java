@@ -1,4 +1,4 @@
-package com.pictopoly.polydemo.process.PointMaker;
+package com.pictopoly.polydemo.process.pointmaker;
 
 //import java.awt.Image;
 //import java.awt.image.BufferedImage;
@@ -26,7 +26,7 @@ public class StickyPointMaker extends RadiusPointMaker {
         super.makePoints(bitmapToBeProcessed);
 		// Generate random points.
 		Random r = new Random();
-		Collection<Point> builtPoints = new ArrayList<>();
+		Collection<Point> builtPoints = new ArrayList<Point>();
         int width = bitmapToBeProcessed.getWidth(),
                 height = bitmapToBeProcessed.getHeight();
 		
@@ -53,7 +53,7 @@ public class StickyPointMaker extends RadiusPointMaker {
         ensureAllPointsWithinBounds(builtPoints,width,height);
 		
 		points.addAll(builtPoints);
-        Log.d(TAG, "Points: " + this.points.size());
+//        Log.d(TAG, "Points: " + this.points.size());
 		
 		return points;
 	}

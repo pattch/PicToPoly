@@ -74,9 +74,10 @@ public class NavigationFragment extends Fragment {
             if(v instanceof TextView)
                 ((TextView) v).setTypeface(materialTypeface);
 
-            if(null == v)
-                Log.d(TAG,navEl.getClass().getSimpleName() + " " + navEl.getId());
-            else
+//            if(null == v)
+//                Log.d(TAG,navEl.getClass().getSimpleName() + " " + navEl.getId());
+//            else
+            if(null != v)
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -127,7 +128,7 @@ public class NavigationFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d(TAG, "Returned From Activity");
+//        Log.d(TAG, "Returned From Activity");
         if(resultCode == Activity.RESULT_OK) {
             int rCode = requestCode;
 
@@ -135,13 +136,13 @@ public class NavigationFragment extends Fragment {
                 if (navEl instanceof IntentNavigationElement) {
                     IntentNavigationElement intentNav = (IntentNavigationElement) navEl;
                     if (intentNav.getRequestCode() == rCode) {
-                        Log.d(TAG,navEl.getClass().getSimpleName());
+//                        Log.d(TAG,navEl.getClass().getSimpleName());
                         intentNav.onActivityResult(requestCode,resultCode,data);
                     }
                 }
             }
         } else
-        Log.d(TAG, "Result: " + resultCode);
+//        Log.d(TAG, "Result: " + resultCode);
         super.onActivityResult(requestCode, resultCode, data);
     }
 

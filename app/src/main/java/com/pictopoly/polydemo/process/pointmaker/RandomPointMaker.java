@@ -1,4 +1,4 @@
-package com.pictopoly.polydemo.process.PointMaker;
+package com.pictopoly.polydemo.process.pointmaker;
 
 import android.graphics.Bitmap;
 import android.util.Log;
@@ -29,7 +29,7 @@ public class RandomPointMaker extends RadiusPointMaker {
             this.points.add(new Point(x,y));
         }
 
-        Log.d(getClass().getSimpleName(), "RandomMaker points: " + this.points.size());
+//        Log.d(getClass().getSimpleName(), "RandomMaker points: " + this.points.size());
         return this.points;
     }
 

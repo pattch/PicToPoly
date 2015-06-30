@@ -1,4 +1,4 @@
-package com.pictopoly.polydemo.process.PointMaker;
+package com.pictopoly.polydemo.process.pointmaker;
 
 import android.graphics.Bitmap;
 
@@ -12,14 +12,14 @@ import java.util.Random;
  * Created by Marklar on 2/14/2015.
  */
 public class UniformPointMaker extends PixelPointMaker {
-    protected Collection<Point> points = new ArrayList<>();
+    protected Collection<Point> points = new ArrayList<Point>();
     protected int numberOfUniformPoints = 200;
 
     public void setBitmap(Bitmap bitmapToBeProcessed) {}
 
     @Override
     public Collection<Point> makePoints(Bitmap bitmapToBeProcessed) {
-        this.points = new ArrayList<>();
+        this.points = new ArrayList<Point>();
         int numPoints = numberOfUniformPoints;
         int mWidth = bitmapToBeProcessed.getWidth(),
                 mHeight = bitmapToBeProcessed.getHeight();

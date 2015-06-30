@@ -1,7 +1,9 @@
-package com.pictopoly.polydemo.process.PointMaker;
+package com.pictopoly.polydemo.process.pointmaker;
 
 import android.graphics.Bitmap;
 
+import com.pictopoly.polydemo.process.pointmaker.PixelPointMaker;
+import com.pictopoly.polydemo.process.pointmaker.PointMaker;
 import com.pictopoly.polydemo.tri.Point;
 
 import java.util.ArrayList;
@@ -20,7 +22,7 @@ public class GridPointMaker extends PixelPointMaker implements PointMaker {
     }
 
     public Collection<Point> makePoints(Bitmap bitmapToBeProcessed) {
-        this.points = new ArrayList<>();
+        this.points = new ArrayList<Point>();
         double mWidth = bitmapToBeProcessed.getWidth(),
                 mHeight = bitmapToBeProcessed.getHeight(),
                 gridSize = mWidth / numBoxes;

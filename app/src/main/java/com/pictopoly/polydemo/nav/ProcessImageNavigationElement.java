@@ -26,11 +26,12 @@ public class ProcessImageNavigationElement extends NavigationElement {
         if(!processor.isProcessing()) {
             Activity a = (Activity) view.getContext();
             if (a instanceof PolyActivity) {
-                Log.d(getClass().getSimpleName(), "Processing from Nav");
+//                Log.d(getClass().getSimpleName(), "Processing from Nav");
                 PolyActivity pa = (PolyActivity) a;
                 pa.showLoadingPanel();
-            } else
-                Log.d(getClass().getSimpleName(), "Activity for ProcessNavEl not PolyActivity");
+            }
+//            else
+//                Log.d(getClass().getSimpleName(), "Activity for ProcessNavEl not PolyActivity");
 
 
             Thread processThread = new Thread(processor);
