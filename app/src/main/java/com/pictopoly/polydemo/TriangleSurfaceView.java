@@ -43,7 +43,7 @@ public class TriangleSurfaceView extends SurfaceView {
     public void onDraw(Canvas canvas) {
         canvas.drawColor(Color.DKGRAY);
 
-        if(handler.getProcessedImage() != null) {
+        if(handler != null && handler.getProcessedImage() != null) {
             if(!paint.isFilterBitmap())
                 paint.setFilterBitmap(true);
 

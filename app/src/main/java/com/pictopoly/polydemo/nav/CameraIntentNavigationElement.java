@@ -19,6 +19,7 @@ import com.pictopoly.polydemo.process.ImageProcessor;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import android.content.pm.PackageManager;
 
 public class CameraIntentNavigationElement extends IntentNavigationElement {
     private String TAG = this.getClass().getSimpleName();
@@ -30,6 +31,13 @@ public class CameraIntentNavigationElement extends IntentNavigationElement {
 
     public CameraIntentNavigationElement(View view, int id) {
         super(view,id,PolyActivity.INTENT_CAMERA);
+    }
+
+    @Override
+    public void onClick(View view) {
+        PackageManager pm = this.view.getContext().getPackageManager();
+        if(pm.hasSystemFeature(PackageManager.FEATURE_CAMERA))
+            super.onClick(view);
     }
 
     @Override

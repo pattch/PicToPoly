@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.crashlytics.android.Crashlytics;
 import com.pictopoly.polydemo.filter.GradientMaker;
 import com.pictopoly.polydemo.nav.CameraIntentNavigationElement;
 import com.pictopoly.polydemo.nav.IntentNavigationElement;
@@ -22,6 +23,7 @@ import com.pictopoly.polydemo.process.ImageProcessor;
 import com.pictopoly.polydemo.process.pointmaker.PointMaker;
 import com.pictopoly.polydemo.process.ThreadCompleteListener;
 import com.pictopoly.polydemo.process.pointmaker.UniformPointMaker;
+import io.fabric.sdk.android.Fabric;
 
 /**
  * This is the opening Activity that users are first exposed to.
@@ -41,6 +43,7 @@ public class SplashActivity extends Activity implements ThreadCompleteListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_splash);
         handler = ImageLayerHandler.getInstance().getSplashProcessor();
         mTriangleSurfaceView = (TriangleSurfaceView) findViewById(R.id.splash_triangleSurfaceView);
