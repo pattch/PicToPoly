@@ -1,0 +1,115 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/Sam/Documents/Dev/Android/PicToPoly/app/src/main/AndroidManifest.xml:2:1-40:12
+	xmlns:android
+		ADDED from /Users/Sam/Documents/Dev/Android/PicToPoly/app/src/main/AndroidManifest.xml:2:11-69
+	package
+		ADDED from /Users/Sam/Documents/Dev/Android/PicToPoly/app/src/main/AndroidManifest.xml:3:5-37
+		INJECTED from /Users/Sam/Documents/Dev/Android/PicToPoly/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/Sam/Documents/Dev/Android/PicToPoly/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/Sam/Documents/Dev/Android/PicToPoly/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/Sam/Documents/Dev/Android/PicToPoly/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /Users/Sam/Documents/Dev/Android/PicToPoly/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/Sam/Documents/Dev/Android/PicToPoly/app/src/main/AndroidManifest.xml
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from /Users/Sam/Documents/Dev/Android/PicToPoly/app/src/main/AndroidManifest.xml:4:5-81
+	android:name
+		ADDED from /Users/Sam/Documents/Dev/Android/PicToPoly/app/src/main/AndroidManifest.xml:4:22-78
+uses-permission#android.permission.CAMERA
+ADDED from /Users/Sam/Documents/Dev/Android/PicToPoly/app/src/main/AndroidManifest.xml:5:5-64
+	android:name
+		ADDED from /Users/Sam/Documents/Dev/Android/PicToPoly/app/src/main/AndroidManifest.xml:5:22-62
+uses-feature#android.hardware.camera
+ADDED from /Users/Sam/Documents/Dev/Android/PicToPoly/app/src/main/AndroidManifest.xml:6:5-85
+	android:required
+		ADDED from /Users/Sam/Documents/Dev/Android/PicToPoly/app/src/main/AndroidManifest.xml:6:58-82
+	android:name
+		ADDED from /Users/Sam/Documents/Dev/Android/PicToPoly/app/src/main/AndroidManifest.xml:6:19-57
+application
+ADDED from /Users/Sam/Documents/Dev/Android/PicToPoly/app/src/main/AndroidManifest.xml:8:5-37:19
+MERGED from [com.android.support:appcompat-v7:21.0.3] /Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/AndroidManifest.xml:16:5-19
+MERGED from [com.android.support:support-v4:21.0.3] /Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/AndroidManifest.xml:16:5-19
+MERGED from [com.crashlytics.sdk.android:crashlytics:2.4.0] /Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/exploded-aar/com.crashlytics.sdk.android/crashlytics/2.4.0/AndroidManifest.xml:11:5-20
+MERGED from [io.fabric.sdk.android:fabric:1.3.4] /Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/exploded-aar/io.fabric.sdk.android/fabric/1.3.4/AndroidManifest.xml:25:5-20
+MERGED from [com.crashlytics.sdk.android:crashlytics-core:2.3.3] /Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/exploded-aar/com.crashlytics.sdk.android/crashlytics-core/2.3.3/AndroidManifest.xml:11:5-20
+MERGED from [io.fabric.sdk.android:fabric:1.3.4] /Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/exploded-aar/io.fabric.sdk.android/fabric/1.3.4/AndroidManifest.xml:25:5-20
+MERGED from [com.crashlytics.sdk.android:answers:1.2.2] /Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/exploded-aar/com.crashlytics.sdk.android/answers/1.2.2/AndroidManifest.xml:9:5-20
+MERGED from [io.fabric.sdk.android:fabric:1.3.4] /Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/exploded-aar/io.fabric.sdk.android/fabric/1.3.4/AndroidManifest.xml:25:5-20
+MERGED from [com.crashlytics.sdk.android:beta:1.1.3] /Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/exploded-aar/com.crashlytics.sdk.android/beta/1.1.3/AndroidManifest.xml:9:5-20
+MERGED from [io.fabric.sdk.android:fabric:1.3.4] /Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/exploded-aar/io.fabric.sdk.android/fabric/1.3.4/AndroidManifest.xml:25:5-20
+MERGED from [com.crashlytics.sdk.android:answers:1.2.2] /Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/exploded-aar/com.crashlytics.sdk.android/answers/1.2.2/AndroidManifest.xml:9:5-20
+MERGED from [io.fabric.sdk.android:fabric:1.3.4] /Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/exploded-aar/io.fabric.sdk.android/fabric/1.3.4/AndroidManifest.xml:25:5-20
+	android:label
+		ADDED from /Users/Sam/Documents/Dev/Android/PicToPoly/app/src/main/AndroidManifest.xml:11:9-41
+	android:allowBackup
+		ADDED from /Users/Sam/Documents/Dev/Android/PicToPoly/app/src/main/AndroidManifest.xml:9:9-35
+	android:icon
+		ADDED from /Users/Sam/Documents/Dev/Android/PicToPoly/app/src/main/AndroidManifest.xml:10:9-45
+	android:theme
+		ADDED from /Users/Sam/Documents/Dev/Android/PicToPoly/app/src/main/AndroidManifest.xml:12:9-40
+activity#com.pictopoly.polydemo.PolyActivity
+ADDED from /Users/Sam/Documents/Dev/Android/PicToPoly/app/src/main/AndroidManifest.xml:14:9-17:20
+	android:label
+		ADDED from /Users/Sam/Documents/Dev/Android/PicToPoly/app/src/main/AndroidManifest.xml:16:13-45
+	android:name
+		ADDED from /Users/Sam/Documents/Dev/Android/PicToPoly/app/src/main/AndroidManifest.xml:15:13-41
+activity#com.pictopoly.polydemo.GradientActivity
+ADDED from /Users/Sam/Documents/Dev/Android/PicToPoly/app/src/main/AndroidManifest.xml:19:9-24:20
+	android:windowSoftInputMode
+		ADDED from /Users/Sam/Documents/Dev/Android/PicToPoly/app/src/main/AndroidManifest.xml:22:13-54
+	android:label
+		ADDED from /Users/Sam/Documents/Dev/Android/PicToPoly/app/src/main/AndroidManifest.xml:23:13-45
+	android:configChanges
+		ADDED from /Users/Sam/Documents/Dev/Android/PicToPoly/app/src/main/AndroidManifest.xml:20:13-63
+	android:name
+		ADDED from /Users/Sam/Documents/Dev/Android/PicToPoly/app/src/main/AndroidManifest.xml:21:13-45
+activity#com.pictopoly.polydemo.SplashActivity
+ADDED from /Users/Sam/Documents/Dev/Android/PicToPoly/app/src/main/AndroidManifest.xml:26:9-33:20
+	android:label
+		ADDED from /Users/Sam/Documents/Dev/Android/PicToPoly/app/src/main/AndroidManifest.xml:27:21-53
+	android:name
+		ADDED from /Users/Sam/Documents/Dev/Android/PicToPoly/app/src/main/AndroidManifest.xml:26:19-49
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from /Users/Sam/Documents/Dev/Android/PicToPoly/app/src/main/AndroidManifest.xml:28:13-32:29
+action#android.intent.action.MAIN
+ADDED from /Users/Sam/Documents/Dev/Android/PicToPoly/app/src/main/AndroidManifest.xml:29:17-69
+	android:name
+		ADDED from /Users/Sam/Documents/Dev/Android/PicToPoly/app/src/main/AndroidManifest.xml:29:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/Sam/Documents/Dev/Android/PicToPoly/app/src/main/AndroidManifest.xml:31:17-77
+	android:name
+		ADDED from /Users/Sam/Documents/Dev/Android/PicToPoly/app/src/main/AndroidManifest.xml:31:27-74
+meta-data#io.fabric.ApiKey
+ADDED from /Users/Sam/Documents/Dev/Android/PicToPoly/app/src/main/AndroidManifest.xml:34:9-36:72
+	android:name
+		ADDED from /Users/Sam/Documents/Dev/Android/PicToPoly/app/src/main/AndroidManifest.xml:35:13-44
+	android:value
+		ADDED from /Users/Sam/Documents/Dev/Android/PicToPoly/app/src/main/AndroidManifest.xml:36:13-69
+uses-permission#android.permission.INTERNET
+ADDED from /Users/Sam/Documents/Dev/Android/PicToPoly/app/src/main/AndroidManifest.xml:39:5-67
+MERGED from [com.crashlytics.sdk.android:crashlytics:2.4.0] /Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/exploded-aar/com.crashlytics.sdk.android/crashlytics/2.4.0/AndroidManifest.xml:9:5-67
+MERGED from [com.crashlytics.sdk.android:crashlytics-core:2.3.3] /Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/exploded-aar/com.crashlytics.sdk.android/crashlytics-core/2.3.3/AndroidManifest.xml:9:5-67
+	android:name
+		ADDED from /Users/Sam/Documents/Dev/Android/PicToPoly/app/src/main/AndroidManifest.xml:39:22-64
+uses-sdk
+INJECTED from /Users/Sam/Documents/Dev/Android/PicToPoly/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+MERGED from [com.android.support:appcompat-v7:21.0.3] /Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/AndroidManifest.xml:15:5-42
+MERGED from [com.android.support:support-v4:21.0.3] /Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/AndroidManifest.xml:15:5-42
+MERGED from [com.crashlytics.sdk.android:crashlytics:2.4.0] /Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/exploded-aar/com.crashlytics.sdk.android/crashlytics/2.4.0/AndroidManifest.xml:7:5-43
+MERGED from [io.fabric.sdk.android:fabric:1.3.4] /Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/exploded-aar/io.fabric.sdk.android/fabric/1.3.4/AndroidManifest.xml:23:5-43
+MERGED from [com.crashlytics.sdk.android:crashlytics-core:2.3.3] /Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/exploded-aar/com.crashlytics.sdk.android/crashlytics-core/2.3.3/AndroidManifest.xml:7:5-43
+MERGED from [io.fabric.sdk.android:fabric:1.3.4] /Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/exploded-aar/io.fabric.sdk.android/fabric/1.3.4/AndroidManifest.xml:23:5-43
+MERGED from [com.crashlytics.sdk.android:answers:1.2.2] /Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/exploded-aar/com.crashlytics.sdk.android/answers/1.2.2/AndroidManifest.xml:7:5-43
+MERGED from [io.fabric.sdk.android:fabric:1.3.4] /Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/exploded-aar/io.fabric.sdk.android/fabric/1.3.4/AndroidManifest.xml:23:5-43
+MERGED from [com.crashlytics.sdk.android:beta:1.1.3] /Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/exploded-aar/com.crashlytics.sdk.android/beta/1.1.3/AndroidManifest.xml:7:5-43
+MERGED from [io.fabric.sdk.android:fabric:1.3.4] /Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/exploded-aar/io.fabric.sdk.android/fabric/1.3.4/AndroidManifest.xml:23:5-43
+MERGED from [com.crashlytics.sdk.android:answers:1.2.2] /Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/exploded-aar/com.crashlytics.sdk.android/answers/1.2.2/AndroidManifest.xml:7:5-43
+MERGED from [io.fabric.sdk.android:fabric:1.3.4] /Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/exploded-aar/io.fabric.sdk.android/fabric/1.3.4/AndroidManifest.xml:23:5-43
+	android:targetSdkVersion
+		INJECTED from /Users/Sam/Documents/Dev/Android/PicToPoly/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/Sam/Documents/Dev/Android/PicToPoly/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/Sam/Documents/Dev/Android/PicToPoly/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/Sam/Documents/Dev/Android/PicToPoly/app/src/main/AndroidManifest.xml
