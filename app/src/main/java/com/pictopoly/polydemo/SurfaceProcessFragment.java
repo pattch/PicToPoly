@@ -13,7 +13,7 @@ import com.pictopoly.polydemo.process.ImageProcessor;
 
 public class SurfaceProcessFragment extends Fragment {
     protected TriangleSurfaceView mTriangleSurfaceView;
-    protected ImageProcessor handler = ImageLayerHandler.getInstance().getProcessor();
+    protected ImageProcessor handler = ImageLayerHandler.getInstance().getPolyActivityImageProcessor();
     protected View loadingPanel;
 
     @Override

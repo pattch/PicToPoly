@@ -32,7 +32,7 @@ public class SaveImageNavigationElement extends NavigationElement {
         outputDir.mkdirs();
         FileOutputStream out = null;
         try {
-            ImageProcessor handler = ImageLayerHandler.getInstance().getProcessor();
+            ImageProcessor handler = ImageLayerHandler.getInstance().getPolyActivityImageProcessor();
             Bitmap bitmap = handler.getProcessedImage();
             out = new FileOutputStream(path + bitmap.getGenerationId() + ".jpg");
             bitmap.compress(Bitmap.CompressFormat.JPEG,100,out);

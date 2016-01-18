@@ -8,7 +8,6 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -72,11 +71,11 @@ public class CameraIntentNavigationElement extends IntentNavigationElement {
 
         try {
             bitmap = MediaStore.Images.Media.getBitmap(cr,imageFileLocation);
-            ImageProcessor polyActivityProcessor = ImageLayerHandler.getInstance().getProcessor();
+            ImageProcessor polyActivityProcessor = ImageLayerHandler.getInstance().getPolyActivityImageProcessor();
             polyActivityProcessor.setImage(bitmap);
             polyActivityProcessor.setDefaultPointMaker();
             if(activity instanceof PolyActivity)
-                ((PolyActivity) activity).setImage(ImageLayerHandler.getInstance().getProcessor().getRawImage());
+                ((PolyActivity) activity).setImage(ImageLayerHandler.getInstance().getPolyActivityImageProcessor().getRawImage());
         } catch (FileNotFoundException e) {
             Toast.makeText(activity,"Image not found", Toast.LENGTH_SHORT).show();
             return;

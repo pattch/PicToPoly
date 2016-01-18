@@ -1,6 +1,5 @@
 package com.pictopoly.polydemo.nav;
 
-import android.util.Log;
 import android.widget.SeekBar;
 
 import com.pictopoly.polydemo.ImageLayerHandler;
@@ -19,7 +18,7 @@ public class NearEdgeDistanceSliderElement extends PointsSliderElement {
     @Override
     public void onStopTrackingTouch (SeekBar seekBar) {
 //        Log.d(getClass().getSimpleName(), "Setting Near-Edge Points: " + numPoints);
-        PointMaker pm = ImageLayerHandler.getInstance().getProcessor().getPointMaker();
+        PointMaker pm = ImageLayerHandler.getInstance().getPolyActivityImageProcessor().getPointMaker();
         if(pm instanceof RadiusPointMaker)
             ((RadiusPointMaker)pm).setRadius(numPoints / 20);
     }

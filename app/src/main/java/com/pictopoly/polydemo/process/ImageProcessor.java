@@ -53,13 +53,16 @@ public class ImageProcessor extends NotifyingRunnable {
         processImage();
         isProcessing = false;
     }
-	
+
+    /**
+     *
+     * REUSE THE COPIED IMAGE HEREEE
+     */
 	public Bitmap processImage() {
         if(this.imageHandler != null && this.imageHandler.getSourceMap() != null) {
             triangulation = new DelaunayTriangulation(pointMaker.makePoints(this.imageHandler.getSourceMap()));
-            this.imageHandler.setProcessedImage(renderTriangles(this.imageHandler.getSourceMap()));
-//            this.lineImage = renderLines(this.rawImage);
-//            Log.d(TAG, "Finished Processing.");
+//            this.imageHandler.setProcessedImage(renderTriangles(this.imageHandler.getSourceMap()));
+            this.imageHandler.setProcessedImage(renderTriangles(this.imageHandler));
             return this.imageHandler.getProcessedMap();
         } else return null;
 	}
@@ -80,13 +83,32 @@ public class ImageProcessor extends NotifyingRunnable {
 	public Bitmap getRawImage() {
 		return this.imageHandler.getSourceMap();
 	}
-	
-	public Bitmap renderTriangles(Bitmap bitmapToBeRendered) {
-        Bitmap copy = bitmapToBeRendered.copy(Bitmap.Config.ARGB_8888, true);
+
+    /**
+     *
+     * @param bitmapToBeRendered    The image being processed into triangles
+     * @return A bitmap with triangles rendered on top
+     * @exception java.lang.OutOfMemoryError
+     *  Copying the full-size image causes the app to crash on some devices
+     *  Should find an alternate method, maybe drawing to a canvas instead of to a Bitmap
+     */
+//	public Bitmap renderTriangles(Bitmap bitmapToBeRendered) {
+//        Bitmap copy = bitmapToBeRendered.copy(Bitmap.Config.ARGB_8888, true); // Problematic line
+//		List<Triangle> triangles = this.triangulation.getTriangulation();
+//		TriangleRenderer.render(copy, triangles);
+//        return copy;
+//	}
+
+    public Bitmap renderTriangles(ImageHandler handler) {
+        handler.prepareProcessedMap();
+        return renderTriangles(handler.getSourceMap(), handler.getProcessedMap());
+    }
+
+    public Bitmap renderTriangles(Bitmap sourceMap, Bitmap processingMap) {
 		List<Triangle> triangles = this.triangulation.getTriangulation();
-		TriangleRenderer.render(copy, triangles);
-        return copy;
-	}
+		TriangleRenderer.render(processingMap, triangles);
+        return processingMap;
+    }
 
     public Bitmap renderLines(Bitmap bitmapToBeRendered) {
         Bitmap copy = bitmapToBeRendered.copy(Bitmap.Config.ARGB_8888, true); // I don't think we even care about the background image here.

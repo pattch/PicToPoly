@@ -4,6 +4,9 @@ import com.pictopoly.polydemo.process.ImageProcessor;
 
 /**
  * Created by Samuel on 1/21/2015.
+ *
+ * This class ensures that the ImageProcessors used by the various activities in the app
+ * persist between Activities.
  */
 public class ImageLayerHandler {
     private static ImageLayerHandler ourInstance = new ImageLayerHandler();
@@ -18,21 +21,25 @@ public class ImageLayerHandler {
         return ourInstance;
     }
 
+    /**
+     * Initialize the ImageProcessors used in the App
+     * Creates processors for Splash, Poly, and Gradient Activities
+     */
     private ImageLayerHandler() {
         for(int i = 0; i < NUM_LAYERS; i++) {
             this.processors[i] = new ImageProcessor();
         }
     }
 
-    public ImageProcessor getProcessor() {
+    public ImageProcessor getPolyActivityImageProcessor() {
         return this.processors[POLY_HANDLER];
     }
 
-    public ImageProcessor getSplashProcessor() {
+    public ImageProcessor getSplashActivityImageProcessor() {
         return this.processors[SPLASH_HANDLER];
     }
 
-    public ImageProcessor getGradientProcessor() {
+    public ImageProcessor getGradientActivityImageProcessor() {
         return this.processors[GRADIENT_HANDLER];
     }
 

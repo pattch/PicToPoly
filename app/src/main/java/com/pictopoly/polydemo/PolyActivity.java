@@ -46,7 +46,7 @@ public class PolyActivity extends Activity implements ThreadCompleteListener {
                     .commit();
         }
 
-        ImageProcessor handler = ImageLayerHandler.getInstance().getProcessor();
+        ImageProcessor handler = ImageLayerHandler.getInstance().getPolyActivityImageProcessor();
         handler.addListener(this);
 
         rootView = findViewById(R.id.root_container);
@@ -86,7 +86,7 @@ public class PolyActivity extends Activity implements ThreadCompleteListener {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                PolyActivity.this.setImage(ImageLayerHandler.getInstance().getProcessor().getProcessedImage());
+                PolyActivity.this.setImage(ImageLayerHandler.getInstance().getPolyActivityImageProcessor().getProcessedImage());
                 PolyActivity.this.hideLoadingPanel();
             }
         });
@@ -97,7 +97,7 @@ public class PolyActivity extends Activity implements ThreadCompleteListener {
      * Post-condition: The current Layer's Image is set to map
      */
     public void setImage(Bitmap map) {
-//        ImageLayerHandler.getInstance().getProcessor().setImage(map);
+//        ImageLayerHandler.getInstance().getPolyActivityImageProcessor().setImage(map);
 //        surfaceFragment.refreshImage();
         if(surfaceFragment != null)
             surfaceFragment.setImage(map);

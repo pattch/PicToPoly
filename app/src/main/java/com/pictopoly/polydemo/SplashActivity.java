@@ -6,7 +6,6 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -45,7 +44,7 @@ public class SplashActivity extends Activity implements ThreadCompleteListener {
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_splash);
-        handler = ImageLayerHandler.getInstance().getSplashProcessor();
+        handler = ImageLayerHandler.getInstance().getSplashActivityImageProcessor();
         mTriangleSurfaceView = (TriangleSurfaceView) findViewById(R.id.splash_triangleSurfaceView);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -134,7 +133,7 @@ public class SplashActivity extends Activity implements ThreadCompleteListener {
 //            Log.d(TAG, "Result: " + resultCode);
 
 
-        ImageProcessor ph = ImageLayerHandler.getInstance().getProcessor();
+        ImageProcessor ph = ImageLayerHandler.getInstance().getPolyActivityImageProcessor();
         View v = findViewById(R.id.splash_back);
         if(v != null) {
             if (ph.getProcessedImage() == null) {

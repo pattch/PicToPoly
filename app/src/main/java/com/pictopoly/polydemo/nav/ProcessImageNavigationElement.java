@@ -1,7 +1,6 @@
 package com.pictopoly.polydemo.nav;
 
 import android.app.Activity;
-import android.util.Log;
 import android.view.View;
 
 import com.pictopoly.polydemo.ImageLayerHandler;
@@ -22,7 +21,7 @@ public class ProcessImageNavigationElement extends NavigationElement {
 
     @Override
     public void onClick(View view) {
-        ImageProcessor processor = ImageLayerHandler.getInstance().getProcessor();
+        ImageProcessor processor = ImageLayerHandler.getInstance().getPolyActivityImageProcessor();
         if(!processor.isProcessing()) {
             Activity a = (Activity) view.getContext();
             if (a instanceof PolyActivity) {

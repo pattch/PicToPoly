@@ -11,6 +11,13 @@ public abstract class ImageHandler {
     protected Bitmap sourceMap, processedMap;
     private int width, height;
 
+    /**
+     *
+     * @param sourceMap     The source image to be processed
+     *
+     * @exception java.lang.OutOfMemoryError
+     *  Can cause the app to crash on some devices, caused by copying the bitmap
+     */
     public ImageHandler(Bitmap sourceMap) {
         this.sourceMap = sourceMap;
         this.processedMap = this.sourceMap.copy(Bitmap.Config.ARGB_8888, true);
@@ -28,6 +35,15 @@ public abstract class ImageHandler {
 
     public void setImage(Bitmap sourceImage) {
         this.sourceMap = sourceImage;
+        this.processedMap = this.sourceMap.copy(Bitmap.Config.ARGB_8888,true);
+    }
+
+    /**
+     * Very Hackish, this relies on the fact that when sourceMap is set, it
+     * renews processedMap to a copied version of sourceMap.
+     */
+    public void prepareProcessedMap() {
+        this.processedMap.recycle();
         this.processedMap = this.sourceMap.copy(Bitmap.Config.ARGB_8888,true);
     }
 

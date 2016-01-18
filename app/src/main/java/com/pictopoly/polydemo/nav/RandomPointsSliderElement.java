@@ -1,6 +1,5 @@
 package com.pictopoly.polydemo.nav;
 
-import android.util.Log;
 import android.widget.SeekBar;
 
 import com.pictopoly.polydemo.ImageLayerHandler;
@@ -23,7 +22,7 @@ public class RandomPointsSliderElement extends PointsSliderElement {
     @Override
     public void onStopTrackingTouch (SeekBar seekBar) {
 //        Log.d(getClass().getSimpleName(),"Setting Random Points: " + numPoints );
-        PointMaker pm = ImageLayerHandler.getInstance().getProcessor().getPointMaker();
+        PointMaker pm = ImageLayerHandler.getInstance().getPolyActivityImageProcessor().getPointMaker();
         if(pm instanceof RandomPointMaker)
             ((RandomPointMaker)pm).setNumberOfRandomPoints(numPoints * numPoints);
     }

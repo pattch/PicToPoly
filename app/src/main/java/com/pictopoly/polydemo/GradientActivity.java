@@ -10,7 +10,6 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
@@ -24,7 +23,6 @@ import android.widget.Toast;
 
 import com.pictopoly.polydemo.filter.GradientMaker;
 import com.pictopoly.polydemo.nav.CloseActivityNavigationElement;
-import com.pictopoly.polydemo.nav.CloseImageIntentNavigationElement;
 import com.pictopoly.polydemo.nav.NavigationElement;
 import com.pictopoly.polydemo.process.ImageProcessor;
 import com.pictopoly.polydemo.process.pointmaker.PointMaker;
@@ -73,7 +71,7 @@ public class GradientActivity extends Activity implements ThreadCompleteListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gradient);
-        gradientProcessor = ImageLayerHandler.getInstance().getGradientProcessor();
+        gradientProcessor = ImageLayerHandler.getInstance().getGradientActivityImageProcessor();
         mTriangleSurfaceView = (TriangleSurfaceView) findViewById(R.id.grad_triangleSurfaceView);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -350,7 +348,7 @@ public class GradientActivity extends Activity implements ThreadCompleteListener
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ImageProcessor processor = ImageLayerHandler.getInstance().getProcessor();
+                ImageProcessor processor = ImageLayerHandler.getInstance().getPolyActivityImageProcessor();
                 int[] fixedColors = fixColors();
                 fixDimensions();
                 Bitmap map = GradientMaker.makeGradient(gradientWidth,gradientHeight,fixedColors,isPortrait);
