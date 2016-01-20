@@ -6,63 +6,63 @@
         jumboMode="false"
         revision="23.0.1"
         sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
-        <dex dex="/Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3_ee2749311bdd02c64585b5f9f0a2c3d9ec89df3b.jar" />
+        <dex dex="/Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/pre-dexed/release/support-annotations-21.0.3_ee2749311bdd02c64585b5f9f0a2c3d9ec89df3b.jar" />
     </item>
     <item
         jar="/Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/jars/libs/internal_impl-21.0.3.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
-        <dex dex="/Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3_26a015cf6fc31cbbc6f9072bb2496fb6fadd9ed7.jar" />
+        <dex dex="/Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/pre-dexed/release/internal_impl-21.0.3_26a015cf6fc31cbbc6f9072bb2496fb6fadd9ed7.jar" />
     </item>
     <item
         jar="/Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/exploded-aar/com.crashlytics.sdk.android/beta/1.1.3/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="b7a78990c10481f43cb4909f535ef4f11e60f1ab">
-        <dex dex="/Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/pre-dexed/debug/com.crashlytics.sdk.android-beta-1.1.3_bdd55d2823b53a56f3a3609e35f6ab6551a2f029.jar" />
+        <dex dex="/Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/pre-dexed/release/com.crashlytics.sdk.android-beta-1.1.3_bdd55d2823b53a56f3a3609e35f6ab6551a2f029.jar" />
     </item>
     <item
         jar="/Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
-        <dex dex="/Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-21.0.3_43c70ac109e6249b0f08e8628877bf1af75554b5.jar" />
+        <dex dex="/Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/pre-dexed/release/com.android.support-support-v4-21.0.3_43c70ac109e6249b0f08e8628877bf1af75554b5.jar" />
     </item>
     <item
         jar="/Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/exploded-aar/io.fabric.sdk.android/fabric/1.3.4/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="f7dc6b43d7c7f3d94e98531aef88269f9ed2a37b">
-        <dex dex="/Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/pre-dexed/debug/io.fabric.sdk.android-fabric-1.3.4_6a9d06bedb662aeb0b792165a7cec9ae5efec192.jar" />
+        <dex dex="/Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/pre-dexed/release/io.fabric.sdk.android-fabric-1.3.4_6a9d06bedb662aeb0b792165a7cec9ae5efec192.jar" />
     </item>
     <item
         jar="/Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
-        <dex dex="/Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-21.0.3_710418862412a22a5dcaf47ed83f804880c66909.jar" />
+        <dex dex="/Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/pre-dexed/release/com.android.support-appcompat-v7-21.0.3_710418862412a22a5dcaf47ed83f804880c66909.jar" />
     </item>
     <item
         jar="/Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/exploded-aar/com.crashlytics.sdk.android/answers/1.2.2/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="c364019628ff5b32e4930334e9db4680829f7115">
-        <dex dex="/Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/pre-dexed/debug/com.crashlytics.sdk.android-answers-1.2.2_7b2c2769cd3dd8211853a3d862a3e871c856cb62.jar" />
-    </item>
-    <item
-        jar="/Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/exploded-aar/com.crashlytics.sdk.android/crashlytics-core/2.3.3/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="3013d965c748748ec9c7d0d42102e9abd1c9ed91">
-        <dex dex="/Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/pre-dexed/debug/com.crashlytics.sdk.android-crashlytics-core-2.3.3_f7ba9e6efa4d57907eab6306fd504acff754b404.jar" />
+        <dex dex="/Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/pre-dexed/release/com.crashlytics.sdk.android-answers-1.2.2_7b2c2769cd3dd8211853a3d862a3e871c856cb62.jar" />
     </item>
     <item
         jar="/Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/exploded-aar/com.crashlytics.sdk.android/crashlytics/2.4.0/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="fd39f74f23c7bd9aeafe58c6d988a7329c3e2790">
-        <dex dex="/Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/pre-dexed/debug/com.crashlytics.sdk.android-crashlytics-2.4.0_3702d5acfd15be856487ccf713b75bb390b5a141.jar" />
+        <dex dex="/Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/pre-dexed/release/com.crashlytics.sdk.android-crashlytics-2.4.0_3702d5acfd15be856487ccf713b75bb390b5a141.jar" />
+    </item>
+    <item
+        jar="/Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/exploded-aar/com.crashlytics.sdk.android/crashlytics-core/2.3.3/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="3013d965c748748ec9c7d0d42102e9abd1c9ed91">
+        <dex dex="/Users/Sam/Documents/Dev/Android/PicToPoly/app/build/intermediates/pre-dexed/release/com.crashlytics.sdk.android-crashlytics-core-2.3.3_f7ba9e6efa4d57907eab6306fd504acff754b404.jar" />
     </item>
 
 </items>
