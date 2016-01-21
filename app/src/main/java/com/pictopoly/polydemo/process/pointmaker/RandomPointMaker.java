@@ -1,8 +1,8 @@
 package com.pictopoly.polydemo.process.pointmaker;
 
 import android.graphics.Bitmap;
-import android.util.Log;
 
+import com.pictopoly.polydemo.process.handler.ImageHandler;
 import com.pictopoly.polydemo.tri.Point;
 
 import java.util.Collection;
@@ -16,10 +16,10 @@ public class RandomPointMaker extends RadiusPointMaker {
     public RandomPointMaker(Bitmap bitmapToBeProcessed) {super(bitmapToBeProcessed);}
 
     @Override
-    public Collection<Point> makePoints(Bitmap bitmapToBeProcessed) {
-        super.makePoints(bitmapToBeProcessed);
-        int width = bitmapToBeProcessed.getWidth();
-        int height = bitmapToBeProcessed.getHeight();
+    public Collection<Point> makePoints(ImageHandler handler) {
+        super.makePoints(handler);
+        int width = handler.getWidth();
+        int height = handler.getHeight();
 
         Random r = new Random();
         for(int i = this.points.size(); i < numberOfRandomPoints; i++) {

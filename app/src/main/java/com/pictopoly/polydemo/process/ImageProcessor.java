@@ -2,13 +2,12 @@ package com.pictopoly.polydemo.process;
 
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
-import android.util.Log;
 
 import java.util.List;
 
+import com.pictopoly.polydemo.process.handler.CacheImageHandler;
 import com.pictopoly.polydemo.process.pointmaker.PointMaker;
 import com.pictopoly.polydemo.process.pointmaker.RandomPointMaker;
-import com.pictopoly.polydemo.process.handler.BitmapImageHandler;
 import com.pictopoly.polydemo.process.handler.ImageHandler;
 import com.pictopoly.polydemo.tri.DelaunayTriangulation;
 import com.pictopoly.polydemo.tri.Point;
@@ -33,10 +32,10 @@ public class ImageProcessor extends NotifyingRunnable {
 	public ImageProcessor(Bitmap bitmapToBeProcessed) {
         setImage(bitmapToBeProcessed);
     }
-	
+
 	public Bitmap setImage(Bitmap bitmapToBeProcessed) {
         this.flush();
-        imageHandler = new BitmapImageHandler(bitmapToBeProcessed);
+        imageHandler = new CacheImageHandler(bitmapToBeProcessed);
         if(null == this.pointMaker)
             this.setDefaultPointMaker();
         else
@@ -60,7 +59,7 @@ public class ImageProcessor extends NotifyingRunnable {
      */
 	public Bitmap processImage() {
         if(this.imageHandler != null && this.imageHandler.getSourceMap() != null) {
-            triangulation = new DelaunayTriangulation(pointMaker.makePoints(this.imageHandler.getSourceMap()));
+            triangulation = new DelaunayTriangulation(pointMaker.makePoints(this.imageHandler));
 //            this.imageHandler.setProcessedImage(renderTriangles(this.imageHandler.getSourceMap()));
             this.imageHandler.setProcessedImage(renderTriangles(this.imageHandler));
             return this.imageHandler.getProcessedMap();

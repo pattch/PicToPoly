@@ -2,6 +2,7 @@ package com.pictopoly.polydemo.process.pointmaker;
 
 import android.graphics.Bitmap;
 
+import com.pictopoly.polydemo.process.handler.ImageHandler;
 import com.pictopoly.polydemo.tri.Point;
 
 import java.util.ArrayList;
@@ -18,11 +19,11 @@ public class UniformPointMaker extends PixelPointMaker {
     public void setBitmap(Bitmap bitmapToBeProcessed) {}
 
     @Override
-    public Collection<Point> makePoints(Bitmap bitmapToBeProcessed) {
+    public Collection<Point> makePoints(ImageHandler handler) {
         this.points = new ArrayList<Point>();
         int numPoints = numberOfUniformPoints;
-        int mWidth = bitmapToBeProcessed.getWidth(),
-                mHeight = bitmapToBeProcessed.getHeight();
+        int mWidth = handler.getWidth(),
+                mHeight = handler.getHeight();
         Random r = new Random();
         for(int i = 0; i < numPoints; i++) {
             double x = r.nextDouble() * (mWidth - 1),
