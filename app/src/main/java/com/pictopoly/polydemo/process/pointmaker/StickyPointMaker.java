@@ -3,13 +3,13 @@ package com.pictopoly.polydemo.process.pointmaker;
 //import java.awt.Image;
 //import java.awt.image.BufferedImage;
 import android.graphics.Bitmap;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Collection;
 //import java.util.List;
 import java.util.Random;
 
+import com.pictopoly.polydemo.process.handler.ImageHandler;
 import com.pictopoly.polydemo.tri.Point;
 
 public class StickyPointMaker extends RadiusPointMaker {
@@ -21,14 +21,14 @@ public class StickyPointMaker extends RadiusPointMaker {
 	}
 	
 	@Override
-	public Collection<Point> makePoints(Bitmap bitmapToBeProcessed) {
+	public Collection<Point> makePoints(ImageHandler handler) {
 //        setImageQuality(10);
-        super.makePoints(bitmapToBeProcessed);
+        super.makePoints(handler);
 		// Generate random points.
 		Random r = new Random();
 		Collection<Point> builtPoints = new ArrayList<Point>();
-        int width = bitmapToBeProcessed.getWidth(),
-                height = bitmapToBeProcessed.getHeight();
+        int width = handler.getWidth(),
+                height = handler.getHeight();
 		
 		for(int i = 0; i < pointCount; i++) {
             builtPoints.add(new Point(

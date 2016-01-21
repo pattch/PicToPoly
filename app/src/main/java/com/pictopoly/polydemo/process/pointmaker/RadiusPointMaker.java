@@ -1,8 +1,8 @@
 package com.pictopoly.polydemo.process.pointmaker;
 
 import android.graphics.Bitmap;
-import android.util.Log;
 
+import com.pictopoly.polydemo.process.handler.ImageHandler;
 import com.pictopoly.polydemo.tri.Point;
 
 import java.util.Collection;
@@ -22,17 +22,17 @@ public class RadiusPointMaker extends EdgePointMaker {
     }
 
     @Override
-    public Collection<Point> makePoints(Bitmap bitmapToBeProcessed) {
-        super.makePoints(bitmapToBeProcessed);              // Stores to super.points, clears previous points
+    public Collection<Point> makePoints(ImageHandler handler) {
+        super.makePoints(handler);              // Stores to super.points, clears previous points
         Collection<Point> newPoints = new LinkedList<Point>();
 
         addRandomPointsNearPreviousPoints(this.points,newPoints);
 
-        double width = bitmapToBeProcessed.getWidth();
-        double height = bitmapToBeProcessed.getHeight();
+        double width = handler.getWidth();
+        double height = handler.getHeight();
 
         // Make Sure all points
-        ensureAllPointsWithinBounds(newPoints, bitmapToBeProcessed.getWidth(), bitmapToBeProcessed.getHeight());
+        ensureAllPointsWithinBounds(newPoints, handler.getWidth(), handler.getHeight());
 
         // For completeness, add corners
         addCorners(newPoints, width, height);

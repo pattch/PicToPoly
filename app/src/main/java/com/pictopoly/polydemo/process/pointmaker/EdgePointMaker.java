@@ -22,6 +22,8 @@ import java.util.Collection;
 import java.util.Random;
 
 import com.pictopoly.polydemo.process.ImageProcessor;
+import com.pictopoly.polydemo.process.handler.CacheImageHandler;
+import com.pictopoly.polydemo.process.handler.ImageHandler;
 import com.pictopoly.polydemo.tri.Point;
 
 import com.pictopoly.polydemo.filter.*;
@@ -43,38 +45,38 @@ public class EdgePointMaker extends PixelPointMaker implements PointMaker {
      *            	points to be considered edge points.
 	 */
 	public static final int MIN_COLOR = Color.argb(255,5,5,5);
-	
-	/*
-     *            Instead of passing through the entire image pixel by pixel I
-     *            skip pixels, this variable is how many pixels to skip.
+
+//	protected Bitmap rawBitmap;
+
+    /**
+     * Kind of a bad paradigm to be doing Image Processing inside of a point population algorithm
+     * Would be much better to have a separate method to do Image Processing, and then do point population
+     *
+     * @param handler
+     * 				The unprocessed Image to Populate points from
+     * @return A collection of points along edges of bitmapToBeProcessed
      */
-	protected int imageQuality = 4;
-	protected Bitmap rawBitmap;
-	
 	@Override
-	public Collection<Point> makePoints(Bitmap bitmapToBeProcessed) {
-        if(this.points != null && this.points.size() > 0)
-            this.points.clear();
-        else if(this.points == null)
-            this.points = new ArrayList<Point>(pointCount);
+	public Collection<Point> makePoints(ImageHandler handler) {
+        preparePoints();
+        Bitmap edgeMap = processEdges(handler);
+        int edgeWidth = edgeMap.getWidth(),
+                edgeHeight = edgeMap.getHeight(),
+                quality = CacheImageHandler.defaultCacheMapScale;
 
-        int newWidth = bitmapToBeProcessed.getWidth() / imageQuality,
-                newHeight = bitmapToBeProcessed.getHeight() / imageQuality;
-
-        Bitmap filteredMap = ImageProcessor.getResizedBitmap(bitmapToBeProcessed, newWidth, newHeight);
-        new GreyScaleFilter().filter(filteredMap); // Kind of awful using it like a static method
-        new SobelFilter().filter(filteredMap);
+        if(handler instanceof CacheImageHandler)
+            quality = ((CacheImageHandler)handler).getCurrentScale();
 
         Collection<Point> newPoints = new ArrayList<Point>();
 
         Random r = new Random();
         // Go through either all of the points in the new Image, or until we have enough uniformly distributed Edge Points
-        for(int i = 0; (i < (newWidth * newHeight)) && (newPoints.size() <= numberOfEdgePoints); i++) {
-            double x = r.nextDouble() * newWidth,
-                    y = r.nextDouble() * newHeight;
-            int mapColor = filteredMap.getPixel((int)x,(int)y);
+        for(int i = 0; (i < (edgeWidth * edgeHeight)) && (newPoints.size() <= numberOfEdgePoints); i++) {
+            double x = r.nextDouble() * edgeWidth,
+                    y = r.nextDouble() * edgeHeight;
+            int mapColor = edgeMap.getPixel((int)x,(int)y);
             if(mapColor <= MAX_COLOR && mapColor >= MIN_COLOR) {
-                newPoints.add(new Point(x * imageQuality, y * imageQuality));
+                newPoints.add(new Point(x * quality, y * quality));
             }
         }
 
@@ -82,37 +84,91 @@ public class EdgePointMaker extends PixelPointMaker implements PointMaker {
 
 //        Log.d(TAG, "EdgeMaker points: " + this.points.size());
 
-        filteredMap.recycle();
+        if(!(handler instanceof CacheImageHandler))
+            edgeMap.recycle();
 
         return this.points;
     }
+
+    /**
+     * Makes sure that points is in the proper starting state for processing
+     */
+    private void preparePoints() {
+        // Initialize points ArrayList
+        if(null == this.points)
+            this.points = new ArrayList<Point>(pointCount);
+        // Clear previous points
+        if(this.points.size() > 0)
+            this.points.clear();
+    }
+
+    private Bitmap processEdges(ImageHandler handler) {
+        Bitmap filteredMap;
+
+        // Branch to use Cacheing of Edge Detection
+        if(handler instanceof CacheImageHandler)
+            filteredMap = getFilterMapWithCache((CacheImageHandler) handler);
+        // Branch to process without Cacheing
+        else
+            filteredMap = getFilterMap(handler);
+
+        new GreyScaleFilter().filter(filteredMap); // Kind of awful using it like a static method
+        new SobelFilter().filter(filteredMap);
+
+        // Save the filtered Image
+        if(handler instanceof CacheImageHandler)
+            ((CacheImageHandler)handler).setEdgeMap(filteredMap);
+        return filteredMap;
+    }
+
+    private Bitmap getFilterMapWithCache(CacheImageHandler cacheHandler) {
+        Log.d(TAG, "CacheHandler is being used.");
+        // Use previous edges
+        if(cacheHandler.hasValidEdgeMap())
+            return cacheHandler.getEdgeMap();
+
+        // Ensure that the edgeMap is valid
+        if(cacheHandler.getEdgeMap() == null)
+            cacheHandler.initializeDefaultEdgeMap();
+
+        return cacheHandler.getEdgeMap();
+    }
+
+    private Bitmap getFilterMap(ImageHandler handler) {
+        Log.d(TAG, "CacheHandler is NOT being used.");
+        int quality = CacheImageHandler.defaultCacheMapScale,
+                newWidth = handler.getWidth() / quality,
+                newHeight = handler.getHeight() / quality;
+
+        return ImageProcessor.getResizedBitmap(handler.getSourceMap(), newWidth, newHeight);
+    }
 	
 	public EdgePointMaker(Bitmap bitmapToBeProcessed) {
-        this.rawBitmap = bitmapToBeProcessed;
+//        this.rawBitmap = bitmapToBeProcessed;
 	}
 	
 	public void setBitmap(Bitmap bitmapToBeProcessed) {
-		this.rawBitmap = bitmapToBeProcessed;
+//		this.rawBitmap = bitmapToBeProcessed;
 	}
 	
-	public Collection<Point> makePoints() {
-        if(this.rawBitmap == null)
-            return null;
-		this.points = makePoints(this.rawBitmap);
-		return this.points;
-	}
+//	public Collection<Point> makePoints() {
+//        if(this.rawBitmap == null)
+//            return null;
+//		this.points = makePoints(this.rawBitmap);
+//		return this.points;
+//	}
 	
 	public Collection<Point> getPoints() {
 		return this.points;
 	}
 	
-	public void setImageQuality(int imageQuality) {
-		this.imageQuality = imageQuality;
-	}
-	
-	public int getImageQuality() {
-		return this.imageQuality;
-	}
+//	public void setImageQuality(int imageQuality) {
+//		this.imageQuality = imageQuality;
+//	}
+//
+//	public int getImageQuality() {
+//		return this.imageQuality;
+//	}
 
     public void setNumberOfEdgePoints(int numberOfEdgePoints) {
         this.numberOfEdgePoints = numberOfEdgePoints;
